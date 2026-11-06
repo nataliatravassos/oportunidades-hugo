@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Oportunidades — Porto</title>
+<meta name="description" content="Vagas de emprego e editais de pesquisa na região do Porto, atualizado todo dia" />
+
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="theme-color" content="#4f46e5" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Vagas Porto" />
+
+<style>
+  :root {
+    --bg: #f4f4f8;
+    --card-bg: #ffffff;
+    --text: #1c1c28;
+    --muted: #6b6b7b;
+    --accent: #4f46e5;
+    --border: #e6e6ef;
+    --chip-escritorio: #e0f2e9; --chip-escritorio-text: #1a7a4c;
+    --chip-indefinido: #eef0fb; --chip-indefinido-text: #4f46e5;
+    --chip-operacional: #faece0; --chip-operacional-text: #b4590f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121218; --card-bg: #1c1c26; --text: #f0f0f5; --muted: #9a9aab;
+      --accent: #8b85f5; --border: #2c2c3a;
+      --chip-escritorio: #163826; --chip-escritorio-text: #6fe3a6;
+      --chip-indefinido: #272a52; --chip-indefinido-text: #b3aeff;
+      --chip-operacional: #3a2814; --chip-operacional-text: #f2a85c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding-bottom: 48px;
+  }
+  header {
+    padding: 20px 16px 12px; position: sticky; top: 0; background: var(--bg);
+    z-index: 5; border-bottom: 1px solid var(--border);
+  }
+  h1 { font-size: 1.3rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 0.85rem; margin: 0; }
+  .filtros { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; padding-bottom: 2px; }
+  .filtro-btn {
+    border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
+    border-radius: 999px; padding: 6px 14px; font-size: 0.82rem; white-space: nowrap;
+    cursor: pointer;
+  }
+  .filtro-btn.ativo { background: var(--accent); color: white; border-color: var(--accent); }
+  main { padding: 12px 16px; max-width: 720px; margin: 0 auto; }
+  .vaga {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;
+    padding: 14px 16px; margin-bottom: 10px; text-decoration: none; color: inherit; display: block;
+  }
+  .vaga-titulo { font-weight: 600; font-size: 0.98rem; margin-bottom: 4px; }
+  .vaga-meta { color: var(--muted); font-size: 0.82rem; display: flex; flex-wrap: wrap; gap: 6px 10px; margin-bottom: 8px; }
+  .chip {
+    display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 600;
+  }
+  .chip.escritorio { background: var(--chip-escritorio); color: var(--chip-escritorio-text); }
+  .chip.indefinido { background: var(--chip-indefinido); color: var(--chip-indefinido-text); }
+  .chip.operacional { background: var(--chip-operacional); color: var(--chip-operacional-text); }
+  .estado {
+    text-align: center; color: var(--muted); padding: 60px 20px; font-size: 0.92rem; line-height: 1.5;
+  }
+  .install-hint {
+    margin: 0 16px 16px; padding: 12px 14px; background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; font-size: 0.8rem; color: var(--muted); display: none;
+  }
+  .install-hint.mostrar { display: block; }
+  .install-hint b { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Oportunidades — Porto e região</h1>
+  <p class="sub" id="status">A carregar…</p>
+  <div class="filtros" id="filtros"></div>
+</header>
+
+<div class="install-hint" id="install-hint">
+  📱 Pra ter isso como app no iPhone: toque no botão de <b>Partilhar</b> do Safari e depois em
+  <b>"Adicionar ao ecrã principal"</b>.
+</div>
+
+<main id="lista">
+  <p class="estado">A carregar vagas…</p>
+</main>
+
+<script>
+const NOMES_CLASSE = { escritorio: "Escritório", indefinido: "A conferir", operacional: "Operacional" };
+let TODAS = [];
+let filtroAtivo = "todas";
+
+function escapeHtml(s) {
+  return (s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+
+function render() {
+  const lista = document.getElementById("lista");
+  const vagas = filtroAtivo === "todas" ? TODAS : TODAS.filter(v => v.classificacao === filtroAtivo);
+
+  if (vagas.length === 0) {
+    lista.innerHTML = '<p class="estado">Nenhuma vaga nessa categoria no momento.</p>';
+    return;
+  }
+
+  lista.innerHTML = vagas.map(v => `
+    <a class="vaga" href="${escapeHtml(v.link)}" target="_blank" rel="noopener">
+      <div class="vaga-titulo">${escapeHtml(v.titulo)}</div>
+      <div class="vaga-meta">
+        <span>${escapeHtml(v.empresa)}</span>
+        ${v.cidade ? `<span>· ${escapeHtml(v.cidade)}</span>` : ""}
+        ${v.tipo_contrato ? `<span>· ${escapeHtml(v.tipo_contrato)}</span>` : ""}
+      </div>
+      <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>
+    </a>
+  `).join("");
+}
+
+function montarFiltros() {
+  const contagens = { todas: TODAS.length, escritorio: 0, indefinido: 0, operacional: 0 };
+  TODAS.forEach(v => { contagens[v.classificacao] = (contagens[v.classificacao] || 0) + 1; });
+
+  const el = document.getElementById("filtros");
+  const grupos = [["todas", "Todas"], ["escritorio", "Escritório"], ["indefinido", "A conferir"], ["operacional", "Operacional"]];
+  el.innerHTML = grupos.map(([chave, rotulo]) => `
+    <button class="filtro-btn ${chave === filtroAtivo ? "ativo" : ""}" data-f="${chave}">
+      ${rotulo} (${contagens[chave] || 0})
+    </button>
+  `).join("");
+
+  el.querySelectorAll(".filtro-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      filtroAtivo = btn.dataset.f;
+      montarFiltros();
+      render();
+    });
+  });
+}
+
+async function carregar() {
+  try {
+    const resp = await fetch("data/vagas.json", { cache: "no-store" });
+    if (!resp.ok) throw new Error("sem dados ainda");
+    const dados = await resp.json();
+    TODAS = dados.vagas || [];
+
+    const atualizado = new Date(dados.atualizado_em);
+    document.getElementById("status").textContent =
+      `${dados.total} vaga(s) · atualizado em ${atualizado.toLocaleString("pt-PT", { dateStyle: "short", timeStyle: "short" })}`;
+
+    montarFiltros();
+    render();
+  } catch (e) {
+    document.getElementById("status").textContent = "Ainda sem dados";
+    document.getElementById("lista").innerHTML =
+      '<p class="estado">O robô ainda não rodou a primeira vez, ou a página acabou de ser publicada.<br>Volta aqui daqui a pouco — isso se atualiza sozinho todo dia.</p>';
+  }
+}
+
+// Mostra a dica de instalação só se parecer ser um iPhone/iPad fora do modo "app".
+const ehIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const jaInstalado = window.navigator.standalone === true;
+if (ehIOS && !jaInstalado) {
+  document.getElementById("install-hint").classList.add("mostrar");
+}
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+
+carregar();
+</script>
+</body>
+</html>
