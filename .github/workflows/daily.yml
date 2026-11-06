@@ -1,0 +1,47 @@
+name: Buscar vagas diariamente
+
+on:
+  schedule:
+    # Todo dia às 07:00 UTC (~07h/08h em Portugal, dependendo do horário
+    # de verão). Pra mudar o horário, edite só os dois primeiros números
+    # (minuto hora).
+    - cron: "0 7 * * *"
+  workflow_dispatch: {}  # permite rodar manualmente na aba "Actions" do GitHub
+
+permissions:
+  contents: write  # necessário pra o workflow poder commitar o resultado
+
+jobs:
+  buscar-vagas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Instalar navegador do Playwright
+        run: playwright install --with-deps chromium
+
+      - name: Buscar vagas
+        run: python main.py
+
+      - name: Salvar resultado no repositório (se mudou algo)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/vagas.json data/vagas.md
+          if git diff --cached --quiet; then
+            echo "Nada mudou hoje, não precisa commitar."
+          else
+            git commit -m "Atualiza vagas ($(date -u +'%Y-%m-%d'))"
+            git push
+          fi
