@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-06 14:47 UTC · 42 vaga(s)
+Atualizado em 2026-11-07 13:40 UTC · 41 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -58,5 +58,4 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 16h - 4 dias/semana (Disponibilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-16h-4-dias-semana-disponibilidade-16h/24107/102592387024) |
 | Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 16h fim-de-semana (sábado e domingo) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-16h-fim-de-semana-sabado-e-domingo/24107/102592387104) |
 | Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 20h (Disponibilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-20h-disponibilidade-16h-as-23h/24107/102592386992) |
-| Sub-chefe de Restauração | IKEA | Matosinhos, Porto, Portugal | Full time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/sub-chefe-de-restauracao/24107/99439330848) |
 | Técnico(a) de Manutenção Industrial | IKEA | Paços de Ferreira, Porto, Portugal | Full time | [abrir](https://jobs.ikea.com/en/job/pacos-de-ferreira/tecnico-a-de-manutencao-industrial/24107/69906269248) |
