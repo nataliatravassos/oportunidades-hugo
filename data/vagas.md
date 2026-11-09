@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-08 13:58 UTC · 41 vaga(s)
+Atualizado em 2026-11-09 16:58 UTC · 37 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -31,7 +31,6 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Ciências da Computação (AE2026-0339) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0339) |
 | Desenvolvimento de sensores e instrumentação para monitorização da qualidade da água. (AE2026-0346) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0346) |
 | Economia e Gestão (AE2026-0333) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0333) |
-| Energia (AE2026-0298) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0298) |
 | Engenharia (AE2026-0319) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0319) |
 | Gestão de ativos (AE2026-0334) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0334) |
 | Gestão de operações (AE2026-0241) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0241) |
@@ -43,9 +42,6 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Sistemas de Energia (AE2026-0320) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0320) |
 | Sistemas de Energia (AE2026-0328) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0328) |
 | Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0341) |
-| Sistemas de Energia - Inteligência Artificial Distribuída e Edge Computing (AE2026-0303) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0303) |
-| Sistemas de Energia - Operação de redes elétricas (AE2026-0304) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0304) |
-| Sistemas de Energia - Operação de redes elétricas (AE2026-0306) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0306) |
 | Sistemas multi-agente para pesquisa, obtenção e utilização de literatura científica no apoio à tomada de decisão, em contexto académico e industrial. (AE2026-0327) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0327) |
 | Sistemas optolectroquimicos aplicados a biosensores (AE2026-0295) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0295) |
 | [verificar manualmente] Oportunidades em ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP) | ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP) | Porto (verificar) | — | [abrir](https://www.isr.uc.pt) |
