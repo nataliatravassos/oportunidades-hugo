@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-09 16:58 UTC · 37 vaga(s)
+Atualizado em 2026-11-10 15:21 UTC · 39 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -29,6 +29,9 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Ciências da computação (AE2026-0337) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0337) |
 | Ciências da Computação (AE2026-0338) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0338) |
 | Ciências da Computação (AE2026-0339) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0339) |
+| Ciências da Computação (AE2026-0348) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0348) |
+| Computação de Elevado Desempenho (AE2026-0347) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0347) |
+| COMPUTER SCIENCE (AE2026-0350) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0350) |
 | Desenvolvimento de sensores e instrumentação para monitorização da qualidade da água. (AE2026-0346) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0346) |
 | Economia e Gestão (AE2026-0333) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0333) |
 | Engenharia (AE2026-0319) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0319) |
@@ -38,6 +41,7 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Gestão Integrada de Fogos Rurais (Investigação das causas da ignição de incêndios rurais). (AE2026-0335) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0335) |
 | Inteligência Artificial (AE2026-0343) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0343) |
 | Línguas e Literatura (AE2026-0332) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0332) |
+| Online Outlier Detection (AE2026-0358) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0358) |
 | Robótica (AE2026-0342) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0342) |
 | Sistemas de Energia (AE2026-0320) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0320) |
 | Sistemas de Energia (AE2026-0328) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0328) |
@@ -50,8 +54,6 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 
 | Cargo | Empresa | Cidade | Tipo | Link |
 |---|---|---|---|---|
-| Colaborador de IKEA Food - Restaurante - 20h (Disponbilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-ikea-food-restaurante-20h-disponbilidade-16h-as-23h/24107/102458670736) |
 | Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 16h - 4 dias/semana (Disponibilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-16h-4-dias-semana-disponibilidade-16h/24107/102592387024) |
-| Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 16h fim-de-semana (sábado e domingo) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-16h-fim-de-semana-sabado-e-domingo/24107/102592387104) |
 | Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 20h (Disponibilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-20h-disponibilidade-16h-as-23h/24107/102592386992) |
 | Técnico(a) de Manutenção Industrial | IKEA | Paços de Ferreira, Porto, Portugal | Full time | [abrir](https://jobs.ikea.com/en/job/pacos-de-ferreira/tecnico-a-de-manutencao-industrial/24107/69906269248) |
