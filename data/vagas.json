@@ -1,6 +1,6 @@
 {
-  "atualizado_em": "2026-11-10T15:21:16+00:00",
-  "total": 39,
+  "atualizado_em": "2026-11-12T15:41:45+00:00",
+  "total": 35,
   "vagas": [
     {
       "titulo": "[verificar manualmente] Oportunidades em IT — Instituto de Telecomunicações (polo do Porto)",
@@ -12,7 +12,7 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-10T15:21:16+00:00"
+      "coletado_em": "2026-11-12T15:41:45+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em CEiiA — Centro de Engenharia e Desenvolvimento de Produto",
@@ -24,7 +24,7 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:21:16+00:00"
+      "coletado_em": "2026-11-12T15:41:45+00:00"
     },
     {
       "titulo": "Concurso de 2026 da Parceria Europeia SBEP",
@@ -36,7 +36,7 @@
       "tipo_contrato": null,
       "data_publicacao": "nov 2026",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:46+00:00"
+      "coletado_em": "2026-11-12T15:39:17+00:00"
     },
     {
       "titulo": "Concurso de 2027 da Parceria Europeia EP PerMed",
@@ -48,7 +48,7 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:46+00:00"
+      "coletado_em": "2026-11-12T15:39:17+00:00"
     },
     {
       "titulo": "Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote A)",
@@ -60,7 +60,7 @@
       "tipo_contrato": null,
       "data_publicacao": "nov 2026",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:46+00:00"
+      "coletado_em": "2026-11-12T15:39:17+00:00"
     },
     {
       "titulo": "Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote A) | Via Rápida",
@@ -72,7 +72,7 @@
       "tipo_contrato": null,
       "data_publicacao": "nov 2026",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:46+00:00"
+      "coletado_em": "2026-11-12T15:39:17+00:00"
     },
     {
       "titulo": "Programa Portugal-Berkeley",
@@ -84,7 +84,7 @@
       "tipo_contrato": null,
       "data_publicacao": "dez 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:46+00:00"
+      "coletado_em": "2026-11-12T15:39:17+00:00"
     },
     {
       "titulo": "Programa RESTART - 4ª Edição",
@@ -96,7 +96,7 @@
       "tipo_contrato": null,
       "data_publicacao": "nov 2026",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:46+00:00"
+      "coletado_em": "2026-11-12T15:39:17+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS",
@@ -108,7 +108,7 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:21:16+00:00"
+      "coletado_em": "2026-11-12T15:41:45+00:00"
     },
     {
       "titulo": "Colaborador de Logística - Outflow - 20h (14h - 20h) - Temporário",
@@ -120,7 +120,7 @@
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:20:04+00:00"
+      "coletado_em": "2026-11-12T15:40:32+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial",
@@ -132,19 +132,7 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:21:16+00:00"
-    },
-    {
-      "titulo": "Ciência dos Dados (AE2026-0330)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0330",
-      "fonte": "inesctec",
-      "categoria": "Laboratório de Inteligência Artificial e Apoio à Decisão",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:41:45+00:00"
     },
     {
       "titulo": "Ciências da computação (AE2026-0331)",
@@ -156,7 +144,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Ciências da computação (AE2026-0337)",
@@ -168,19 +156,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Ciências da Computação (AE2026-0338)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0338",
-      "fonte": "inesctec",
-      "categoria": "Laboratório de Inteligência Artificial e Apoio à Decisão",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Ciências da Computação (AE2026-0339)",
@@ -192,7 +168,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Ciências da Computação (AE2026-0348)",
@@ -204,7 +180,19 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
+    },
+    {
+      "titulo": "Ciências da Computação (AE2026-0349)",
+      "empresa": "INESC TEC",
+      "cidade": "Braga",
+      "link": "https://www.inesctec.pt/editais/pt/AE2026-0349",
+      "fonte": "inesctec",
+      "categoria": "Laboratório de Software Confiável",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-25",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Computação de Elevado Desempenho (AE2026-0347)",
@@ -216,7 +204,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "COMPUTER SCIENCE (AE2026-0350)",
@@ -228,7 +216,31 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
+    },
+    {
+      "titulo": "COMPUTER SCIENCE (AE2026-0352)",
+      "empresa": "INESC TEC",
+      "cidade": "Porto",
+      "link": "https://www.inesctec.pt/editais/pt/AE2026-0352",
+      "fonte": "inesctec",
+      "categoria": "Computação Centrada no Humano e Ciência da Informação",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-25",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-12T15:39:15+00:00"
+    },
+    {
+      "titulo": "Comunicação ótica subaquática e localização relativa para veículos submarinos cooperativos. (AE2026-0353)",
+      "empresa": "INESC TEC",
+      "cidade": "Porto",
+      "link": "https://www.inesctec.pt/editais/pt/AE2026-0353",
+      "fonte": "inesctec",
+      "categoria": "Robótica e Sistemas Autónomos",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-25",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Desenvolvimento de sensores e instrumentação para monitorização da qualidade da água. (AE2026-0346)",
@@ -240,19 +252,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Economia e Gestão (AE2026-0333)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0333",
-      "fonte": "inesctec",
-      "categoria": "Engenharia de Sistemas e Gestão Industrial",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Engenharia (AE2026-0319)",
@@ -264,19 +264,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Gestão de ativos (AE2026-0334)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0334",
-      "fonte": "inesctec",
-      "categoria": "Engenharia de Sistemas e Gestão Industrial",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Gestão de operações (AE2026-0241)",
@@ -288,31 +276,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-13",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Gestão Integrada de Fogos Rurais (Comunicação do Risco da ignição de incêndios rurais com causa negligente) (AE2026-0336)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0336",
-      "fonte": "inesctec",
-      "categoria": "Engenharia de Sistemas e Gestão Industrial",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Gestão Integrada de Fogos Rurais (Investigação das causas da ignição de incêndios rurais). (AE2026-0335)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0335",
-      "fonte": "inesctec",
-      "categoria": "Engenharia de Sistemas e Gestão Industrial",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Inteligência Artificial (AE2026-0343)",
@@ -324,19 +288,19 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
-      "titulo": "Línguas e Literatura (AE2026-0332)",
+      "titulo": "LLMs executados localmente e sem ligação a serviços externos para aumentar a autonomia de veículos submarinos. (AE2026-0354)",
       "empresa": "INESC TEC",
       "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0332",
+      "link": "https://www.inesctec.pt/editais/pt/AE2026-0354",
       "fonte": "inesctec",
-      "categoria": "Laboratório de Inteligência Artificial e Apoio à Decisão",
+      "categoria": "Robótica e Sistemas Autónomos",
       "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
+      "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Online Outlier Detection (AE2026-0358)",
@@ -348,7 +312,19 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-26",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
+    },
+    {
+      "titulo": "Problema de entrega na última milha (AE2026-0356)",
+      "empresa": "INESC TEC",
+      "cidade": "Porto",
+      "link": "https://www.inesctec.pt/editais/pt/AE2026-0356",
+      "fonte": "inesctec",
+      "categoria": "Engenharia de Sistemas e Gestão Industrial",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-26",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Robótica (AE2026-0342)",
@@ -360,7 +336,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Sistemas de Energia (AE2026-0320)",
@@ -372,7 +348,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-22",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Sistemas de Energia (AE2026-0328)",
@@ -384,7 +360,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341)",
@@ -396,31 +372,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Sistemas multi-agente para pesquisa, obtenção e utilização de literatura científica no apoio à tomada de decisão, em contexto académico e industrial. (AE2026-0327)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0327",
-      "fonte": "inesctec",
-      "categoria": "Engenharia de Sistemas e Gestão Industrial",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
-    },
-    {
-      "titulo": "Sistemas optolectroquimicos aplicados a biosensores (AE2026-0295)",
-      "empresa": "INESC TEC",
-      "cidade": "Porto",
-      "link": "https://www.inesctec.pt/editais/pt/AE2026-0295",
-      "fonte": "inesctec",
-      "categoria": "Fotónica Aplicada",
-      "tipo_contrato": null,
-      "data_publicacao": "2026-11-11",
-      "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:18:44+00:00"
+      "coletado_em": "2026-11-12T15:39:15+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP)",
@@ -432,7 +384,7 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-10T15:21:16+00:00"
+      "coletado_em": "2026-11-12T15:41:45+00:00"
     },
     {
       "titulo": "Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 16h - 4 dias/semana (Disponibilidade: 16h às 23h)",
@@ -444,7 +396,7 @@
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-10T15:20:04+00:00"
+      "coletado_em": "2026-11-12T15:40:32+00:00"
     },
     {
       "titulo": "Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 20h (Disponibilidade: 16h às 23h)",
@@ -456,7 +408,7 @@
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-10T15:20:04+00:00"
+      "coletado_em": "2026-11-12T15:40:32+00:00"
     },
     {
       "titulo": "Técnico(a) de Manutenção Industrial",
@@ -468,7 +420,7 @@
       "tipo_contrato": "Full time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-10T15:20:04+00:00"
+      "coletado_em": "2026-11-12T15:40:32+00:00"
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-10 15:21 UTC · 39 vaga(s)
+Atualizado em 2026-11-12 15:41 UTC · 35 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -24,30 +24,26 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | [verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS | Fraunhofer Portugal AICOS | Porto (verificar) | — | [abrir](https://www.fraunhofer.pt) |
 | Colaborador de Logística - Outflow - 20h (14h - 20h) - Temporário | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-20h-14h-20h-temporario/24107/102764249280) |
 | [verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | Porto (verificar) | — | [abrir](https://www.inegi.pt/pt/carreiras/) |
-| Ciência dos Dados (AE2026-0330) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0330) |
 | Ciências da computação (AE2026-0331) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0331) |
 | Ciências da computação (AE2026-0337) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0337) |
-| Ciências da Computação (AE2026-0338) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0338) |
 | Ciências da Computação (AE2026-0339) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0339) |
 | Ciências da Computação (AE2026-0348) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0348) |
+| Ciências da Computação (AE2026-0349) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0349) |
 | Computação de Elevado Desempenho (AE2026-0347) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0347) |
 | COMPUTER SCIENCE (AE2026-0350) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0350) |
+| COMPUTER SCIENCE (AE2026-0352) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0352) |
+| Comunicação ótica subaquática e localização relativa para veículos submarinos cooperativos. (AE2026-0353) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0353) |
 | Desenvolvimento de sensores e instrumentação para monitorização da qualidade da água. (AE2026-0346) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0346) |
-| Economia e Gestão (AE2026-0333) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0333) |
 | Engenharia (AE2026-0319) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0319) |
-| Gestão de ativos (AE2026-0334) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0334) |
 | Gestão de operações (AE2026-0241) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0241) |
-| Gestão Integrada de Fogos Rurais (Comunicação do Risco da ignição de incêndios rurais com causa negligente) (AE2026-0336) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0336) |
-| Gestão Integrada de Fogos Rurais (Investigação das causas da ignição de incêndios rurais). (AE2026-0335) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0335) |
 | Inteligência Artificial (AE2026-0343) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0343) |
-| Línguas e Literatura (AE2026-0332) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0332) |
+| LLMs executados localmente e sem ligação a serviços externos para aumentar a autonomia de veículos submarinos. (AE2026-0354) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0354) |
 | Online Outlier Detection (AE2026-0358) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0358) |
+| Problema de entrega na última milha (AE2026-0356) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0356) |
 | Robótica (AE2026-0342) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0342) |
 | Sistemas de Energia (AE2026-0320) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0320) |
 | Sistemas de Energia (AE2026-0328) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0328) |
 | Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0341) |
-| Sistemas multi-agente para pesquisa, obtenção e utilização de literatura científica no apoio à tomada de decisão, em contexto académico e industrial. (AE2026-0327) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0327) |
-| Sistemas optolectroquimicos aplicados a biosensores (AE2026-0295) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0295) |
 | [verificar manualmente] Oportunidades em ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP) | ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP) | Porto (verificar) | — | [abrir](https://www.isr.uc.pt) |
 
 ## Operacional (provável ficar muito em pé)
