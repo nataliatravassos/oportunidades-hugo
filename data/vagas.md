@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-12 15:41 UTC · 35 vaga(s)
+Atualizado em 2026-11-13 15:00 UTC · 32 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -24,7 +24,6 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | [verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS | Fraunhofer Portugal AICOS | Porto (verificar) | — | [abrir](https://www.fraunhofer.pt) |
 | Colaborador de Logística - Outflow - 20h (14h - 20h) - Temporário | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-20h-14h-20h-temporario/24107/102764249280) |
 | [verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | Porto (verificar) | — | [abrir](https://www.inegi.pt/pt/carreiras/) |
-| Ciências da computação (AE2026-0331) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0331) |
 | Ciências da computação (AE2026-0337) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0337) |
 | Ciências da Computação (AE2026-0339) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0339) |
 | Ciências da Computação (AE2026-0348) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0348) |
@@ -50,6 +49,4 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 
 | Cargo | Empresa | Cidade | Tipo | Link |
 |---|---|---|---|---|
-| Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 16h - 4 dias/semana (Disponibilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-16h-4-dias-semana-disponibilidade-16h/24107/102592387024) |
-| Colaborador de Relação com Cliente - Balcão de Apoio ao Cliente - 20h (Disponibilidade: 16h às 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-relacao-com-cliente-balcao-de-apoio-ao-cliente-20h-disponibilidade-16h-as-23h/24107/102592386992) |
 | Técnico(a) de Manutenção Industrial | IKEA | Paços de Ferreira, Porto, Portugal | Full time | [abrir](https://jobs.ikea.com/en/job/pacos-de-ferreira/tecnico-a-de-manutencao-industrial/24107/69906269248) |
