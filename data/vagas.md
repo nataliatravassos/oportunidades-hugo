@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-14 13:52 UTC · 31 vaga(s)
+Atualizado em 2026-11-15 14:26 UTC · 31 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
