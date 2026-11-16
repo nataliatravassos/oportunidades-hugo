@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-15 14:26 UTC · 31 vaga(s)
+Atualizado em 2026-11-16 16:34 UTC · 30 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -15,7 +15,6 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Cargo | Empresa | Cidade | Tipo | Link |
 |---|---|---|---|---|
 | [verificar manualmente] Oportunidades em CEiiA — Centro de Engenharia e Desenvolvimento de Produto | CEiiA — Centro de Engenharia e Desenvolvimento de Produto | Porto (verificar) | — | [abrir](https://www.ceiia.com/carreiras) |
-| Concurso de 2026 da Parceria Europeia SBEP | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-2026-da-parceria-europeia-sbep) |
 | Concurso de 2027 da Parceria Europeia EP PerMed | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-2027-da-parceria-europeia-ep-permed) |
 | Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote A) | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a0-a1-lote-a-) |
 | Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote A) | Via Rápida | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a2-a3-lote-a-via-rapida) |
