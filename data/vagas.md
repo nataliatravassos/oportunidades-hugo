@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-16 16:34 UTC · 30 vaga(s)
+Atualizado em 2026-11-17 16:34 UTC · 29 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -20,7 +20,6 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote A) | Via Rápida | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a2-a3-lote-a-via-rapida) |
 | Programa Portugal-Berkeley | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/programa-portugal-berkeley-1) |
 | [verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS | Fraunhofer Portugal AICOS | Porto (verificar) | — | [abrir](https://www.fraunhofer.pt) |
-| Colaborador de Logística - Outflow - 20h (14h - 20h) - Temporário | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-20h-14h-20h-temporario/24107/102764249280) |
 | Colaborador de Vendas - Iluminação e Tapetes - 20h (Disponibilidade: 16h - 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-vendas-iluminacao-e-tapetes-20h-disponibilidade-16h-23h/24107/103264448512) |
 | [verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | Porto (verificar) | — | [abrir](https://www.inegi.pt/pt/carreiras/) |
 | Ciências da computação (AE2026-0337) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0337) |
