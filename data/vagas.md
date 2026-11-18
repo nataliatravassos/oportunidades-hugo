@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-17 16:34 UTC · 29 vaga(s)
+Atualizado em 2026-11-18 16:02 UTC · 55 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -8,6 +8,16 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 
 | Cargo | Empresa | Cidade | Tipo | Link |
 |---|---|---|---|---|
+| E58I0: Marketing Analyst-Senior (ID) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/e58i0-marketing-analyst-senior-id/job/77033E333895FDF6E7D96943ACA292E8?utm_source=CareerSiteOrganic) |
+| Human Resources Recruitment Specialist | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/human-resources-recruitment-specialist/job/37876711D3FF3F071F01A7C9945DA6CB?utm_source=CareerSiteOrganic) |
+| Industrial Engineer - Senior | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer-senior/job/F0F72FE49C8E475875076E5094AC0D09?utm_source=CareerSiteOrganic) |
+| Industrial Engineer - Sort Technology Design & Modelling | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer-sort-technology-design-modelling/job/E8FA3157BDE40F92C62BF493F4249B3B?utm_source=CareerSiteOrganic) |
+| Industrial Engineer- (Associate - Standard - Senior) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer-associate-standard-senior/job/7931351892CCBCEF27823DC810996BF2?utm_source=CareerSiteOrganic) |
+| Operations Quality Associate / Specialist / Snr. Specialist | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/operations-quality-associate-specialist-snr-specialist/job/128AB832CF9A784AB767FC75F3EFF462?utm_source=CareerSiteOrganic) |
+| Planning & Engineering Business Analyst (Associate - Standard - Senior) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/planning-engineering-business-analyst-associate-standard-senior/job/F890E1BB49855FA8E40B2CD8BC5C6B23?utm_source=CareerSiteOrganic) |
+| Process Advisor | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/process-advisor/job/95E75AA772F4EE12DEDCD1223F95DD68?utm_source=CareerSiteOrganic) |
+| Project Engineer | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/project-engineer/job/3CC7CE69B3E0FBCF34D9B968FCDCE931?utm_source=CareerSiteOrganic) |
+| Senior System Engineer (f/m) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/senior-system-engineer-f-m/job/B862C4EFCA3F3AF74FBA0FB1E459AA1F?utm_source=CareerSiteOrganic) |
 | [verificar manualmente] Oportunidades em IT — Instituto de Telecomunicações (polo do Porto) | IT — Instituto de Telecomunicações (polo do Porto) | Porto (verificar) | — | [abrir](https://www.it.pt) |
 
 ## Não dá pra saber só pelo título
@@ -16,9 +26,19 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 |---|---|---|---|---|
 | [verificar manualmente] Oportunidades em CEiiA — Centro de Engenharia e Desenvolvimento de Produto | CEiiA — Centro de Engenharia e Desenvolvimento de Produto | Porto (verificar) | — | [abrir](https://www.ceiia.com/carreiras) |
 | Concurso de 2027 da Parceria Europeia EP PerMed | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-2027-da-parceria-europeia-ep-permed) |
-| Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote A) | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a0-a1-lote-a-) |
-| Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote A) | Via Rápida | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a2-a3-lote-a-via-rapida) |
+| Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote B) | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a0-a1-lote-b-) |
+| Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote B) | Via Rápida | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a2-a3-lote-b-via-rapida) |
 | Programa Portugal-Berkeley | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/programa-portugal-berkeley-1) |
+| Clearance Broker Associate with English | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-english/job/2AD310ECB2D8836435FEC36C3B427A08?utm_source=CareerSiteOrganic) |
+| Clearance Broker Associate with German | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-german/job/00776E6ED4D8A5E7DFE8D0F7CC5C7A8F?utm_source=CareerSiteOrganic) |
+| Clearance Broker Associate with German | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-german/job/A88BCFBD68902023141C5C37BFD02FD5?utm_source=CareerSiteOrganic) |
+| Clearance Broker Associate with German (Austria) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-german-austria/job/74B73B3957BE9329A8A9EFEAA625A43E?utm_source=CareerSiteOrganic) |
+| Clearance Broker Associate with Italian | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-italian/job/35022FA5132BEFCA2D3284AF4B651FC4?utm_source=CareerSiteOrganic) |
+| Clearance Broker with Dutch | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-with-dutch/job/2B4CACBF575F428F53892DF3483847FC?utm_source=CareerSiteOrganic) |
+| Clearance Broker with Dutch | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-with-dutch/job/BE0773C7FE6912DA0F51921E315D3781?utm_source=CareerSiteOrganic) |
+| Invoice Adjustment (Billing & Dispute Management) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/invoice-adjustment-billing-dispute-management/job/75EBDC9381E6E133F15ADAF505FEEF52?utm_source=CareerSiteOrganic) |
+| Invoice to Cash (CFS Representative) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/invoice-to-cash-cfs-representative/job/78B94C53B071F21F0C7D4AF94CE8A60E?utm_source=CareerSiteOrganic) |
+| Logistics Services Representative | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/logistics-services-representative/job/19B54B24CDA079BFDF9EF57EB6879BBB?utm_source=CareerSiteOrganic) |
 | [verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS | Fraunhofer Portugal AICOS | Porto (verificar) | — | [abrir](https://www.fraunhofer.pt) |
 | Colaborador de Vendas - Iluminação e Tapetes - 20h (Disponibilidade: 16h - 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-vendas-iluminacao-e-tapetes-20h-disponibilidade-16h-23h/24107/103264448512) |
 | [verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | Porto (verificar) | — | [abrir](https://www.inegi.pt/pt/carreiras/) |
@@ -32,6 +52,8 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Comunicação ótica subaquática e localização relativa para veículos submarinos cooperativos. (AE2026-0353) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0353) |
 | Desenvolvimento de sensores e instrumentação para monitorização da qualidade da água. (AE2026-0346) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0346) |
 | Engenharia (AE2026-0319) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0319) |
+| Engenharia Electrotécnica (AE2026-0351) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0351) |
+| Informática, Eletrónica e Sistemas Digitais (AE2026-0359) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0359) |
 | Inteligência Artificial (AE2026-0343) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0343) |
 | LLMs executados localmente e sem ligação a serviços externos para aumentar a autonomia de veículos submarinos. (AE2026-0354) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0354) |
 | Online Outlier Detection (AE2026-0358) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0358) |
@@ -40,10 +62,14 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Sistemas de Energia (AE2026-0320) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0320) |
 | Sistemas de Energia (AE2026-0328) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0328) |
 | Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0341) |
+| Telecomunicações (AE2026-0361) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0361) |
+| Telecomunicações (AE2026-0362) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0362) |
 | [verificar manualmente] Oportunidades em ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP) | ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP) | Porto (verificar) | — | [abrir](https://www.isr.uc.pt) |
 
 ## Operacional (provável ficar muito em pé)
 
 | Cargo | Empresa | Cidade | Tipo | Link |
 |---|---|---|---|---|
+| Operador Armazém - GOPS OPO - Exportação - Part-time | FedEx | Rua do Barreiro, Moreira Da Maia, Porto, PT | Part Time | [abrir](/operador-armazém-gops-opo-exportação-part-time/job/6648352A24E2F797505708FE6608FBD4?utm_source=CareerSiteOrganic) |
+| Operador Armazém - Importação- Part-time | FedEx | Rua do Barreiro, Moreira Da Maia, Porto, PT | Part Time | [abrir](/operador-armazém-importação-part-time/job/36ECDD2D265544AC450B6B19723FE7E8?utm_source=CareerSiteOrganic) |
 | Técnico(a) de Manutenção Industrial | IKEA | Paços de Ferreira, Porto, Portugal | Full time | [abrir](https://jobs.ikea.com/en/job/pacos-de-ferreira/tecnico-a-de-manutencao-industrial/24107/69906269248) |
