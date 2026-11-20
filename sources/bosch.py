@@ -42,7 +42,9 @@ def extrair_cartao(html: str, url: str) -> dict | None:
     data = texto('.A-JobPanel__description:has(i[title="calendar"]) .A-JobPanel__value')
     modo = texto(".A-JobPanel__remote")
     link = url_absoluta(cabecalho["href"], url)
-    if not cidade or not link or urlsplit(link).hostname != "jobs.bosch.com" or "/job/" not in urlsplit(link).path:
+    destino = urlsplit(link or "")
+    if (not cidade or destino.scheme != "https" or destino.netloc != "jobs.bosch.com"
+            or not re.fullmatch(r"/en/job/REF\d+[A-Za-z]?-([^/]+)/?", destino.path)):
         return None
     vaga = make_vaga(
         titulo=titulo.get_text(" ", strip=True), empresa="Bosch", cidade=cidade,

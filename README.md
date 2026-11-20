@@ -95,10 +95,15 @@ só pedir depois que o repositório estiver no ar.
   observação refere-se à listagem e pode avançar sem alterar o carimbo do
   conteúdo. Isso não comprova que a candidatura continua aberta.
 - Os diagnósticos incluem o recorte consultado e, quando disponível, a
-  contagem anunciada pelo portal. Uma vaga da Microsoft fora da região
-  entra como remota apenas quando o cartão inclui Portugal e o anúncio
-  confirma zero dias de escritório com indicação explícita de trabalho
-  remoto. O aplicativo identifica `Europe/Lisbon` no cabeçalho e nos cartões.
+  contagem anunciada pelo portal. A Siemens exige os filtros na URL
+  de resultados, o resumo de filtros aplicados e a localização nos cartões.
+  Na Sonae, só destinos explícitos e coerentes no HTML público são usados.
+  O `robots.txt` exclui a API da coleta.
+- Na Microsoft, Portugal no cartão e regime totalmente remoto tornam a
+  elegibilidade provável. A inclusão fora do recorte regional exige uma
+  confirmação explícita no anúncio. Restrições geográficas encontradas
+  prevalecem sobre a indicação de trabalho remoto. O aplicativo identifica
+  `Europe/Lisbon` no cabeçalho e nos cartões.
 
 ## Estrutura dos arquivos
 

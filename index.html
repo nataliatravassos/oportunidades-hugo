@@ -108,6 +108,11 @@ const DATA_LISBOA = new Intl.DateTimeFormat("pt-PT", {
   dateStyle: "short", timeStyle: "short", timeZone: "Europe/Lisbon",
 });
 const MODALIDADES = { remoto: "Remoto", hibrido: "Híbrido", presencial: "Presencial", desconhecido: "Modalidade desconhecida" };
+const ELEGIBILIDADE_REMOTA = {
+  confirmada: "Elegibilidade em Portugal confirmada no anúncio",
+  provavel: "Elegibilidade em Portugal por confirmar",
+  nao_verificada: "Elegibilidade em Portugal não verificada",
+};
 
 function dataLisboa(valor) {
   const data = new Date(valor || "");
@@ -141,6 +146,8 @@ function render() {
         ${v.cidade ? `<span>· ${escapeHtml(v.cidade)}</span>` : ""}
         ${v.tipo_contrato ? `<span>· ${escapeHtml(v.tipo_contrato)}</span>` : ""}
         ${MODALIDADES[v.modalidade] ? `<span>· ${MODALIDADES[v.modalidade]}</span>` : ""}
+        ${v.modalidade === "remoto" && ELEGIBILIDADE_REMOTA[v.elegibilidade_portugal] ?
+          `<span>· ${ELEGIBILIDADE_REMOTA[v.elegibilidade_portugal]}</span>` : ""}
       </div>
       <div class="vaga-meta">${escapeHtml(ultimaObservacao(v))}${temLink ? "" : " · Link por confirmar"}</div>
       <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>

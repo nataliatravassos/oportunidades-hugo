@@ -9,7 +9,8 @@ from config import eh_regiao_porto, remoto_elegivel
 from publicacao import carregar_base, publicar, validar_vaga
 from sources import bosch, dhl, microsoft, nestle, siemens, sonae
 from sources.base import EstadoColeta, ResultadoColeta, make_vaga, url_absoluta
-from sources.fedex_links import url_vaga_fedex
+from sources.fedex_links import identidade_fedex, url_vaga_fedex
+from sources import playwright_utils
 from sources.playwright_utils import ErroNavegacao
 
 
@@ -67,6 +68,21 @@ class BoschTest(unittest.TestCase):
 
 
 class FedexTest(unittest.TestCase):
+    def test_duas_paginas_observadas_conservam_referencias_e_recorte(self):
+        paginas = json.loads(ler("fedex-duas-paginas.json"))
+        self.assertEqual([len(p) for p in paginas], [25, 18])
+        vagas = [
+            validar_vaga(make_vaga(titulo=c["title"], empresa="FedEx", fonte="fedex",
+                                  cidade=c["local"], categoria=c["ref"],
+                                  link=url_absoluta(c["href"], "https://careers.fedex.com")))
+            for pagina in paginas for c in pagina
+        ]
+        self.assertEqual(len({identidade_fedex(v) for v in vagas}), 43)
+        self.assertEqual(sum(eh_regiao_porto(v["cidade"]) for v in vagas), 24)
+        va = next(v for v in vagas if v["categoria"] == "RC789529")
+        locale = {**va, "link": va["link"].replace(".com/", ".com/pt-pt/") + "__pt-pt"}
+        self.assertEqual(identidade_fedex(validar_vaga(locale)), identidade_fedex(va))
+
     def test_formatos_reais_continuam_sujeitos_ao_filtro_regional(self):
         cartoes = json.loads(ler("fedex-cartoes.json"))
         for i, cartao in enumerate(cartoes):
@@ -88,13 +104,36 @@ class FedexTest(unittest.TestCase):
 
 
 class MicrosoftTest(unittest.TestCase):
-    def test_amostra_real_nacional_com_work_site_remoto_e_elegivel(self):
+    def test_restricoes_explicitas_prevalecem_sobre_indicacao_nacional(self):
+        base = ler("microsoft-work-site.html")
+        for texto in ("You must be legally authorized to work in Ireland.",
+                      "U.S. citizenship is required.",
+                      "Candidates must reside in Spain. The Portugal team can help.",
+                      "This role is Germany-only.", "Hiring is not available in Portugal."):
+            with self.subTest(texto=texto):
+                vaga = microsoft.modalidade_do_anuncio(base + f"<p>{texto}</p>", "Porto, Portugal")
+                self.assertEqual(vaga["elegibilidade_portugal"], "inelegivel")
+                self.assertTrue(texto.startswith(vaga["evidencia_elegibilidade"]))
+                self.assertFalse(remoto_elegivel(vaga))
+
+    def test_evidencia_afirmativa_e_distinta_de_ausencia_de_verificacao(self):
+        confirmada = microsoft.modalidade_do_anuncio(
+            ler("microsoft-work-site.html") + "<p>You may work remotely from Portugal.</p>", "Portugal",
+        )
+        self.assertTrue(remoto_elegivel(confirmada))
+        self.assertEqual(confirmada["elegibilidade_portugal"], "confirmada")
+        self.assertIn("remotely from Portugal", confirmada["evidencia_elegibilidade"])
+        desconhecida = microsoft.modalidade_do_anuncio("<p>You may work remotely from Portugal.</p>", "Portugal")
+        self.assertEqual(desconhecida["elegibilidade_portugal"], "nao_verificada")
+
+    def test_amostra_real_nacional_com_work_site_remoto_fica_como_provavel(self):
         vaga = microsoft.extrair_cartao(ler("microsoft-cartao.html"), "https://apply.careers.microsoft.com/careers")
         self.assertEqual(vaga["cidade"], "Portugal, Multiple Locations, Multiple Locations + 4 more")
         self.assertEqual(vaga["modalidade"], "desconhecido")
         self.assertFalse(remoto_elegivel(vaga))
         vaga.update(microsoft.modalidade_do_anuncio(ler("microsoft-work-site.html"), vaga["cidade"]))
-        self.assertTrue(remoto_elegivel(validar_vaga(vaga)))
+        self.assertEqual(vaga["elegibilidade_portugal"], "provavel")
+        self.assertFalse(remoto_elegivel(validar_vaga(vaga)))
 
     def test_hibrido_presencial_e_texto_generico_nao_implicam_remoto(self):
         for evid, modo in (("3 days / week in-office", "hibrido"), ("Fully on-site", "presencial"),
@@ -121,11 +160,17 @@ class MicrosoftTest(unittest.TestCase):
                              "vagas": [anterior_fedex]}, {})
             anterior, anteriores = carregar_base(pasta)
             vaga = microsoft.extrair_cartao(ler("microsoft-cartao.html"), "https://apply.careers.microsoft.com/careers")
-            vaga.update(microsoft.modalidade_do_anuncio(ler("microsoft-work-site.html"), vaga["cidade"]))
+            remoto = ler("microsoft-work-site.html") + "<p>Candidates residing in Portugal may apply.</p>"
+            vaga.update(microsoft.modalidade_do_anuncio(remoto, vaga["cidade"]))
             hibrida = {**vaga, "link": vaga["link"] + "?fixture=hibrida", "modalidade": "hibrido"}
+            restrita = {**vaga, "link": vaga["link"] + "?fixture=restrita", "cidade": "Porto, Portugal"}
+            restrita.update(microsoft.modalidade_do_anuncio(
+                remoto + "<p>Candidates must reside in Spain. The Portugal team supports this role.</p>",
+                restrita["cidade"],
+            ))
             respostas = {
                 "fedex": ResultadoColeta(EstadoColeta.FALHA, motivo="timeout simulado"),
-                "microsoft": ResultadoColeta(EstadoColeta.PARCIAL, [vaga, hibrida], "cobertura limitada",
+                "microsoft": ResultadoColeta(EstadoColeta.PARCIAL, [vaga, hibrida, restrita], "cobertura limitada",
                                              consulta={"escopo": "Portugal"}),
             }
             with (
@@ -139,11 +184,59 @@ class MicrosoftTest(unittest.TestCase):
             self.assertEqual(dados["total"], anterior["total"] + 1)
             self.assertTrue(all(v in registos for v in anteriores))
             saude = json.loads((pasta / "coleta.json").read_text(encoding="utf-8"))["fontes"]["microsoft"]
-            self.assertEqual((saude["extraidas"], saude["remotas_elegiveis"], saude["fora_do_recorte"]), (2, 1, 1))
+            self.assertEqual((saude["extraidas"], saude["remotas_elegiveis"], saude["fora_do_recorte"]), (3, 1, 2))
+            self.assertEqual(saude["elegibilidade_portugal"]["inelegivel"], 1)
             self.assertEqual(saude["consulta"]["escopo"], "Portugal")
 
 
 class FiltrosTest(unittest.TestCase):
+    def test_siemens_formulario_selecionado_sem_busca_ou_resumo_nao_basta(self):
+        r = "https://jobs.siemens.com/pt_PT/externaljobs"
+        page = Mock(url=r + "?42414=%5B812097%5D")
+        page.get_by_text.return_value.first.is_visible.return_value = True
+        page.locator.return_value.evaluate_all.return_value = ["812097"]
+        filtros = [("42414[]", "812097")]
+        self.assertFalse(siemens._filtros_aplicados(page, filtros))
+        page.url = r + "/SearchJobs/?42414=%5B812097%5D"
+        page.get_by_text.return_value.first.is_visible.return_value = False
+        self.assertFalse(siemens._filtros_aplicados(page, filtros))
+        page.get_by_text.return_value.first.is_visible.return_value = True
+        page.url = r + "/SearchJobs/?42414=%5B812097%2C44%5D"
+        self.assertFalse(siemens._filtros_aplicados(page, filtros))
+
+    def test_siemens_resultado_ignora_distrito_quando_cartoes_nao_o_comprovam(self):
+        page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=%5B812097%5D&42415=6")
+        page.get_by_text.return_value.first.is_visible.return_value = True
+        filtros = [("42414[]", "812097"), ("42415[]", "6")]
+        with patch.object(siemens, "_extrair_pagina", return_value=[{"cidade": "Amadora, Lisboa, Portugal"}]):
+            with self.assertRaisesRegex(ValueError, "Nenhum cartão"):
+                siemens._extrair_validada(page, filtros, True)
+        com_porto = {"cidade": "Maia, Porto, Portugal"}
+        with patch.object(siemens, "_extrair_pagina", return_value=[com_porto, {"cidade": "Vários locais"}]):
+            self.assertEqual(siemens._extrair_validada(page, filtros, True), [com_porto])
+
+    def test_siemens_ignorar_filtro_na_segunda_pagina_preserva_a_primeira(self):
+        page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=%5B812097%5D")
+        page.get_by_text.return_value.first.is_visible.side_effect = [True, False]
+        vaga = {"cidade": "Porto, Portugal", "link": "https://jobs.siemens.com/pt_PT/externaljobs/JobDetail/1"}
+        controle = Mock()
+        controle.count.return_value = 1
+        controle.is_disabled.return_value = False
+        with (
+            patch.object(siemens, "_extrair_pagina", return_value=[vaga]),
+            patch.object(playwright_utils, "links_dos_cartoes", side_effect=[["/um"], ["/dois"]]),
+            patch.object(playwright_utils, "esperar_resultados"),
+        ):
+            resultado = playwright_utils.coletar_paginas(
+                page, siemens.SELETOR_CARD,
+                lambda p: siemens._extrair_validada(p, [("42414[]", "812097")], False),
+                lambda _: controle, 2,
+            )
+        self.assertEqual(resultado.estado, EstadoColeta.PARCIAL)
+        self.assertEqual(resultado.vagas, [vaga])
+        self.assertEqual(resultado.paginas, 1)
+        self.assertIn("sem confirmação", resultado.motivo)
+
     def test_dhl_aceita_variacoes_portuguesas_e_rejeita_homonimos(self):
         self.assertTrue(dhl.local_dhl_valido("Porto, Portugal"))
         self.assertTrue(dhl.local_dhl_valido("Maia, Porto, PT"))
@@ -152,7 +245,7 @@ class FiltrosTest(unittest.TestCase):
 
     def test_siemens_precisa_dos_valores_confirmados(self):
         page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs?country%5B%5D=812097&district%5B%5D=42")
-        page.locator.return_value.evaluate_all.return_value = []
+        page.get_by_text.return_value.first.is_visible.return_value = True
         self.assertTrue(siemens._filtros_aplicados(page, [("country[]", "812097"), ("district[]", "42")]))
         self.assertFalse(siemens._filtros_aplicados(page, [("country[]", "812097"), ("district[]", "99")]))
 
@@ -164,16 +257,39 @@ class FiltrosTest(unittest.TestCase):
 
     def test_siemens_aceita_serializacao_do_portal(self):
         page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=%5B812097%5D")
-        page.locator.return_value.evaluate_all.return_value = []
+        page.get_by_text.return_value.first.is_visible.return_value = True
         self.assertTrue(siemens._filtros_aplicados(page, [("42414[]", "812097")]))
         self.assertFalse(siemens._filtros_aplicados(page, [("42414[]", "81209")]))
 
     def test_sonae_descarta_destino_de_cartao_desatualizado_apos_filtrar(self):
         caminho = "/pt/talento/oportunidades/operador-a-de-loja-part-time-18h00-22h00-945355"
-        url = sonae._link_anuncio(caminho, sonae.URL)
-        self.assertTrue(sonae._titulo_corresponde("OPERADOR/A DE LOJA | PART-TIME (18h00 - 22h00)", url))
-        self.assertFalse(sonae._titulo_corresponde("VENDEDOR/A DE LOJA", url))
-        self.assertIsNone(sonae._link_anuncio("https://example.org" + caminho, sonae.URL))
+        html = f'<div role="button" class="border-secondary-200 border-b"><p>VENDEDOR/A DE LOJA</p><p>Vendas</p><p>VALONGO - Lojas</p><a href="{caminho}">Detalhes</a></div>'
+        resultado = sonae.extrair_listagem(html, sonae.URL)
+        self.assertEqual(resultado.estado, EstadoColeta.FALHA)
+        self.assertEqual(resultado.vagas, [])
+
+    def test_sonae_cartoes_sem_link_nao_iniciam_navegacao(self):
+        html = ler("sonae-cartoes-sem-link.html")
+        resposta = Mock(text=html, url=sonae.URL)
+        with patch.object(sonae.requests, "get", return_value=resposta) as get:
+            resultado = sonae.fetch()
+        get.assert_called_once_with(sonae.URL, timeout=15)
+        self.assertEqual(resultado.estado, EstadoColeta.FALHA)
+        self.assertEqual(resultado.consulta["cartoes_lidos"], 2)
+        self.assertEqual(resultado.vagas, [])
+
+    def test_sonae_preserva_destinos_distintos_e_rejeita_mesmo_id_em_locais_diferentes(self):
+        html = ler("sonae-cartoes-sem-link.html")
+        for local, vaga in (("VALONGO", "948463"), ("MATOSINHOS", "948462")):
+            html = html.replace(f"{local} - Lojas</p>",
+                                f'{local} - Lojas</p><a href="{sonae.URL}/{vaga}">Detalhes</a>')
+        resultado = sonae.extrair_listagem(html, sonae.URL)
+        self.assertEqual(resultado.estado, EstadoColeta.PARCIAL)
+        self.assertEqual([(v["cidade"], v["link"].rsplit("/", 1)[1]) for v in resultado.vagas],
+                         [("VALONGO", "948463"), ("MATOSINHOS", "948462")])
+        conflito = sonae.extrair_listagem(html.replace("948462", "948463"), sonae.URL)
+        self.assertEqual(conflito.estado, EstadoColeta.FALHA)
+        self.assertIn("dados divergentes", conflito.motivo)
 
     def test_nestle_403_nao_tenta_contornar_nem_publica_zero(self):
         contexto = Mock()

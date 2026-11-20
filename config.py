@@ -37,9 +37,13 @@ def eh_regiao_porto(cidade: str | None) -> bool:
     return bool(_LOCAIS_PORTO.search(local) and not _FORA_REGIAO.search(local))
 
 
+def local_em_portugal(local: str | None) -> bool:
+    return any(normalizar_local(parte) == "portugal" for parte in (local or "").split(","))
+
+
 def remoto_elegivel(vaga: dict) -> bool:
-    return (vaga.get("modalidade") == "remoto" and vaga.get("remoto_em_portugal") is True
-            and bool(vaga.get("evidencia_modalidade")))
+    return (vaga.get("modalidade") == "remoto" and vaga.get("elegibilidade_portugal") == "confirmada"
+            and bool(vaga.get("evidencia_modalidade")) and bool(vaga.get("evidencia_elegibilidade")))
 
 
 # Nome de cada módulo em sources/ que será executado pelo main.py.

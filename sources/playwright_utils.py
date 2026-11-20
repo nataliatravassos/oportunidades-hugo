@@ -85,29 +85,24 @@ def links_dos_cartoes(page, seletor: str) -> list[str]:
     return page.locator(seletor).evaluate_all(LINKS_DOS_CARTOES)
 
 
-def texto_dos_cartoes(page, seletor: str) -> list[str]:
-    return [texto.strip() for texto in page.locator(seletor).all_text_contents()]
-
-
-def esperar_resultados(page, seletor: str, anteriores: list[str], *, crescer: bool = False,
-                       usar_texto: bool = False) -> None:
+def esperar_resultados(page, seletor: str, anteriores: list[str], *, crescer: bool = False) -> None:
     page.wait_for_function(
-        """({seletor, anteriores, crescer, usarTexto}) => {
+        """({seletor, anteriores, crescer}) => {
             const links = Array.from(document.querySelectorAll(seletor), card =>
-                usarTexto ? card.textContent.trim() : card.querySelector('a[href]')?.getAttribute('href') ?? ''
+                card.querySelector('a[href]')?.getAttribute('href') ?? ''
             );
             return links.some(Boolean) && (crescer
                 ? links.length > anteriores.length
                 : JSON.stringify([...new Set(links)].sort()) !==
                   JSON.stringify([...new Set(anteriores)].sort()));
         }""",
-        arg={"seletor": seletor, "anteriores": anteriores, "crescer": crescer, "usarTexto": usar_texto},
+        arg={"seletor": seletor, "anteriores": anteriores, "crescer": crescer},
         timeout=15000,
     )
 
 
 def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
-                   consulta: dict | None = None, usar_texto: bool = False) -> ResultadoColeta:
+                   consulta: dict | None = None) -> ResultadoColeta:
     """Conserva os resultados já lidos caso uma página deixe de avançar."""
     vagas = {}
     problemas = []
@@ -116,8 +111,7 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
     cartoes_lidos = 0
     for numero in range(1, limite + 1):
         try:
-            ler_cartoes = texto_dos_cartoes if usar_texto else links_dos_cartoes
-            links = ler_cartoes(page, seletor)
+            links = links_dos_cartoes(page, seletor)
             assinatura = frozenset(links)
             if assinatura in assinaturas:
                 problemas.append(f"Página {numero} repetida")
@@ -140,7 +134,7 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
                 problemas.append(f"Limite de {limite} páginas atingido com navegação restante")
                 break
             controle.click()
-            esperar_resultados(page, seletor, links, usar_texto=usar_texto)
+            esperar_resultados(page, seletor, links)
         except Exception as erro:
             problemas.append(f"Paginação a partir da página {numero}: {resumir_erro(erro)}")
             break

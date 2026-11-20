@@ -17,11 +17,11 @@ import datetime as dt
 import importlib
 import logging
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import replace
 from pathlib import Path
 
-from config import FONTES, eh_regiao_porto, remoto_elegivel
+from config import FONTES, eh_regiao_porto, local_em_portugal, remoto_elegivel
 from publicacao import carregar_base, publicar, validar_vaga
 from sources.base import EstadoColeta, ResultadoColeta, resumir_erro
 from sources.fedex_links import identidade_fedex, url_vaga_fedex
@@ -136,8 +136,8 @@ def atualizar_fonte(
         if anterior["fonte"] == "fedex":
             atualizada["link"] = observada["link"]
             atualizada.pop("link_original", None)
-        if observada.get("evidencia_modalidade"):
-            for campo in ("modalidade", "evidencia_modalidade", "remoto_em_portugal"):
+        if observada.get("evidencia_modalidade") or observada.get("evidencia_elegibilidade"):
+            for campo in ("modalidade", "evidencia_modalidade", "elegibilidade_portugal", "evidencia_elegibilidade"):
                 if campo in observada:
                     atualizada[campo] = observada[campo]
         atualizada.pop("verificacao_pendente", None)
@@ -157,6 +157,10 @@ def main() -> int:
         resultado, rejeitadas = validar_resultado(nome, bruto)
         locais, remotas = [], []
         for vaga in resultado.vagas:
+            if vaga.get("elegibilidade_portugal") == "inelegivel":
+                continue
+            if nome == "microsoft" and not local_em_portugal(vaga.get("cidade")):
+                continue
             if nome in FONTES_SEM_FILTRO_REGIAO or eh_regiao_porto(vaga.get("cidade")):
                 locais.append(vaga)
             elif remoto_elegivel(vaga):
@@ -183,6 +187,10 @@ def main() -> int:
             "manual": manual,
             "consulta": resultado.consulta,
         }
+        if nome == "microsoft":
+            diagnosticos[nome]["elegibilidade_portugal"] = dict(Counter(
+                vaga.get("elegibilidade_portugal", "nao_verificada") for vaga in resultado.vagas
+            ))
         logar = logger.warning if resultado.estado in (EstadoColeta.PARCIAL, EstadoColeta.FALHA) else logger.info
         logar("%s: %s, %s", nome, resultado.estado, diagnosticos[nome])
 

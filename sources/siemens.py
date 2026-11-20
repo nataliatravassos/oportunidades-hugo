@@ -1,18 +1,4 @@
-"""
-Siemens — portal de carreiras (jobs.siemens.com), migrado para um novo
-portal em 2026 (o antigo link redireciona pra cá automaticamente).
-
-A busca usa dois campos select2 (autocomplete do tipo "digita e escolhe
-uma opção da lista", não dá pra simplesmente preencher um `<select>`):
-primeiro "País / região" (escolhe "Portugal"), o que libera um segundo
-campo "Estado/Província/Município" (escolhe "Porto"). Only depois de
-escolher as duas opções clicando nas sugestões (não só digitando) os
-filtros realmente aplicam — por isso o scraper clica explicitamente em
-cada sugestão, em vez de tentar atalhos de URL.
-
-A lista de resultados é paginada (6 por página) com um botão
-"próxima página" (`.paginationNextLink`).
-"""
+"""Pesquisa na Siemens com verificação dos filtros na página de resultados."""
 
 from __future__ import annotations
 
@@ -54,26 +40,45 @@ def _selecionar(page, filtro: str, valor: str) -> tuple[str, str]:
 
 
 def _filtros_aplicados(page, filtros: list[tuple[str, str]]) -> bool:
-    parametros = parse_qs(urlsplit(page.url).query)
+    url = urlsplit(page.url)
+    if (not filtros or url.scheme != "https" or url.netloc != "jobs.siemens.com"
+            or url.path.rstrip("/") != "/pt_PT/externaljobs/SearchJobs"):
+        return False
+    parametros = parse_qs(url.query)
 
     def valores_url(nome):
-        for campo in (nome, nome.removesuffix("[]")):
+        for campo in {nome, nome.removesuffix("[]")}:
             for valor in parametros.get(campo, []):
                 if valor.startswith("["):
                     try:
                         itens = json.loads(valor)
                     except ValueError:
+                        yield ""
                         continue
                     if isinstance(itens, list):
                         yield from map(str, itens)
+                    else:
+                        yield ""
                 else:
                     yield valor
 
-    return all(
-        valor in valores_url(nome) or
-        valor in page.locator(f'select[name="{nome}"] option:checked').evaluate_all("(opcoes) => opcoes.map(o => o.value)")
-        for nome, valor in filtros
-    )
+    if not all(set(valores_url(nome)) == {valor} for nome, valor in filtros):
+        return False
+    resumo = page.get_by_text(re.compile(r"^Filtros aplicados\b", re.I)).first
+    return resumo.is_visible()
+
+
+def _extrair_validada(page, filtros: list[tuple[str, str]], distrito_porto: bool) -> list[dict]:
+    if not _filtros_aplicados(page, filtros):
+        raise ValueError("Filtros Siemens sem confirmação na URL de resultados e no resumo de filtros aplicados")
+    vagas = []
+    for vaga in _extrair_pagina(page):
+        locais = {normalizar_local(item) for item in re.split(r"[,/\n]", vaga.get("cidade") or "")}
+        if "portugal" in locais and (not distrito_porto or "porto" in locais):
+            vagas.append(vaga)
+    if not vagas:
+        raise ValueError("Nenhum cartão desta página confirma a localização selecionada na Siemens")
+    return vagas
 
 
 def _extrair_pagina(page) -> list[dict]:
@@ -128,17 +133,16 @@ def fetch() -> ResultadoColeta:
         anteriores = links_dos_cartoes(page, SELETOR_CARD)
         page.get_by_role("button", name=re.compile(r"^Pesquisar$", re.I)).first.click()
         esperar_resultados(page, SELETOR_CARD, anteriores)
-        if not _filtros_aplicados(page, filtros):
-            raise ValueError("Filtros selecionados não confirmados nos resultados Siemens")
-        escopo = ("Portugal e distrito Porto confirmados após o envio" if len(filtros) == 2
-                  else "Portugal confirmado; distrito não disponível no formulário inicial, recorte regional aplicado aos cartões")
+        escopo = "Portugal e distrito Porto" if len(filtros) == 2 else "Portugal; distrito indisponível no formulário inicial"
 
-        return coletar_paginas(
-            page, SELETOR_CARD, _extrair_pagina,
+        resultado = coletar_paginas(
+            page, SELETOR_CARD, lambda p: _extrair_validada(p, filtros, len(filtros) == 2),
             lambda numero: page.locator(".list-controls__pagination__item.paginationNextLink a").first,
             MAX_PAGINAS,
-            consulta={"url": page.url, "escopo": escopo},
+            consulta={"url": page.url, "filtros_solicitados": escopo},
         )
+        resultado.consulta["paginas_com_filtros_confirmados"] = resultado.paginas
+        return resultado
 
 
 if __name__ == "__main__":
