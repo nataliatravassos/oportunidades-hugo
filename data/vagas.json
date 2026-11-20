@@ -1,7 +1,665 @@
 {
-  "atualizado_em": "2026-11-20T21:03:09+00:00",
-  "total": 60,
+  "atualizado_em": "2026-11-20T22:12:57+00:00",
+  "total": 138,
   "vagas": [
+    {
+      "titulo": "Academic Internship in Industrial Engineering and Management (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300604Y-academic-internship-in-industrial-engineering-and-management-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-10",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Academic Internship in Industrial Engineering and Management (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300610Q-academic-internship-in-industrial-engineering-and-management-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-10",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Automated Driving Sensor Engineer - Radar (f/m/div)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299859I-automated-driving-sensor-engineer-radar-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-30",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Backend Developer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300435T-backend-developer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Data Engineer – Unified Data Layer (UDL) (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300709O-data-engineer-unified-data-layer-udl-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-11",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Data Scientist (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF296980P-data-scientist-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-05",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Data Scientist (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301274J-data-scientist-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Development & Test Engineer - Heat Pumps (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF299858J-development-test-engineer-heat-pumps-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-30",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Development and Test Engineer for Hydraulics in Heat Pump development (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301536V-development-and-test-engineer-for-hydraulics-in-heat-pump-development-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-20",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Development Engineer - Acoustic (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300322J-development-engineer-acoustic-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-05",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Development Engineer - Machine Learning (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300387F-development-engineer-machine-learning-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Development Engineer - Materials (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300319P-development-engineer-materials-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Development Engineer - Refrigeration Testing (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300390Z-development-engineer-refrigeration-testing-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "DevOps Engineer – Unified Data Layer (UDL) (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300714N-devops-engineer-unified-data-layer-udl-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-11",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Electrical Engineer – Heat Pumps (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300773U-electrical-engineer-heat-pumps-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Embedded Software Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301288N-embedded-software-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Embedded Software Engineer - Radar Systems (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF295130V-embedded-software-engineer-radar-systems-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-02",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Estágio Extracurricular: Planeamento Supply Chain & Data Analytics para a região EMEA (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300118J-estagio-extracurricular-planeamento-supply-chain-data-analytics-para-a-regiao-emea-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Logistics",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-04",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship – DevOps & GenAI Engineer for Quality (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299851Q-extracurricular-internship-devops-genai-engineer-for-quality-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-30",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship: AI Software Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301002H-extracurricular-internship-ai-software-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Extracurricular Internship: Android Developer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301303J-extracurricular-internship-android-developer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship: Data Engineering - Cloud Platform (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300490P-extracurricular-internship-data-engineering-cloud-platform-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Information Technology",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-09",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Extracurricular Internship: Industry 4.0, IIoT and Manufacturing Digitalization (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF293347M-extracurricular-internship-industry-4-0-iiot-and-manufacturing-digitalization-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-11",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Extracurricular Internship: iOS Developer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301306O-extracurricular-internship-ios-developer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship: Lab Engineer within Heat Pump Development - Automation (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301425Q-extracurricular-internship-lab-engineer-within-heat-pump-development-automation-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Extracurricular Internship: Mechanical Development and Testing Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300761U-extracurricular-internship-mechanical-development-and-testing-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship: Project Management for Digitalization (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF293342U-extracurricular-internship-project-management-for-digitalization-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Strategy",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Extracurricular Internship: R&D & Simulation Engineer - Heat Pump Water Heaters (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301547U-extracurricular-internship-r-d-simulation-engineer-heat-pump-water-heaters-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-20",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Finite Element Simulation Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF298301I-finite-element-simulation-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Full Stack Developer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300433X-full-stack-developer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Full-Stack Developer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301253Y-full-stack-developer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Information Technology",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Information Security & Data Protection Expert (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299335V-information-security-data-protection-expert-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Legal",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-23",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "IT Process Expert – Plan to Fulfill (P2F) (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300677O-it-process-expert-plan-to-fulfill-p2f-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-11",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Junior Software Quality Assurance Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301238Z-junior-software-quality-assurance-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Information Technology",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Lab Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF298462K-lab-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-04",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Module Lead Development Engineer for Hydraulics in Heat Pump application (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF299932R-module-lead-development-engineer-for-hydraulics-in-heat-pump-application-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-02",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Preventive Quality Engineer - FMEA & Data Analytics (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301429H-preventive-quality-engineer-fmea-data-analytics-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Product Architect - AW Heat Pumps (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301430D-product-architect-aw-heat-pumps-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Project Manager (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300785K-project-manager-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "R&D Engineer - Mechanical Designer | eBike (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF301233B-r-d-engineer-mechanical-designer-ebike-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "R&D Engineer - Mechanical Project Manager | eBike (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF301236A-r-d-engineer-mechanical-project-manager-ebike-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-18",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Refrigeration Engineer – Heat Pumps (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300774Z-refrigeration-engineer-heat-pumps-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Reliability Test Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301039Y-reliability-test-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-16",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "SAP S/4HANA Test Automation Manager (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF299446J-sap-s-4hana-test-automation-manager-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-26",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Senior Hardware Design Engineer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF289531R-senior-hardware-design-engineer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-26",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Senior Information Security & Data Protection Expert (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299552F-senior-information-security-data-protection-expert-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Legal",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-27",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Subproject Manager - RADAR Plant Test (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299338F-subproject-manager-radar-plant-test-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-27",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
     {
       "titulo": "E58I0: Marketing Analyst-Senior (ID)",
       "empresa": "FedEx",
@@ -12,7 +670,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Human Resources Recruitment Specialist",
@@ -24,7 +682,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:13+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Industrial Engineer",
@@ -36,7 +694,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Industrial Engineer",
@@ -48,7 +706,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Industrial Engineer - Senior",
@@ -60,7 +718,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Industrial Engineer - Sort Technology Design & Modelling",
@@ -72,7 +730,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Industrial Engineer- (Associate - Standard - Senior)",
@@ -84,7 +742,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:13+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Operations Quality Associate / Specialist / Snr. Specialist",
@@ -96,7 +754,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Process Advisor",
@@ -108,7 +766,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Project Engineer",
@@ -120,7 +778,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Senior System Engineer (f/m)",
@@ -132,7 +790,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T21:02:13+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em IT — Instituto de Telecomunicações (polo do Porto)",
@@ -147,6 +805,356 @@
       "coletado_em": "2026-11-20T15:51:20+00:00"
     },
     {
+      "titulo": "Academic Internship in Management systems or Computing (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300605Y-academic-internship-in-management-systems-or-computing-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-10",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Buyer (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300278J-buyer-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-05",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Controlling Business Partner (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300191B-controlling-business-partner-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Management Accounting, Financial Accounting, and Credit Control",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-20",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Customer Order & Production Planner (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299618A-customer-order-production-planner-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-28",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:48+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Environmental, Health & Safety (EHS) Technician (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300806J-environmental-health-safety-ehs-technician-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Estágio Curricular em Engenharia e Gestão Industrial (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300620M-estagio-curricular-em-engenharia-e-gestao-industrial-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-10",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Curricular em Engenharia Eletrónica/Eletrotécnica (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF297556F-estagio-curricular-em-engenharia-eletronica-eletrotecnica-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-26",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Curricular em Engenharia Mecânica (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299548J-estagio-curricular-em-engenharia-mecanica-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-27",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Curricular em Exportação e Logística (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF301419R-estagio-curricular-em-exportacao-e-logistica-f-m-div",
+      "fonte": "bosch",
+      "categoria": "others",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Curricular em Gestão/ Engenharia Gestão Industrial (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299439G-estagio-curricular-em-gestao-engenharia-gestao-industrial-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-04",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Extracurricular em Engenharia e Gestão Industrial (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300601G-estagio-extracurricular-em-engenharia-e-gestao-industrial-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-10",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Extracurricular: Gestão de Energia e Gestão de Projetos (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300050P-estagio-extracurricular-gestao-de-energia-e-gestao-de-projetos-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-03",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio extracurricular: Logística Inversa e Inbound de Distribuição Nacional (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF299950E-estagio-extracurricular-logistica-inversa-e-inbound-de-distribuicao-nacional-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-03",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Estágio Extracurricular: Suporte aos Sistemas de Gestão de Segurança e Ambiente (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF292978N-estagio-extracurricular-suporte-aos-sistemas-de-gestao-de-seguranca-e-ambiente-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-20",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship: Model-Based System Simulation (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF296271B-extracurricular-internship-model-based-system-simulation-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-05",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Extracurricular Internship: Product Management (f/m/div)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300038P-extracurricular-internship-product-management-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Strategy",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-04",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Hardware Customer Project Lead (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299857K-hardware-customer-project-lead-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-30",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Mechanical Designer - Packaging (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300395C-mechanical-designer-packaging-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Responsável Operacional Logístico (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF300009S-responsavel-operacional-logistico-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-03",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "SAP Process Expert Source to Pay (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301559T-sap-process-expert-source-to-pay-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Project Management",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-20",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "SAP S/4HANA Authorization Expert (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF299603F-sap-s-4hana-authorization-expert-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-28",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:48+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Senior Expert Compressors - Heat Pumps (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301418H-senior-expert-compressors-heat-pumps-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-19",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Senior Plant Controller (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF299751P-senior-plant-controller-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Management Accounting, Financial Accounting, and Credit Control",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-29",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:48+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Senior SAP Consultant Order to Cash (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF301558J-senior-sap-consultant-order-to-cash-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Project Management",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-20",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "modalidade": "hibrido",
+      "evidencia_modalidade": "Hybrid"
+    },
+    {
+      "titulo": "Técnico de Mecatrónica (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF290905K-tecnico-de-mecatronica-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-12",
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
       "titulo": "[verificar manualmente] Oportunidades em CEiiA — Centro de Engenharia e Desenvolvimento de Produto",
       "empresa": "CEiiA — Centro de Engenharia e Desenvolvimento de Produto",
       "cidade": "Porto (verificar)",
@@ -159,6 +1167,30 @@
       "coletado_em": "2026-11-20T15:51:20+00:00"
     },
     {
+      "titulo": "CUSTOMS OPS SUPPORT - DHL EXPRESS",
+      "empresa": "DHL",
+      "cidade": "Porto, Porto, Portugal",
+      "link": "https://careers.dhl.com/global/en/job/DPDHGLOBALAV384489ENGLOBALEXTERNAL/CUSTOMS-OPS-SUPPORT-DHL-EXPRESS",
+      "fonte": "dhl",
+      "categoria": null,
+      "tipo_contrato": "Part-time",
+      "data_publicacao": null,
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:12:18+00:00"
+    },
+    {
+      "titulo": "Handling Operator",
+      "empresa": "DHL",
+      "cidade": "Maia, Porto, Portugal",
+      "link": "https://careers.dhl.com/global/en/job/DPDHGLOBALAV384322ENGLOBALEXTERNAL/Handling-Operator",
+      "fonte": "dhl",
+      "categoria": null,
+      "tipo_contrato": "Part-time",
+      "data_publicacao": null,
+      "classificacao": "indefinido",
+      "coletado_em": "2026-11-20T22:12:18+00:00"
+    },
+    {
       "titulo": "Concurso de 2027 da Parceria Europeia EP PerMed",
       "empresa": "FCT",
       "cidade": "Portugal (nacional)",
@@ -168,7 +1200,7 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:01:02+00:00"
+      "coletado_em": "2026-11-20T22:11:12+00:00"
     },
     {
       "titulo": "Concurso de 2027 da Parceria Europeia One Health – Antimicrobial Resistance (EUP OHAMR)",
@@ -180,7 +1212,7 @@
       "tipo_contrato": null,
       "data_publicacao": "fev 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:01:02+00:00"
+      "coletado_em": "2026-11-20T22:11:12+00:00"
     },
     {
       "titulo": "Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote B)",
@@ -192,7 +1224,7 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:01:02+00:00"
+      "coletado_em": "2026-11-20T22:11:12+00:00"
     },
     {
       "titulo": "Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote B) | Via Rápida",
@@ -204,7 +1236,7 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:01:02+00:00"
+      "coletado_em": "2026-11-20T22:11:12+00:00"
     },
     {
       "titulo": "Programa Portugal-Berkeley",
@@ -216,7 +1248,7 @@
       "tipo_contrato": null,
       "data_publicacao": "dez 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:01:02+00:00"
+      "coletado_em": "2026-11-20T22:11:12+00:00"
     },
     {
       "titulo": "Cash Application (Receive and Apply)",
@@ -228,7 +1260,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Clearance Broker Associate with English",
@@ -240,7 +1272,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:13+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Clearance Broker Associate with German",
@@ -252,7 +1284,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Clearance Broker Associate with German",
@@ -264,7 +1296,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Clearance Broker Associate with German (Austria)",
@@ -276,7 +1308,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Clearance Broker Associate with Italian",
@@ -288,7 +1320,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Clearance Broker with Dutch",
@@ -300,7 +1332,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:13+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Clearance Broker with Dutch",
@@ -312,7 +1344,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Invoice Adjustment (Billing & Dispute Management)",
@@ -324,7 +1356,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "Invoice to Cash (CFS Representative)",
@@ -336,7 +1368,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Logistics Services Representative",
@@ -348,7 +1380,7 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:08+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS",
@@ -372,19 +1404,19 @@
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:35+00:00"
+      "coletado_em": "2026-11-20T22:12:37+00:00"
     },
     {
       "titulo": "Colaborador de Logística - Outflow - 25h (Disponibilidade: 15h às 22h) - Temporário",
       "empresa": "IKEA",
-      "cidade": "Matosinhos, Porto",
+      "cidade": "Matosinhos, Porto, Portugal",
       "link": "https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-25h-disponibilidade-15h-as-22h-temporario/24107/103564257728",
       "fonte": "ikea",
       "categoria": "Logistics & Supply Chain",
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:35+00:00"
+      "coletado_em": "2026-11-20T22:12:37+00:00"
     },
     {
       "titulo": "Colaborador de Vendas - Iluminação e Tapetes - 20h (Disponibilidade: 16h - 23h)",
@@ -396,7 +1428,7 @@
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:02:35+00:00"
+      "coletado_em": "2026-11-20T22:12:37+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial",
@@ -420,7 +1452,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Bioengenharia, Tecnologias para a saúde, Gestão e conservação de dados clínicos. (AE2026-0355)",
@@ -432,7 +1464,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Ciências da Computação (AE2026-0348)",
@@ -444,7 +1476,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Ciências da Computação (AE2026-0349)",
@@ -456,7 +1488,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Computação de Elevado Desempenho (AE2026-0347)",
@@ -468,7 +1500,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "COMPUTER SCIENCE (AE2026-0350)",
@@ -480,7 +1512,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "COMPUTER SCIENCE (AE2026-0352)",
@@ -492,7 +1524,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Comunicação ótica subaquática e localização relativa para veículos submarinos cooperativos. (AE2026-0353)",
@@ -504,7 +1536,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Engenharia (AE2026-0360)",
@@ -516,7 +1548,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Engenharia Electrotécnica (AE2026-0351)",
@@ -528,7 +1560,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-03",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Informática, Eletrónica e Sistemas Digitais (AE2026-0305)",
@@ -540,7 +1572,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Informática, Eletrónica e Sistemas Digitais (AE2026-0359)",
@@ -552,7 +1584,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "LLMs executados localmente e sem ligação a serviços externos para aumentar a autonomia de veículos submarinos. (AE2026-0354)",
@@ -564,7 +1596,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Online Outlier Detection (AE2026-0358)",
@@ -576,7 +1608,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-26",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Power systems (AE2026-0357)",
@@ -588,7 +1620,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Problema de entrega na última milha (AE2026-0356)",
@@ -600,7 +1632,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-26",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Sistemas de Energia (AE2026-0320)",
@@ -612,7 +1644,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-22",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Sistemas de Energia (AE2026-0364)",
@@ -624,7 +1656,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341)",
@@ -636,7 +1668,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Telecomunicações (AE2026-0361)",
@@ -648,7 +1680,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "Telecomunicações (AE2026-0362)",
@@ -660,7 +1692,7 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-23",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T21:00:59+00:00"
+      "coletado_em": "2026-11-20T22:11:10+00:00"
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP)",
@@ -675,6 +1707,60 @@
       "coletado_em": "2026-11-20T15:51:20+00:00"
     },
     {
+      "titulo": "Estágio Curricular em Manutenção Preditiva (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300619C-estagio-curricular-em-manutencao-preditiva-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-11",
+      "classificacao": "operacional",
+      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Técnico de Manutenção (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF300195I-tecnico-de-manutencao-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Manufacturing",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-04",
+      "classificacao": "operacional",
+      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "Técnico de Manutenção Industrial - Mecânica (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Aveiro",
+      "link": "https://jobs.bosch.com/en/job/REF290906Z-tecnico-de-manutencao-industrial-mecanica-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-11-06",
+      "classificacao": "operacional",
+      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site"
+    },
+    {
+      "titulo": "ESTÁGIO PROFISSIONAL | TECNICO DE MANUTENÇÃO | DHL EXPRESS PORTUGAL",
+      "empresa": "DHL",
+      "cidade": "Maia, Porto, Portugal",
+      "link": "https://careers.dhl.com/global/en/job/DPDHGLOBALAV364753ENGLOBALEXTERNAL/ESTÁGIO-PROFISSIONAL-TECNICO-DE-MANUTENÇÃO-DHL-EXPRESS-PORTUGAL",
+      "fonte": "dhl",
+      "categoria": null,
+      "tipo_contrato": "Full-time",
+      "data_publicacao": null,
+      "classificacao": "operacional",
+      "coletado_em": "2026-11-20T22:12:18+00:00"
+    },
+    {
       "titulo": "Operador Armazém - GOPS OPO - Exportação - Part-time",
       "empresa": "FedEx",
       "cidade": "Rua do Barreiro, Moreira Da Maia, Porto, PT",
@@ -684,7 +1770,7 @@
       "tipo_contrato": "Part Time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Operador Armazém - Importação- Part-time",
@@ -696,7 +1782,7 @@
       "tipo_contrato": "Part Time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T21:02:14+00:00"
+      "coletado_em": "2026-11-20T22:12:09+00:00"
     },
     {
       "titulo": "Colaborador de IKEA Food - Copa - 20h (Disponibilidade: 12h às 19h)",
@@ -708,7 +1794,7 @@
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T21:02:35+00:00"
+      "coletado_em": "2026-11-20T22:12:37+00:00"
     },
     {
       "titulo": "Técnico(a) de Manutenção Industrial",
@@ -720,7 +1806,7 @@
       "tipo_contrato": "Full time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T21:02:35+00:00"
+      "coletado_em": "2026-11-20T22:12:37+00:00"
     }
   ]
 }
