@@ -104,12 +104,19 @@ function escapeHtml(s) {
   return (s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 
+const DATA_LISBOA = new Intl.DateTimeFormat("pt-PT", {
+  dateStyle: "short", timeStyle: "short", timeZone: "Europe/Lisbon",
+});
+const MODALIDADES = { remoto: "Remoto", hibrido: "Híbrido", presencial: "Presencial", desconhecido: "Modalidade desconhecida" };
+
+function dataLisboa(valor) {
+  const data = new Date(valor || "");
+  return Number.isNaN(data.getTime()) ? "Sem data registada" : `${DATA_LISBOA.format(data)} (Europe/Lisbon)`;
+}
+
 function ultimaObservacao(vaga) {
   if (vaga.fonte === "outros_institutos") return "Consulta manual";
-  const data = new Date(vaga.coletado_em || "");
-  const ultima = Number.isNaN(data.getTime()) ? "Sem data registada" :
-    data.toLocaleString("pt-PT", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Lisbon" });
-  return `Última vez vista: ${ultima}${vaga.verificacao_pendente ? " · por confirmar" : ""}`;
+  return `Última vez vista: ${dataLisboa(vaga.coletado_em)}${vaga.verificacao_pendente ? " · por confirmar" : ""}`;
 }
 
 function render() {
@@ -133,6 +140,7 @@ function render() {
         <span>${escapeHtml(v.empresa)}</span>
         ${v.cidade ? `<span>· ${escapeHtml(v.cidade)}</span>` : ""}
         ${v.tipo_contrato ? `<span>· ${escapeHtml(v.tipo_contrato)}</span>` : ""}
+        ${MODALIDADES[v.modalidade] ? `<span>· ${MODALIDADES[v.modalidade]}</span>` : ""}
       </div>
       <div class="vaga-meta">${escapeHtml(ultimaObservacao(v))}${temLink ? "" : " · Link por confirmar"}</div>
       <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>
@@ -169,9 +177,8 @@ async function carregar() {
     const dados = await resp.json();
     TODAS = dados.vagas || [];
 
-    const atualizado = new Date(dados.atualizado_em);
     document.getElementById("status").textContent =
-      `${dados.total} vaga(s) · atualizado em ${atualizado.toLocaleString("pt-PT", { dateStyle: "short", timeStyle: "short" })}`;
+      `${dados.total} vaga(s) · atualizado em ${dataLisboa(dados.atualizado_em)}`;
 
     montarFiltros();
     render();

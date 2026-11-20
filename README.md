@@ -82,8 +82,10 @@ só pedir depois que o repositório estiver no ar.
   em que foram vistas pela última vez. O reaparecimento retira essa marca.
   Se todas as fontes automáticas falharem, só o diagnóstico é publicado e o
   workflow fica com estado de falha.
-- A API do INESC TEC permite validar uma lista integral ou um zero. Para
-  Bosch, DHL, FedEx, FCT, IKEA, Microsoft, Nestlé, Siemens e Sonae, a
+- A API do INESC TEC permite validar uma lista integral ou um zero. O IKEA
+  pode confirmar a cobertura do raio de Porto quando o total anunciado
+  coincide com todos os cartões válidos da página. Para
+  Bosch, DHL, FedEx, FCT, Microsoft, Nestlé, Siemens e Sonae, a
   extração aproveitável é parcial enquanto o layout, os filtros ou a
   paginação não demonstrarem a cobertura total. A lista dos outros
   institutos é estática e não conta como coleta automática.
@@ -92,6 +94,11 @@ só pedir depois que o repositório estiver no ar.
   clicável até uma nova observação com um destino reconhecido. A data de
   observação refere-se à listagem e pode avançar sem alterar o carimbo do
   conteúdo. Isso não comprova que a candidatura continua aberta.
+- Os diagnósticos incluem o recorte consultado e, quando disponível, a
+  contagem anunciada pelo portal. Uma vaga da Microsoft fora da região
+  entra como remota apenas quando o cartão inclui Portugal e o anúncio
+  confirma zero dias de escritório com indicação explícita de trabalho
+  remoto. O aplicativo identifica `Europe/Lisbon` no cabeçalho e nos cartões.
 
 ## Estrutura dos arquivos
 

@@ -6,7 +6,9 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 from .base import url_absoluta
 
 ORIGEM = "https://careers.fedex.com"
-ROTA = re.compile(r"/(?:[a-z]{2}(?:-[a-z]{2})?/)?[\w-]+/job/([a-f0-9]{32})(?:__[a-z]{2}-[a-z]{2})?/?", re.I)
+REQUISICAO = re.compile(r"P\d{2}-\d{6}-\d+", re.I)
+ROTA = re.compile(r"/(?:[a-z]{2}(?:-[a-z]{2})?/)?[\w-]+/job/"
+                  r"([a-f0-9]{32}|P\d{2}-\d{6}-\d+)(?:__[a-z]{2}-[a-z]{2})?/?", re.I)
 
 
 def _rota(caminho: str) -> re.Match[str] | None:
@@ -19,7 +21,7 @@ def _rota(caminho: str) -> re.Match[str] | None:
     return ROTA.fullmatch("/".join(partes))
 
 
-def url_vaga_fedex(href: str | None, *, legado: bool = False) -> str | None:
+def url_vaga_fedex(href: str | None, *, legado: bool = False, referencia: str | None = None) -> str | None:
     # O snapshot antigo guardou caminhos a partir da raiz do portal.
     if legado and isinstance(href, str) and href.startswith("/") and not href.startswith("//"):
         if not _rota(urlsplit(href).path):
@@ -29,7 +31,11 @@ def url_vaga_fedex(href: str | None, *, legado: bool = False) -> str | None:
     if not url:
         return None
     partes = urlsplit(url)
-    if partes.scheme != "https" or partes.netloc.lower() != "careers.fedex.com" or not _rota(partes.path):
+    rota = _rota(partes.path)
+    if partes.scheme != "https" or partes.netloc.lower() != "careers.fedex.com" or not rota:
+        return None
+    # A variante em texto só é aceita quando coincide com a referência do cartão.
+    if REQUISICAO.fullmatch(rota[1]) and rota[1].upper() != (referencia or "").upper():
         return None
     consulta = "&".join(p for p in partes.query.split("&") if p != "utm_source=CareerSiteOrganic")
     caminho = quote(unquote(partes.path), safe="/")
@@ -38,7 +44,7 @@ def url_vaga_fedex(href: str | None, *, legado: bool = False) -> str | None:
 
 def identidade_fedex(vaga: dict) -> str:
     referencia = vaga.get("categoria") or ""
-    if re.fullmatch(r"RC\d+", referencia, re.I):
+    if re.fullmatch(r"RC\d+", referencia, re.I) or REQUISICAO.fullmatch(referencia):
         return referencia.upper()
     rota = _rota(urlsplit(vaga["link"]).path) if vaga["link"] else None
     return rota[1].upper() if rota else vaga["link_original"]

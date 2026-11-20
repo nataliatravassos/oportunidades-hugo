@@ -28,17 +28,19 @@ class ResultadoColeta:
     vagas: list[dict] = field(default_factory=list)
     motivo: str | None = None
     paginas: int = 0
+    consulta: dict = field(default_factory=dict)
 
     @classmethod
-    def avaliar(cls, vagas: list[dict], problemas: list[str], paginas: int = 1, *, cobertura: str | None = None):
+    def avaliar(cls, vagas: list[dict], problemas: list[str], paginas: int = 1, *,
+                cobertura: str | None = None, consulta: dict | None = None):
         if not vagas:
             motivo = "; ".join(problemas) or "Nenhuma vaga extraída e zero sem confirmação"
-            return cls(EstadoColeta.FALHA, motivo=motivo, paginas=paginas)
+            return cls(EstadoColeta.FALHA, motivo=motivo, paginas=paginas, consulta=consulta or {})
         if not cobertura and not problemas:
             problemas = ["Cobertura integral não demonstrada"]
         if problemas:
-            return cls(EstadoColeta.PARCIAL, vagas, "; ".join(problemas), paginas)
-        return cls(EstadoColeta.COMPLETA, vagas, motivo=cobertura, paginas=paginas)
+            return cls(EstadoColeta.PARCIAL, vagas, "; ".join(problemas), paginas, consulta or {})
+        return cls(EstadoColeta.COMPLETA, vagas, motivo=cobertura, paginas=paginas, consulta=consulta or {})
 
 
 def resumir_erro(erro: Exception) -> str:
@@ -121,7 +123,7 @@ def make_vaga(
     *,
     titulo: str,
     empresa: str,
-    cidade: str,
+    cidade: str | None,
     link: str | None,
     fonte: str,
     categoria: str | None = None,

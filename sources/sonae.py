@@ -17,55 +17,79 @@ botões numerados (aria-label="Page N").
 
 from __future__ import annotations
 
+import re
+from urllib.parse import unquote, urlsplit
+
+from playwright.sync_api import TimeoutError as PlaywrightTimeout, expect
+
+from config import normalizar_local
 from .base import ResultadoColeta, make_vaga, url_absoluta
 from .playwright_utils import (
-    abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
+    abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, nova_pagina, texto_dos_cartoes,
 )
 
 URL = "https://www.sonae.pt/pt/talento/oportunidades"
 MAX_PAGINAS = 40
 
 SELETOR_CARD = (
-    ".border-secondary-200.border-b.bg-white.group.cursor-pointer"
+    'div[role="button"].border-secondary-200.border-b:has(p)'
 )
+ROTAS_ANUNCIO = "**/pt/talento/oportunidades/**"
+
+
+def _link_anuncio(href: str | None, base: str) -> str | None:
+    url = url_absoluta(href, base)
+    if url:
+        partes = urlsplit(url)
+        if (partes.scheme == "https" and partes.netloc == "www.sonae.pt"
+                and re.fullmatch(r"/pt/talento/oportunidades/[^/]+-\d+/?", partes.path)):
+            return url
+    return None
+
+
+def _titulo_corresponde(titulo: str, link: str) -> bool:
+    slug = unquote(urlsplit(link).path.rstrip("/").rsplit("/", 1)[-1])
+    titulo_slug = "-".join(re.findall(r"[a-z0-9]+", normalizar_local(titulo)))
+    return bool(titulo_slug) and slug.casefold().startswith(titulo_slug + "-")
 
 
 def _extrair_pagina(page) -> list[dict]:
-    cards = page.locator(SELETOR_CARD)
-    total = cards.count()
+    # Os cartões atuais navegam na própria aba sem <a>. Leia o destino real
+    # do clique, resolvendo localmente a navegação com 204. O anúncio nunca
+    # é requisitado ao portal e a aba permanece na listagem.
+    def suprimir_destino(rota):
+        if rota.request.is_navigation_request():
+            rota.fulfill(status=204)
+        else:
+            rota.continue_()
+
     vagas = []
-    for i in range(total):
-        card = cards.nth(i)
-        link_el = card.locator("a").first
-        if link_el.count() == 0:
-            continue
-        href = link_el.get_attribute("href")
-        paragrafos = card.locator("p")
-        n_p = paragrafos.count()
-        if n_p < 3 or not href:
-            continue
-        titulo = paragrafos.nth(0).inner_text().strip()
-        categoria = paragrafos.nth(1).inner_text().strip()
-        cidade_tipo = paragrafos.nth(2).inner_text().strip()
-
-        # formato observado: "MAIA/CARNAXIDE - Estruturas" ou
-        # "V. N. FAMALICÃO - RIBEIRÃO - Lojas"; a última parte depois do
-        # último " - " é o tipo de unidade (Estruturas/Lojas/Novas Lojas).
-        partes = cidade_tipo.rsplit(" - ", 1)
-        cidade = partes[0].strip() if partes else cidade_tipo
-        tipo = partes[1].strip() if len(partes) > 1 else None
-
-        vagas.append(
-            make_vaga(
-                titulo=titulo,
-                empresa="Sonae",
-                cidade=cidade,
-                link=url_absoluta(href, page.url),
-                fonte="sonae",
-                categoria=categoria,
-                tipo_contrato=tipo,
-            )
-        )
+    page.route(ROTAS_ANUNCIO, suprimir_destino)
+    try:
+        for card in page.locator(SELETOR_CARD).all():
+            linhas = card.locator("p").all_inner_texts()
+            if len(linhas) < 3:
+                continue
+            a = card.locator("a[href]").first
+            href = a.get_attribute("href") if a.count() else None
+            if not href:
+                try:
+                    with page.expect_request(lambda r: r.is_navigation_request() and bool(_link_anuncio(r.url, page.url)),
+                                             timeout=2000) as destino:
+                        card.click(timeout=2500)
+                    href = destino.value.url
+                except PlaywrightTimeout:
+                    continue
+            titulo, categoria, cidade_tipo = linhas[:3]
+            link = _link_anuncio(href, page.url)
+            if not link or not _titulo_corresponde(titulo, link):
+                continue
+            partes = cidade_tipo.rsplit(" - ", 1)
+            vagas.append(make_vaga(titulo=titulo, empresa="Sonae", cidade=partes[0].strip(), link=link,
+                                  fonte="sonae", categoria=categoria,
+                                  tipo_contrato=partes[1].strip() if len(partes) > 1 else None))
+    finally:
+        page.unroute(ROTAS_ANUNCIO, suprimir_destino)
     return vagas
 
 
@@ -73,24 +97,29 @@ def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
         abrir_busca(page, URL)
 
-        clicar_se_existir(page, 'button:has-text("Aceitar todos")', timeout=4000)
-        clicar_se_existir(page, 'button:has-text("Aceitar")', timeout=2000)
+        clicar_se_existir(page, 'button:has-text("Utilizar só os cookies necessários")', timeout=3500)
 
         page.wait_for_selector(SELETOR_CARD, timeout=20000)
 
-        # Expande a lista de distritos (só mostra ~10 por padrão) e marca
-        # "Porto".
-        clicar_se_existir(page, 'text="Mostrar mais"', timeout=3000)
-        rotulo_porto = page.locator('label:text-is("Porto")').first
-        rotulo_porto.wait_for(state="visible", timeout=10000)
-        anteriores = links_dos_cartoes(page, SELETOR_CARD)
-        rotulo_porto.click()
-        esperar_resultados(page, SELETOR_CARD, anteriores)
+        rotulo = page.locator('label[for^="location-"]').filter(has_text=re.compile(r"^\s*Porto\s*(?:\(\d+\))?\s*$", re.I))
+        if not rotulo.count():
+            page.get_by_role("button", name=re.compile(r"^Mostrar mais\b", re.I)).first.click()
+        identificador = rotulo.get_attribute("for")
+        checkbox = page.locator(f'[role="checkbox"][id="{identificador}"]')
+        anteriores = texto_dos_cartoes(page, SELETOR_CARD)
+        if checkbox.get_attribute("aria-checked") != "true":
+            checkbox.click()
+            expect(checkbox).to_have_attribute("aria-checked", "true")
+            esperar_resultados(page, SELETOR_CARD, anteriores, usar_texto=True)
+        else:
+            expect(checkbox).to_have_attribute("aria-checked", "true")
 
         return coletar_paginas(
             page, SELETOR_CARD, _extrair_pagina,
             lambda numero: page.locator('button[aria-label="Next page"]').first,
             MAX_PAGINAS,
+            consulta={"url": page.url, "escopo": "Distrito Porto confirmado no checkbox de localização"},
+            usar_texto=True,
         )
 
 

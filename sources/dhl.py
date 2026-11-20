@@ -21,7 +21,9 @@ from __future__ import annotations
 
 import logging
 import re
+from urllib.parse import parse_qs, urlsplit
 
+from config import eh_regiao_porto, normalizar_local
 from .base import ResultadoColeta, make_vaga, url_absoluta
 from .playwright_utils import (
     abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
@@ -31,9 +33,24 @@ logger = logging.getLogger(__name__)
 
 URL = "https://careers.dhl.com/global/en/search-results"
 LOCAL_BUSCA = "Porto"
-SUGESTAO_ESPERADA = "Maia, Porto, Portugal"
 MAX_PAGINAS = 10
 SELETOR_CARD = "li.jobs-list-item"
+
+
+def local_dhl_valido(local: str) -> bool:
+    return eh_regiao_porto(local) and bool(re.search(r"\b(?:portugal|pt)\b", normalizar_local(local)))
+
+
+def filtro_confirmado(url: str, escolhido: str, campo: str) -> bool:
+    if not local_dhl_valido(escolhido):
+        return False
+    if normalizar_local(campo) == normalizar_local(escolhido):
+        return True
+    parametros = parse_qs(urlsplit(url).query)
+    return bool(parametros.get("p")) and any(
+        normalizar_local(local) == normalizar_local(escolhido)
+        for local in parametros.get("location", [])
+    )
 
 
 def _extrair_pagina(page) -> list[dict]:
@@ -83,21 +100,33 @@ def fetch() -> ResultadoColeta:
         clicar_se_existir(page, 'button:has-text("Accept All")', timeout=4000)
 
         campo_local = page.locator("#gllocationInput")
-        campo_local.click()
-        campo_local.fill(LOCAL_BUSCA)
-
-        sugestao = page.locator(f'a:has-text("{SUGESTAO_ESPERADA}")').first
-        sugestao.wait_for(state="visible", timeout=10000)
+        campo_local.fill("")
+        campo_local.press_sequentially(LOCAL_BUSCA, delay=75)
+        lista = campo_local.get_attribute("aria-controls")
+        if not lista:
+            raise ValueError("O campo de localização não aponta para uma lista de sugestões")
+        opcoes = page.locator(f'[id="{lista}"]').locator('[role="option"]:visible, a:visible')
+        # Só escolha sugestões do próprio autocomplete que identifiquem Portugal.
+        tem_pais = opcoes.filter(has_text=re.compile(r"\b(?:Portugal|PT)\b", re.I)).first
+        tem_pais.wait_for(timeout=10000)
+        sugestao = next((opcao for opcao in opcoes.all() if local_dhl_valido(opcao.inner_text())), None)
+        if sugestao is None:
+            raise ValueError("Autocomplete da DHL sem uma localização confirmada na região do Porto")
+        local_selecionado = sugestao.inner_text()
         sugestao.click()
 
         anteriores = links_dos_cartoes(page, SELETOR_CARD)
-        page.locator('button:has-text("Find Jobs")').first.click()
+        page.get_by_role("button", name=re.compile(r"^Find Jobs$", re.I)).last.click()
         esperar_resultados(page, SELETOR_CARD, anteriores)
+        if not filtro_confirmado(page.url, local_selecionado, campo_local.input_value()):
+            raise ValueError("A localização selecionada não foi mantida após a pesquisa DHL")
 
         return coletar_paginas(
             page, SELETOR_CARD, _extrair_pagina,
             lambda numero: page.locator(f'a.phw-s-page-number-link:text-is("{numero + 1}")').first,
             MAX_PAGINAS,
+            consulta={"url": page.url, "escopo": "Busca por perímetro; localização validada após o envio",
+                      "local_selecionado": local_selecionado},
         )
 
 

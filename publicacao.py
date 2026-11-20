@@ -24,7 +24,7 @@ def validar_vaga(vaga: dict, *, legado: bool = False, preservada: bool = False) 
         valor = vaga.get(campo)
         if not isinstance(valor, str) or not valor.strip():
             raise ValueError(f"Campo obrigatório inválido: {campo}")
-    for campo in ("cidade", "categoria", "tipo_contrato", "data_publicacao", "coletado_em"):
+    for campo in ("cidade", "categoria", "tipo_contrato", "data_publicacao", "coletado_em", "evidencia_modalidade"):
         valor = vaga.get(campo)
         if valor is not None and not isinstance(valor, str):
             raise ValueError(f"Campo inválido: {campo}")
@@ -33,11 +33,15 @@ def validar_vaga(vaga: dict, *, legado: bool = False, preservada: bool = False) 
         raise ValueError("Classificação inválida")
     if "verificacao_pendente" in vaga and type(vaga["verificacao_pendente"]) is not bool:
         raise ValueError("Estado da verificação inválido")
+    if "modalidade" in vaga and vaga["modalidade"] not in ("remoto", "hibrido", "presencial", "desconhecido"):
+        raise ValueError("Modalidade inválida")
+    if "remoto_em_portugal" in vaga and type(vaga["remoto_em_portugal"]) is not bool:
+        raise ValueError("Elegibilidade remota inválida")
     if vaga.get("coletado_em"):
         _data_com_fuso(vaga["coletado_em"])
     href = vaga.get("link")
     if vaga["fonte"] == "fedex":
-        link = url_vaga_fedex(href, legado=legado)
+        link = url_vaga_fedex(href, legado=legado, referencia=vaga.get("categoria"))
         if not link and legado and isinstance(href, str) and href:
             return {**vaga, "link": None, "link_original": href}
         if not link and (legado or preservada) and href is None and isinstance(vaga.get("link_original"), str):

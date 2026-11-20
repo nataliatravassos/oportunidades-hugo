@@ -16,6 +16,11 @@ A lista de resultados é paginada (6 por página) com um botão
 
 from __future__ import annotations
 
+import re
+import json
+from urllib.parse import parse_qs, urlsplit
+
+from config import normalizar_local
 from .base import ResultadoColeta, make_vaga, url_absoluta
 from .playwright_utils import (
     abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
@@ -23,20 +28,52 @@ from .playwright_utils import (
 
 URL = "https://jobs.siemens.com/pt_PT/externaljobs"
 MAX_PAGINAS = 20
-
-
-def _selecionar_select2(page, *, placeholder_aprox: str, texto_opcao: str) -> None:
-    """Clica num campo select2 pelo texto do placeholder visível, digita
-    `texto_opcao` e clica na sugestão exata que aparece."""
-    campo = page.get_by_text(placeholder_aprox, exact=False).first
-    campo.click()
-    page.keyboard.type(texto_opcao)
-    opcao = page.locator(
-        f'li.select2-results__option[role="option"]:text-is("{texto_opcao}")'
-    ).first
-    opcao.wait_for(state="visible", timeout=10000)
-    opcao.click()
 SELETOR_CARD = "article.article--result"
+
+
+def _selecionar(page, filtro: str, valor: str) -> tuple[str, str]:
+    select = page.locator(f"select.search_param--{filtro}").first
+    if filtro == "country":
+        identificador = select.get_attribute("id")
+        campo = page.locator(f'input[role="searchbox"][aria-labelledby="{identificador}-label"]:visible')
+        campo.click()
+        campo.press_sequentially(valor, delay=55)
+        opcao = page.locator('li.select2-results__option[role="option"]:visible').filter(
+            has_text=re.compile(rf"^\s*{re.escape(valor)}\s*$", re.I),
+        )
+        opcao.click()
+        page.keyboard.press("Escape")
+    else:
+        # O Select2 popula o select dependente depois da escolha de país.
+        # Escolher a opção nativa dispara o mesmo evento change do formulário.
+        select.select_option(label=valor, force=True)
+    selecionada = select.locator("option:checked")
+    if selecionada.count() != 1 or normalizar_local(selecionada.inner_text()) != normalizar_local(valor):
+        raise ValueError(f"Filtro Siemens não confirmado: {filtro}")
+    return select.get_attribute("name"), selecionada.get_attribute("value")
+
+
+def _filtros_aplicados(page, filtros: list[tuple[str, str]]) -> bool:
+    parametros = parse_qs(urlsplit(page.url).query)
+
+    def valores_url(nome):
+        for campo in (nome, nome.removesuffix("[]")):
+            for valor in parametros.get(campo, []):
+                if valor.startswith("["):
+                    try:
+                        itens = json.loads(valor)
+                    except ValueError:
+                        continue
+                    if isinstance(itens, list):
+                        yield from map(str, itens)
+                else:
+                    yield valor
+
+    return all(
+        valor in valores_url(nome) or
+        valor in page.locator(f'select[name="{nome}"] option:checked').evaluate_all("(opcoes) => opcoes.map(o => o.value)")
+        for nome, valor in filtros
+    )
 
 
 def _extrair_pagina(page) -> list[dict]:
@@ -83,19 +120,24 @@ def fetch() -> ResultadoColeta:
         clicar_se_existir(page, 'button:has-text("Accept")', timeout=4000)
         clicar_se_existir(page, 'button:has-text("Aceitar")', timeout=2000)
 
-        _selecionar_select2(page, placeholder_aprox="País / região", texto_opcao="Portugal")
-        _selecionar_select2(
-            page, placeholder_aprox="Estado/Província/Município", texto_opcao="Porto"
-        )
+        filtros = [_selecionar(page, "country", "Portugal")]
+        distritos = page.locator("select.search_param--state option").all_text_contents()
+        if any(normalizar_local(distrito) == "porto" for distrito in distritos):
+            filtros.append(_selecionar(page, "state", "Porto"))
 
         anteriores = links_dos_cartoes(page, SELETOR_CARD)
-        page.locator('button:has-text("Pesquisar")').first.click()
+        page.get_by_role("button", name=re.compile(r"^Pesquisar$", re.I)).first.click()
         esperar_resultados(page, SELETOR_CARD, anteriores)
+        if not _filtros_aplicados(page, filtros):
+            raise ValueError("Filtros selecionados não confirmados nos resultados Siemens")
+        escopo = ("Portugal e distrito Porto confirmados após o envio" if len(filtros) == 2
+                  else "Portugal confirmado; distrito não disponível no formulário inicial, recorte regional aplicado aos cartões")
 
         return coletar_paginas(
             page, SELETOR_CARD, _extrair_pagina,
             lambda numero: page.locator(".list-controls__pagination__item.paginationNextLink a").first,
             MAX_PAGINAS,
+            consulta={"url": page.url, "escopo": escopo},
         )
 
 
