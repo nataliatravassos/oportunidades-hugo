@@ -109,6 +109,8 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
     assinaturas = set()
     paginas = 0
     cartoes_lidos = 0
+    cartoes_processados = 0
+    cartoes_invalidos = 0
     for numero in range(1, limite + 1):
         try:
             links = links_dos_cartoes(page, seletor)
@@ -119,6 +121,8 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
             assinaturas.add(assinatura)
             cartoes_lidos += len(links)
             extraidas = extrair(page)
+            cartoes_processados += len(links)
+            cartoes_invalidos += max(0, len(links) - len(extraidas))
             paginas += 1
             for vaga in extraidas:
                 # Mantenha também os links inválidos para a validação central.
@@ -138,5 +142,11 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
         except Exception as erro:
             problemas.append(f"Paginação a partir da página {numero}: {resumir_erro(erro)}")
             break
-    diagnostico = {"limite_paginas": limite, "cartoes_lidos": cartoes_lidos, **(consulta or {})}
+    diagnostico = {
+        **(consulta or {}),
+        "limite_paginas": limite,
+        "cartoes_lidos": cartoes_lidos,
+        "cartoes_invalidos": cartoes_invalidos,
+        "cartoes_sem_processar": cartoes_lidos - cartoes_processados,
+    }
     return ResultadoColeta.avaliar(list(vagas.values()), problemas, paginas, consulta=diagnostico)

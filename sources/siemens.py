@@ -68,17 +68,10 @@ def _filtros_aplicados(page, filtros: list[tuple[str, str]]) -> bool:
     return resumo.is_visible()
 
 
-def _extrair_validada(page, filtros: list[tuple[str, str]], distrito_porto: bool) -> list[dict]:
+def _extrair_validada(page, filtros: list[tuple[str, str]]) -> list[dict]:
     if not _filtros_aplicados(page, filtros):
         raise ValueError("Filtros Siemens sem confirmação na URL de resultados e no resumo de filtros aplicados")
-    vagas = []
-    for vaga in _extrair_pagina(page):
-        locais = {normalizar_local(item) for item in re.split(r"[,/\n]", vaga.get("cidade") or "")}
-        if "portugal" in locais and (not distrito_porto or "porto" in locais):
-            vagas.append(vaga)
-    if not vagas:
-        raise ValueError("Nenhum cartão desta página confirma a localização selecionada na Siemens")
-    return vagas
+    return _extrair_pagina(page)
 
 
 def _extrair_pagina(page) -> list[dict]:
@@ -136,7 +129,7 @@ def fetch() -> ResultadoColeta:
         escopo = "Portugal e distrito Porto" if len(filtros) == 2 else "Portugal; distrito indisponível no formulário inicial"
 
         resultado = coletar_paginas(
-            page, SELETOR_CARD, lambda p: _extrair_validada(p, filtros, len(filtros) == 2),
+            page, SELETOR_CARD, lambda p: _extrair_validada(p, filtros),
             lambda numero: page.locator(".list-controls__pagination__item.paginationNextLink a").first,
             MAX_PAGINAS,
             consulta={"url": page.url, "filtros_solicitados": escopo},

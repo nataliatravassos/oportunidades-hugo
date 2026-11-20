@@ -203,17 +203,86 @@ class FiltrosTest(unittest.TestCase):
         page.get_by_text.return_value.first.is_visible.return_value = True
         page.url = r + "/SearchJobs/?42414=%5B812097%2C44%5D"
         self.assertFalse(siemens._filtros_aplicados(page, filtros))
+        with patch.object(siemens, "_extrair_pagina") as extrair:
+            with self.assertRaisesRegex(ValueError, "Filtros Siemens sem confirmação"):
+                siemens._extrair_validada(page, filtros)
+        extrair.assert_not_called()
 
-    def test_siemens_resultado_ignora_distrito_quando_cartoes_nao_o_comprovam(self):
+    def test_siemens_pagina_valida_sem_vagas_regionais_nao_e_falha_ou_zero(self):
         page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=%5B812097%5D&42415=6")
         page.get_by_text.return_value.first.is_visible.return_value = True
         filtros = [("42414[]", "812097"), ("42415[]", "6")]
-        with patch.object(siemens, "_extrair_pagina", return_value=[{"cidade": "Amadora, Lisboa, Portugal"}]):
-            with self.assertRaisesRegex(ValueError, "Nenhum cartão"):
-                siemens._extrair_validada(page, filtros, True)
-        com_porto = {"cidade": "Maia, Porto, Portugal"}
-        with patch.object(siemens, "_extrair_pagina", return_value=[com_porto, {"cidade": "Vários locais"}]):
-            self.assertEqual(siemens._extrair_validada(page, filtros, True), [com_porto])
+        vagas = [{"cidade": "Amadora, Lisboa, Portugal", "link": "https://example.org/a"},
+                 {"cidade": "Vários locais", "link": "https://example.org/b"}]
+        controle = Mock()
+        controle.count.return_value = 0
+        with (
+            patch.object(siemens, "_extrair_pagina", return_value=vagas),
+            patch.object(playwright_utils, "links_dos_cartoes", return_value=["/a", "/b"]),
+        ):
+            resultado = playwright_utils.coletar_paginas(
+                page, siemens.SELETOR_CARD, lambda p: siemens._extrair_validada(p, filtros),
+                lambda _: controle, 2,
+            )
+        self.assertEqual(resultado.estado, EstadoColeta.PARCIAL)
+        self.assertEqual(resultado.vagas, vagas)
+        self.assertEqual(resultado.paginas, 1)
+        self.assertEqual(resultado.consulta["cartoes_invalidos"], 0)
+
+    def test_siemens_lisboa_primeiro_porto_depois_e_preservacao_de_60_registos(self):
+        rota = "https://jobs.siemens.com/pt_PT/externaljobs"
+        page = Mock(url=rota + "/SearchJobs/?42414=%5B812097%5D")
+        page.get_by_text.return_value.first.is_visible.return_value = True
+        lisboa = make_vaga(titulo="Lisboa", empresa="Siemens", cidade="Lisboa, Portugal",
+                           link=rota + "/JobDetail/101", fonte="siemens")
+        porto = make_vaga(titulo="Porto", empresa="Siemens", cidade="Porto, Portugal",
+                          link=rota + "/JobDetail/102", fonte="siemens")
+        invalida = {**porto, "link": None}
+        controle = Mock()
+        controle.count.side_effect = [1, 0]
+        controle.is_disabled.return_value = False
+        filtros = [("42414[]", "812097")]
+        with (
+            patch.object(siemens, "_extrair_pagina", side_effect=[[lisboa], [porto, invalida]]),
+            patch.object(playwright_utils, "links_dos_cartoes", side_effect=[["/101", ""], ["/102", "/103"]]),
+            patch.object(playwright_utils, "esperar_resultados"),
+        ):
+            resultado = playwright_utils.coletar_paginas(
+                page, siemens.SELETOR_CARD, lambda p: siemens._extrair_validada(p, filtros),
+                lambda _: controle, 2,
+            )
+        controle.click.assert_called_once()
+        self.assertEqual(resultado.estado, EstadoColeta.PARCIAL)
+        self.assertEqual(resultado.vagas, [lisboa, porto, invalida])
+        self.assertEqual(resultado.paginas, 2)
+        self.assertEqual(resultado.consulta["cartoes_sem_processar"], 0)
+
+        with TemporaryDirectory() as temp:
+            pasta = Path(temp)
+            anteriores = [
+                make_vaga(titulo=f"Concurso {i}", empresa="FCT", cidade="Portugal",
+                          link=f"https://www.fct.pt/concursos/{i}", fonte="fct")
+                for i in range(60)
+            ]
+            publicar(pasta, {"atualizado_em": "2026-11-20T21:03:09+00:00", "total": 60,
+                             "vagas": anteriores}, {})
+            with (
+                patch.object(main, "PASTA_DADOS", pasta),
+                patch.object(main, "FONTES", ["siemens"]),
+                patch.object(main, "rodar_fonte", return_value=resultado),
+                patch.object(main, "logger"),
+            ):
+                self.assertEqual(main.main(), 0)
+            dados, vagas = carregar_base(pasta)
+            self.assertEqual(dados["total"], 61)
+            self.assertEqual([v for v in vagas if v["fonte"] == "siemens"], [porto])
+            self.assertTrue(all(v in vagas for v in anteriores))
+            saude = json.loads((pasta / "coleta.json").read_text(encoding="utf-8"))["fontes"]["siemens"]
+            self.assertEqual(
+                [saude[campo] for campo in ("cartoes_encontrados", "extraidas", "validas_extraidas",
+                                           "rejeitadas", "fora_do_recorte")],
+                [4, 3, 2, 2, 1],
+            )
 
     def test_siemens_ignorar_filtro_na_segunda_pagina_preserva_a_primeira(self):
         page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=%5B812097%5D")
@@ -229,13 +298,37 @@ class FiltrosTest(unittest.TestCase):
         ):
             resultado = playwright_utils.coletar_paginas(
                 page, siemens.SELETOR_CARD,
-                lambda p: siemens._extrair_validada(p, [("42414[]", "812097")], False),
+                lambda p: siemens._extrair_validada(p, [("42414[]", "812097")]),
                 lambda _: controle, 2,
             )
         self.assertEqual(resultado.estado, EstadoColeta.PARCIAL)
         self.assertEqual(resultado.vagas, [vaga])
         self.assertEqual(resultado.paginas, 1)
         self.assertIn("sem confirmação", resultado.motivo)
+        self.assertEqual(resultado.consulta["cartoes_sem_processar"], 1)
+        self.assertEqual(resultado.consulta["cartoes_invalidos"], 0)
+
+    def test_siemens_pagina_repetida_nao_duplica_cartoes_ou_vagas(self):
+        page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=812097")
+        page.get_by_text.return_value.first.is_visible.return_value = True
+        vaga = {"cidade": "Lisboa, Portugal", "link": "https://jobs.siemens.com/pt_PT/externaljobs/JobDetail/1"}
+        controle = Mock()
+        controle.count.return_value = 1
+        controle.is_disabled.return_value = False
+        with (
+            patch.object(siemens, "_extrair_pagina", return_value=[vaga]) as extrair,
+            patch.object(playwright_utils, "links_dos_cartoes", return_value=["/mesma"]),
+            patch.object(playwright_utils, "esperar_resultados"),
+        ):
+            resultado = playwright_utils.coletar_paginas(
+                page, siemens.SELETOR_CARD, lambda p: siemens._extrair_validada(p, [("42414[]", "812097")]),
+                lambda _: controle, 3,
+            )
+        extrair.assert_called_once_with(page)
+        self.assertEqual(resultado.estado, EstadoColeta.PARCIAL)
+        self.assertEqual(resultado.vagas, [vaga])
+        self.assertIn("repetida", resultado.motivo)
+        self.assertEqual(resultado.consulta["cartoes_lidos"], 1)
 
     def test_dhl_aceita_variacoes_portuguesas_e_rejeita_homonimos(self):
         self.assertTrue(dhl.local_dhl_valido("Porto, Portugal"))
