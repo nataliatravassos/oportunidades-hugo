@@ -1,6 +1,6 @@
 # Oportunidades — Porto e região
 
-Atualizado em 2026-11-19 16:09 UTC · 51 vaga(s)
+Atualizado em 2026-11-20 15:51 UTC · 58 vaga(s)
 
 Gerado automaticamente. Classificação é só uma estimativa por palavra-chave no título — confira a vaga antes de descartar.
 
@@ -10,6 +10,8 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 |---|---|---|---|---|
 | E58I0: Marketing Analyst-Senior (ID) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/e58i0-marketing-analyst-senior-id/job/77033E333895FDF6E7D96943ACA292E8?utm_source=CareerSiteOrganic) |
 | Human Resources Recruitment Specialist | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/human-resources-recruitment-specialist/job/37876711D3FF3F071F01A7C9945DA6CB?utm_source=CareerSiteOrganic) |
+| Industrial Engineer | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer/job/0114F948BA2B5F95B676A19B406F93E8?utm_source=CareerSiteOrganic) |
+| Industrial Engineer | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer/job/C4338356D8C71A343D496C0250B61059?utm_source=CareerSiteOrganic) |
 | Industrial Engineer - Senior | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer-senior/job/F0F72FE49C8E475875076E5094AC0D09?utm_source=CareerSiteOrganic) |
 | Industrial Engineer - Sort Technology Design & Modelling | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer-sort-technology-design-modelling/job/E8FA3157BDE40F92C62BF493F4249B3B?utm_source=CareerSiteOrganic) |
 | Industrial Engineer- (Associate - Standard - Senior) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/industrial-engineer-associate-standard-senior/job/7931351892CCBCEF27823DC810996BF2?utm_source=CareerSiteOrganic) |
@@ -25,9 +27,11 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 |---|---|---|---|---|
 | [verificar manualmente] Oportunidades em CEiiA — Centro de Engenharia e Desenvolvimento de Produto | CEiiA — Centro de Engenharia e Desenvolvimento de Produto | Porto (verificar) | — | [abrir](https://www.ceiia.com/carreiras) |
 | Concurso de 2027 da Parceria Europeia EP PerMed | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-2027-da-parceria-europeia-ep-permed) |
+| Concurso de 2027 da Parceria Europeia One Health – Antimicrobial Resistance (EUP OHAMR) | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-2027-da-parceria-europeia-one-health-antimicrobial-resistance-eup-ohamr-) |
 | Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote B) | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a0-a1-lote-b-) |
 | Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote B) | Via Rápida | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/concurso-de-projetos-de-computacao-avancada-7-ed-a2-a3-lote-b-via-rapida) |
 | Programa Portugal-Berkeley | FCT | Portugal (nacional) | — | [abrir](https://www.fct.pt/concursos/programa-portugal-berkeley-1) |
+| Cash Application (Receive and Apply) | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/cash-application-receive-and-apply/job/78E62005D6E71F23A3147166CD4DB424?utm_source=CareerSiteOrganic) |
 | Clearance Broker Associate with English | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-english/job/2AD310ECB2D8836435FEC36C3B427A08?utm_source=CareerSiteOrganic) |
 | Clearance Broker Associate with German | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-german/job/00776E6ED4D8A5E7DFE8D0F7CC5C7A8F?utm_source=CareerSiteOrganic) |
 | Clearance Broker Associate with German | FedEx | Rua Lionesa, Leça do Balio, Porto, PT | Full Time | [abrir](/clearance-broker-associate-with-german/job/A88BCFBD68902023141C5C37BFD02FD5?utm_source=CareerSiteOrganic) |
@@ -42,20 +46,23 @@ Gerado automaticamente. Classificação é só uma estimativa por palavra-chave 
 | Colaborador de Logística - Outflow - 20h (14h - 20h) - Temporário | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-20h-14h-20h-temporario/24107/102764249280) |
 | Colaborador de Vendas - Iluminação e Tapetes - 20h (Disponibilidade: 16h - 23h) | IKEA | Matosinhos, Porto, Portugal | Part time | [abrir](https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-vendas-iluminacao-e-tapetes-20h-disponibilidade-16h-23h/24107/103264448512) |
 | [verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial | Porto (verificar) | — | [abrir](https://www.inegi.pt/pt/carreiras/) |
+| Bioengenharia, Processamento de sinal e imagem biomédicao, gestão de projetos. (AE2026-0365) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0365) |
+| Bioengenharia, Tecnologias para a saúde, Gestão e conservação de dados clínicos. (AE2026-0355) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0355) |
 | Ciências da Computação (AE2026-0348) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0348) |
 | Ciências da Computação (AE2026-0349) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0349) |
 | Computação de Elevado Desempenho (AE2026-0347) | INESC TEC | Braga | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0347) |
 | COMPUTER SCIENCE (AE2026-0350) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0350) |
 | COMPUTER SCIENCE (AE2026-0352) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0352) |
 | Comunicação ótica subaquática e localização relativa para veículos submarinos cooperativos. (AE2026-0353) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0353) |
+| Engenharia (AE2026-0360) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0360) |
 | Engenharia Electrotécnica (AE2026-0351) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0351) |
 | Informática, Eletrónica e Sistemas Digitais (AE2026-0359) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0359) |
 | LLMs executados localmente e sem ligação a serviços externos para aumentar a autonomia de veículos submarinos. (AE2026-0354) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0354) |
 | Online Outlier Detection (AE2026-0358) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0358) |
+| Power systems (AE2026-0357) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0357) |
 | Problema de entrega na última milha (AE2026-0356) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0356) |
-| Robótica (AE2026-0342) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0342) |
 | Sistemas de Energia (AE2026-0320) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0320) |
-| Sistemas de Energia (AE2026-0328) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0328) |
+| Sistemas de Energia (AE2026-0364) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0364) |
 | Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0341) |
 | Telecomunicações (AE2026-0361) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0361) |
 | Telecomunicações (AE2026-0362) | INESC TEC | Porto | — | [abrir](https://www.inesctec.pt/editais/pt/AE2026-0362) |
