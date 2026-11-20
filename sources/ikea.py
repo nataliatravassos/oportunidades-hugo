@@ -20,8 +20,8 @@ tiver muito mais vagas, pode ser necessário investigar paginação de novo.
 
 from __future__ import annotations
 
-from .base import make_vaga
-from .playwright_utils import clicar_se_existir, nova_pagina
+from .base import ResultadoColeta, make_vaga, url_absoluta
+from .playwright_utils import abrir_busca, clicar_se_existir, nova_pagina
 
 URL = (
     "https://jobs.ikea.com/en/search-jobs/Porto/22908/4/"
@@ -29,9 +29,9 @@ URL = (
 )
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        page.goto(URL, wait_until="domcontentloaded")
+        abrir_busca(page, URL)
 
         clicar_se_existir(page, 'button:has-text("Accept")', timeout=4000)
         clicar_se_existir(page, 'button:has-text("Aceitar")', timeout=2000)
@@ -66,16 +66,23 @@ def fetch() -> list[dict]:
                     titulo=titulo,
                     empresa="IKEA",
                     cidade=cidade,
-                    link=href if href.startswith("http") else f"https://jobs.ikea.com{href}",
+                    link=url_absoluta(href, page.url),
                     fonte="ikea",
                     categoria=categoria,
                     tipo_contrato=tipo,
                 )
             )
-        return vagas
+        problemas = []
+        if len(vagas) != total:
+            problemas.append(f"{len(vagas)}/{total} cartões extraídos")
+        paginacao = page.locator('[rel="next"], .pagination a, .pagination button')
+        if paginacao.count():
+            problemas.append("Controles de paginação presentes; apenas a primeira página foi lida")
+        return ResultadoColeta.avaliar(vagas, problemas)
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

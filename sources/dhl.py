@@ -22,8 +22,10 @@ from __future__ import annotations
 import logging
 import re
 
-from .base import make_vaga
-from .playwright_utils import clicar_se_existir, nova_pagina
+from .base import ResultadoColeta, make_vaga, url_absoluta
+from .playwright_utils import (
+    abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -31,10 +33,11 @@ URL = "https://careers.dhl.com/global/en/search-results"
 LOCAL_BUSCA = "Porto"
 SUGESTAO_ESPERADA = "Maia, Porto, Portugal"
 MAX_PAGINAS = 10
+SELETOR_CARD = "li.jobs-list-item"
 
 
 def _extrair_pagina(page) -> list[dict]:
-    itens = page.locator("li.jobs-list-item")
+    itens = page.locator(SELETOR_CARD)
     total = itens.count()
     vagas = []
     for i in range(total):
@@ -64,7 +67,7 @@ def _extrair_pagina(page) -> list[dict]:
                 titulo=titulo,
                 empresa="DHL",
                 cidade=cidade,
-                link=href if href.startswith("http") else f"https://careers.dhl.com{href}",
+                link=url_absoluta(href, page.url),
                 fonte="dhl",
                 tipo_contrato=tipo,
             )
@@ -72,9 +75,9 @@ def _extrair_pagina(page) -> list[dict]:
     return vagas
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        page.goto(URL, wait_until="domcontentloaded")
+        abrir_busca(page, URL)
 
         # Banner de cookies: melhor esforço, nem sempre aparece.
         clicar_se_existir(page, 'button:has-text("Accept All")', timeout=4000)
@@ -87,38 +90,20 @@ def fetch() -> list[dict]:
         sugestao.wait_for(state="visible", timeout=10000)
         sugestao.click()
 
+        anteriores = links_dos_cartoes(page, SELETOR_CARD)
         page.locator('button:has-text("Find Jobs")').first.click()
-        page.wait_for_selector("li.jobs-list-item", timeout=20000)
-        page.wait_for_timeout(800)
+        esperar_resultados(page, SELETOR_CARD, anteriores)
 
-        todas = list(_extrair_pagina(page))
-
-        pagina_atual = 1
-        while pagina_atual < MAX_PAGINAS:
-            proxima = page.locator(f'a.phw-s-page-number-link:has-text("{pagina_atual + 1}")').first
-            if proxima.count() == 0:
-                break
-            try:
-                proxima.click()
-            except Exception:  # noqa: BLE001
-                break
-            page.wait_for_timeout(1200)
-            page.wait_for_selector("li.jobs-list-item", timeout=15000)
-            pagina_atual += 1
-            todas.extend(_extrair_pagina(page))
-
-        vistos = set()
-        unicas = []
-        for v in todas:
-            if v["link"] in vistos:
-                continue
-            vistos.add(v["link"])
-            unicas.append(v)
-        return unicas
+        return coletar_paginas(
+            page, SELETOR_CARD, _extrair_pagina,
+            lambda numero: page.locator(f'a.phw-s-page-number-link:text-is("{numero + 1}")').first,
+            MAX_PAGINAS,
+        )
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
     logging.basicConfig(level=logging.INFO)
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

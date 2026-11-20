@@ -18,20 +18,24 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from .base import make_vaga
+from .base import ResultadoColeta, make_vaga, url_absoluta
 
 URL = "https://www.fct.pt/concursos/"
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     resp = requests.get(URL, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
 
     vagas = []
-    links = soup.select('a[href*="/concursos/"]')
+    problemas = []
     vistos = set()
-    for a in links:
+    for titulo_el in soup.select(".calendar__title"):
+        a = titulo_el.find_parent("a")
+        if a is None:
+            problemas.append("Cartão de concurso sem link")
+            continue
         href = a.get("href", "")
         if href.rstrip("/").endswith("/concursos") or "/en/" in href:
             continue
@@ -39,31 +43,27 @@ def fetch() -> list[dict]:
             continue
         vistos.add(href)
 
-        titulo_el = a.select_one(".calendar__title")
-        if not titulo_el:
-            continue
         titulo = re.sub(r"\s+", " ", titulo_el.get_text(strip=True))
 
         mes_el = a.select_one(".month")
         prazo = re.sub(r"\s+", " ", mes_el.get_text(strip=True)) if mes_el else None
-
-        link = href if href.startswith("http") else f"https://www.fct.pt{href}"
 
         vagas.append(
             make_vaga(
                 titulo=titulo,
                 empresa="FCT",
                 cidade="Portugal (nacional)",
-                link=link,
+                link=url_absoluta(href, resp.url),
                 fonte="fct",
                 categoria="Concurso FCT",
                 data_publicacao=prazo,
             )
         )
-    return vagas
+    return ResultadoColeta.avaliar(vagas, problemas)
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

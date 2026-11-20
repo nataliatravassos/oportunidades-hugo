@@ -11,14 +11,21 @@ on:
 permissions:
   contents: write  # necessário pra o workflow poder commitar o resultado
 
+concurrency:
+  group: coleta-diaria-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   buscar-vagas:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
       - name: Baixar o código do repositório
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
 
       - name: Preparar Python
         uses: actions/setup-python@v5
@@ -28,20 +35,40 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
+      - name: Testar coleta e publicação com dados simulados
+        run: python -m unittest discover -s tests
+
       - name: Instalar navegador do Playwright
         run: playwright install --with-deps chromium
 
       - name: Buscar vagas
-        run: python main.py
+        id: coleta
+        run: |
+          status=0
+          python main.py || status=$?
+          case "$status" in
+            0) ;;
+            2) echo "falha_total=true" >> "$GITHUB_OUTPUT" ;;
+            *) exit "$status" ;;
+          esac
 
       - name: Salvar resultado no repositório (se mudou algo)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/vagas.json data/vagas.md
+          git add -- data/coleta.json
+          if [ "${{ steps.coleta.outputs.falha_total }}" != "true" ]; then
+            git add -- data/vagas.json data/vagas.md
+          fi
           if git diff --cached --quiet; then
-            echo "Nada mudou hoje, não precisa commitar."
+            echo "Nenhuma alteração para publicar."
           else
-            git commit -m "Atualiza vagas ($(date -u +'%Y-%m-%d'))"
+            git commit -m "Registra coleta ($(date -u +'%Y-%m-%d'))"
             git push
           fi
+
+      - name: Sinalizar falha total
+        if: steps.coleta.outputs.falha_total == 'true'
+        run: |
+          echo "::error::Todas as fontes automáticas falharam. As vagas publicadas foram preservadas."
+          exit 1

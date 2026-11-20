@@ -25,7 +25,7 @@ Como preencher um TODO:
 
 from __future__ import annotations
 
-from .base import make_vaga
+from .base import ResultadoColeta, make_vaga
 
 # Institutos sugeridos, com uma descrição rápida de por que podem interessar
 # ao Hugo. Cada um vira uma "vaga" avisando que ainda não há busca
@@ -61,7 +61,7 @@ INSTITUTOS_SUGERIDOS = [
 ]
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     vagas = []
     for inst in INSTITUTOS_SUGERIDOS:
         vagas.append(
@@ -74,10 +74,11 @@ def fetch() -> list[dict]:
                 categoria=inst["motivo"],
             )
         )
-    return vagas
+    return ResultadoColeta.avaliar(vagas, [], paginas=0)
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

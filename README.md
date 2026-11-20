@@ -22,9 +22,9 @@ O resultado fica salvo em `data/vagas.json` (dados completos) e `data/vagas.md`
    `.github/workflows/daily.yml` já roda sozinho todo dia às 7h (UTC).
 4. Pra rodar uma vez na hora, sem esperar o dia seguinte: vá na aba **Actions**
    do repositório → clique em **"Buscar vagas diariamente"** → **"Run workflow"**.
-5. Depois que rodar, os arquivos `data/vagas.json` e `data/vagas.md` aparecem
-   atualizados no repositório — o próprio GitHub Actions commita o resultado
-   automaticamente.
+5. O GitHub Actions commita o resultado automaticamente na branch padrão.
+   A data de `data/vagas.json` e `data/vagas.md` avança quando os dados mudam.
+   `data/coleta.json` regista a última tentativa e o resultado por fonte.
 
 Não precisa de nenhuma senha, chave de API ou configuração extra: o GitHub já
 dá ao workflow a permissão que ele precisa pra salvar o resultado.
@@ -42,6 +42,13 @@ scraper daquela empresa quebrou):
 
 ```bash
 python -m sources.bosch
+```
+
+A suíte automatizada usa respostas simuladas e dispensa acesso aos portais
+e instalação do navegador.
+
+```bash
+python -m unittest discover -s tests -v
 ```
 
 ## Sobre a pergunta "dá pra ser só um Artifact do Claude, sem GitHub?"
@@ -69,9 +76,11 @@ só pedir depois que o repositório estiver no ar.
 - **A classificação "escritório/operacional" é só uma estimativa** baseada em
   palavras do título do cargo — não é perfeita, serve só pra ordenar a lista
   e facilitar a leitura.
-- **Uma fonte quebrada não derruba as outras:** se um site falhar
-  (fora do ar, mudou de layout, etc.), o programa loga o erro e continua
-  buscando nas outras fontes normalmente.
+- Uma falha preserva a última lista válida daquela fonte. Uma coleta parcial
+  pode acrescentar vagas e mantém as que já estavam publicadas. O zero só
+  limpa a lista da fonte quando confirmado por uma resposta reconhecida.
+  Se todas as fontes automáticas falharem, só o diagnóstico é publicado e
+  o workflow fica com estado de falha.
 
 ## Estrutura dos arquivos
 
@@ -82,5 +91,6 @@ sources/base.py          → formato comum de cada vaga + classificação por pa
 sources/*.py              → um arquivo por fonte (empresa ou instituto)
 data/vagas.json           → resultado em dados (gerado automaticamente)
 data/vagas.md              → resultado em tabela legível (gerado automaticamente)
+data/coleta.json          → diagnóstico da tentativa mais recente (gerado automaticamente)
 .github/workflows/daily.yml → agendamento que roda tudo isso todo dia
 ```

@@ -11,17 +11,20 @@ from __future__ import annotations
 
 import logging
 
-from .base import make_vaga
-from .playwright_utils import nova_pagina
+from .base import ResultadoColeta, make_vaga, url_absoluta
+from .playwright_utils import (
+    abrir_busca, coletar_paginas, nova_pagina,
+)
 
 logger = logging.getLogger(__name__)
 
 URL = "https://careers.fedex.com/jobs?location_name=Porto%2C%20Portugal&location_type=2"
 MAX_PAGINAS = 10
+SELETOR_CARD = "ul.results-list > li"
 
 
 def _extrair_pagina(page) -> list[dict]:
-    itens = page.locator("ul.results-list > li")
+    itens = page.locator(SELETOR_CARD)
     total = itens.count()
     vagas = []
     for i in range(total):
@@ -47,7 +50,7 @@ def _extrair_pagina(page) -> list[dict]:
                 titulo=titulo,
                 empresa="FedEx",
                 cidade=cidade,
-                link=href,
+                link=url_absoluta(href, page.url),
                 fonte="fedex",
                 categoria=ref,
                 tipo_contrato=tipo,
@@ -56,41 +59,21 @@ def _extrair_pagina(page) -> list[dict]:
     return vagas
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        page.goto(URL, wait_until="domcontentloaded")
-        page.wait_for_selector("ul.results-list > li", timeout=20000)
-        page.wait_for_timeout(500)
+        abrir_busca(page, URL)
+        page.wait_for_selector(SELETOR_CARD, timeout=20000)
 
-        todas = list(_extrair_pagina(page))
-
-        pagina_atual = 1
-        while pagina_atual < MAX_PAGINAS:
-            proxima = page.locator(f'a:has-text("{pagina_atual + 1}")').first
-            if proxima.count() == 0:
-                break
-            try:
-                proxima.click()
-            except Exception:  # noqa: BLE001
-                break
-            page.wait_for_timeout(1200)
-            page.wait_for_selector("ul.results-list > li", timeout=15000)
-            pagina_atual += 1
-            todas.extend(_extrair_pagina(page))
-
-        # remove duplicados (mesmo link)
-        vistos = set()
-        unicas = []
-        for v in todas:
-            if v["link"] in vistos:
-                continue
-            vistos.add(v["link"])
-            unicas.append(v)
-        return unicas
+        return coletar_paginas(
+            page, SELETOR_CARD, _extrair_pagina,
+            lambda numero: page.locator(f'a:text-is("{numero + 1}")').first,
+            MAX_PAGINAS,
+        )
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
     logging.basicConfig(level=logging.INFO)
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

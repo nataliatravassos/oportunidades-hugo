@@ -22,15 +22,18 @@ A lista é paginada (10 por página) com um pager estilo Drupal
 
 from __future__ import annotations
 
-from .base import make_vaga
-from .playwright_utils import clicar_se_existir, nova_pagina
+from .base import ResultadoColeta, make_vaga, url_absoluta
+from .playwright_utils import (
+    abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
+)
 
 URL = "https://www.nestle.com/jobs"
 MAX_PAGINAS = 10
+SELETOR_CARD = ".jobs-card"
 
 
 def _extrair_pagina(page) -> list[dict]:
-    cards = page.locator(".jobs-card")
+    cards = page.locator(SELETOR_CARD)
     total = cards.count()
     vagas = []
     for i in range(total):
@@ -39,8 +42,6 @@ def _extrair_pagina(page) -> list[dict]:
         if a.count() == 0:
             continue
         href = a.get_attribute("href")
-        if href:
-            href = href.split("?")[0]
         titulo_el = card.locator(".jobs-title").first
         titulo = None
         if titulo_el.count():
@@ -63,7 +64,7 @@ def _extrair_pagina(page) -> list[dict]:
                 titulo=titulo,
                 empresa="Nestlé",
                 cidade=cidade,
-                link=href,
+                link=url_absoluta(href, page.url),
                 fonte="nestle",
                 categoria=categoria,
                 tipo_contrato=tipo,
@@ -72,9 +73,9 @@ def _extrair_pagina(page) -> list[dict]:
     return vagas
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        page.goto(URL, wait_until="domcontentloaded")
+        abrir_busca(page, URL)
 
         clicar_se_existir(page, 'button:has-text("Accept All Cookies")', timeout=4000)
         clicar_se_existir(page, 'button:has-text("Accept")', timeout=2000)
@@ -87,41 +88,19 @@ def fetch() -> list[dict]:
         select_pais.select_option("PT")
 
         botoes_busca = page.locator('button:has-text("Search jobs")')
+        anteriores = links_dos_cartoes(page, SELETOR_CARD)
         botoes_busca.last.click()
+        esperar_resultados(page, SELETOR_CARD, anteriores)
 
-        page.wait_for_selector(".jobs-card", timeout=20000)
-        page.wait_for_timeout(800)
-
-        todas = list(_extrair_pagina(page))
-
-        pagina_atual = 1
-        while pagina_atual < MAX_PAGINAS:
-            proximo = page.locator(".pager__item--next a").first
-            if proximo.count() == 0:
-                break
-            try:
-                proximo.click()
-            except Exception:  # noqa: BLE001
-                break
-            page.wait_for_timeout(1200)
-            page.wait_for_selector(".jobs-card", timeout=15000)
-            pagina_atual += 1
-            novas = _extrair_pagina(page)
-            if not novas:
-                break
-            todas.extend(novas)
-
-        vistos = set()
-        unicas = []
-        for v in todas:
-            if v["link"] in vistos:
-                continue
-            vistos.add(v["link"])
-            unicas.append(v)
-        return unicas
+        return coletar_paginas(
+            page, SELETOR_CARD, _extrair_pagina,
+            lambda numero: page.locator(".pager__item--next a").first,
+            MAX_PAGINAS,
+        )
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))
