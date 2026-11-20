@@ -64,11 +64,16 @@ def clicar_se_existir(page, selector: str, *, timeout: int = 3000) -> bool:
         return False
 
 
+class ErroNavegacao(RuntimeError):
+    def __init__(self, status: int | None):
+        self.status = status
+        super().__init__(f"Navegação para a busca: HTTP {status if status is not None else 'sem resposta'}")
+
+
 def abrir_busca(page, url: str) -> None:
     resposta = page.goto(url, wait_until="domcontentloaded")
     if resposta is None or not resposta.ok:
-        status = resposta.status if resposta is not None else "sem resposta"
-        raise RuntimeError(f"Navegação para a busca: HTTP {status}")
+        raise ErroNavegacao(resposta.status if resposta is not None else None)
 
 
 LINKS_DOS_CARTOES = """cards => cards.map(card =>
@@ -96,12 +101,16 @@ def esperar_resultados(page, seletor: str, anteriores: list[str], *, crescer: bo
     )
 
 
-def coletar_paginas(page, seletor: str, extrair, proxima, limite: int) -> ResultadoColeta:
+def coletar_paginas(page, seletor: str, extrair, proxima, limite: int, *,
+                   consulta: dict | None = None) -> ResultadoColeta:
     """Conserva os resultados já lidos caso uma página deixe de avançar."""
     vagas = {}
     problemas = []
     assinaturas = set()
     paginas = 0
+    cartoes_lidos = 0
+    cartoes_processados = 0
+    cartoes_invalidos = 0
     for numero in range(1, limite + 1):
         try:
             links = links_dos_cartoes(page, seletor)
@@ -110,7 +119,10 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int) -> Result
                 problemas.append(f"Página {numero} repetida")
                 break
             assinaturas.add(assinatura)
+            cartoes_lidos += len(links)
             extraidas = extrair(page)
+            cartoes_processados += len(links)
+            cartoes_invalidos += max(0, len(links) - len(extraidas))
             paginas += 1
             for vaga in extraidas:
                 # Mantenha também os links inválidos para a validação central.
@@ -130,4 +142,11 @@ def coletar_paginas(page, seletor: str, extrair, proxima, limite: int) -> Result
         except Exception as erro:
             problemas.append(f"Paginação a partir da página {numero}: {resumir_erro(erro)}")
             break
-    return ResultadoColeta.avaliar(list(vagas.values()), problemas, paginas)
+    diagnostico = {
+        **(consulta or {}),
+        "limite_paginas": limite,
+        "cartoes_lidos": cartoes_lidos,
+        "cartoes_invalidos": cartoes_invalidos,
+        "cartoes_sem_processar": cartoes_lidos - cartoes_processados,
+    }
+    return ResultadoColeta.avaliar(list(vagas.values()), problemas, paginas, consulta=diagnostico)

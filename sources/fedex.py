@@ -10,6 +10,7 @@ scraper segue os links de paginação numerados até não haver mais.
 from __future__ import annotations
 
 import logging
+import re
 
 from .base import ResultadoColeta, make_vaga, url_absoluta
 from .playwright_utils import (
@@ -64,10 +65,15 @@ def fetch() -> ResultadoColeta:
         abrir_busca(page, URL)
         page.wait_for_selector(SELETOR_CARD, timeout=20000)
 
+        contador = page.get_by_text(re.compile(r"Showing\s+[\d,-]+\s+of\s+[\d,]+\s+jobs", re.I))
+        total = next((re.search(r"\bof\s+([\d,]+)", s, re.I) for s in contador.all_text_contents()), None)
+        consulta = {"url": page.url, "escopo": "Busca por Porto (o portal mistura outros países)",
+                    "total_anunciado": int(total[1].replace(",", "")) if total else None}
         return coletar_paginas(
             page, SELETOR_CARD, _extrair_pagina,
             lambda numero: page.locator(f'a:text-is("{numero + 1}")').first,
             MAX_PAGINAS,
+            consulta=consulta,
         )
 
 

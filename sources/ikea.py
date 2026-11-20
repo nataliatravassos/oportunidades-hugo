@@ -20,6 +20,8 @@ tiver muito mais vagas, pode ser necessário investigar paginação de novo.
 
 from __future__ import annotations
 
+import re
+
 from .base import ResultadoColeta, make_vaga, url_absoluta
 from .playwright_utils import abrir_busca, clicar_se_existir, nova_pagina
 
@@ -78,7 +80,15 @@ def fetch() -> ResultadoColeta:
         paginacao = page.locator('[rel="next"], .pagination a, .pagination button')
         if paginacao.count():
             problemas.append("Controles de paginação presentes; apenas a primeira página foi lida")
-        return ResultadoColeta.avaliar(vagas, problemas)
+        resumo = page.get_by_text(re.compile(r"^\s*\d+ results? for Porto\s*$", re.I)).all_text_contents()
+        total_anunciado = next((int(s.split()[0]) for s in resumo), None)
+        cobertura = None
+        if total_anunciado == total == len({vaga["link"] for vaga in vagas}) and not problemas:
+            cobertura = "Todos os resultados anunciados para a busca de Porto foram lidos"
+        return ResultadoColeta.avaliar(vagas, problemas, cobertura=cobertura, consulta={
+            "url": page.url, "escopo": "Busca Porto, raio publicado de 25 km",
+            "cartoes_lidos": total, "total_anunciado": total_anunciado,
+        })
 
 
 if __name__ == "__main__":

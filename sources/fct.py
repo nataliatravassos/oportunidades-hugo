@@ -31,7 +31,8 @@ def fetch() -> ResultadoColeta:
     vagas = []
     problemas = []
     vistos = set()
-    for titulo_el in soup.select(".calendar__title"):
+    cartoes = soup.select(".calendar__title")
+    for titulo_el in cartoes:
         a = titulo_el.find_parent("a")
         if a is None:
             problemas.append("Cartão de concurso sem link")
@@ -59,7 +60,10 @@ def fetch() -> ResultadoColeta:
                 data_publicacao=prazo,
             )
         )
-    return ResultadoColeta.avaliar(vagas, problemas)
+    return ResultadoColeta.avaliar(vagas, problemas, consulta={
+        "url": resp.url, "escopo": "Listagem inicial dos concursos nacionais; abas e detalhes não percorridos",
+        "cartoes_lidos": len(cartoes),
+    })
 
 
 if __name__ == "__main__":

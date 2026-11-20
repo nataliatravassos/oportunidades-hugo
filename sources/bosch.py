@@ -1,48 +1,59 @@
-"""
-Bosch — portal de carreiras (jobs.bosch.com).
-
-A busca por cidade exata ("Porto") costuma devolver 0 resultados porque a
-Bosch não tem instalação na cidade do Porto propriamente — as vagas da
-região ficam em Aveiro e Braga. Por isso aqui a gente carrega TODAS as
-vagas de Portugal (sem filtrar cidade no site) e deixa o filtro de região
-pro main.py aplicar depois, usando o campo "cidade" de cada vaga.
-
-A lista carrega 8 vagas por vez; tem um botão "See all jobs" que funciona
-como "carregar mais". O scraper clica nele repetidamente até não aparecer
-mais vagas novas (ou até um limite de segurança).
-"""
+"""Bosch Careers em Portugal, com expansão da lista e filtro regional local."""
 
 from __future__ import annotations
 
-import logging
+from datetime import datetime
 import re
+from urllib.parse import urlsplit
+
+from bs4 import BeautifulSoup
 
 from .base import ResultadoColeta, make_vaga, resumir_erro, url_absoluta
 from .playwright_utils import (
     abrir_busca, clicar_se_existir, esperar_resultados, links_dos_cartoes, nova_pagina,
 )
 
-logger = logging.getLogger(__name__)
-
 URL = "https://jobs.bosch.com/en/?pages=1&country=pt"
 MAX_CLIQUES_CARREGAR_MAIS = 30
 SELETOR_CARD = ".M-JobSearchResultsGroup__item"
 
-PADRAO_CARD = re.compile(
-    r"^(?P<titulo>.+?)"
-    r"Field of work(?P<categoria>.+?)"
-    r"Bosch Location(?P<cidade>.+?)"
-    r"(?P<modo>Hybrid|On-Site|Remote)?"
-    r"Job posted:(?P<data>[\d/]+)$"
-)
+def _data_publicacao(valor: str | None) -> str | None:
+    for formato in ("%m/%d/%Y", "%Y-%m-%d"):
+        try:
+            return datetime.strptime(valor or "", formato).date().isoformat()
+        except ValueError:
+            continue
+    return None
 
 
-def _parse_card(texto: str) -> dict | None:
-    texto = " ".join(texto.split())
-    m = PADRAO_CARD.match(texto)
-    if not m:
+def extrair_cartao(html: str, url: str) -> dict | None:
+    cartao = BeautifulSoup(html, "html.parser")
+    cabecalho = cartao.select_one("a.A-JobPanel__header[href]")
+    titulo = cartao.select_one(".A-JobPanel__title")
+    if not cabecalho or not titulo:
         return None
-    return m.groupdict()
+
+    def texto(seletor):
+        elemento = cartao.select_one(seletor)
+        return elemento.get_text(" ", strip=True) if elemento else None
+
+    cidade = texto('.A-JobPanel__description:has(i[title="locator"]) .A-JobPanel__value')
+    categoria = texto('.A-JobPanel__description:has(i[title="briefcase"]) .A-JobPanel__value')
+    data = texto('.A-JobPanel__description:has(i[title="calendar"]) .A-JobPanel__value')
+    modo = texto(".A-JobPanel__remote")
+    link = url_absoluta(cabecalho["href"], url)
+    destino = urlsplit(link or "")
+    if (not cidade or destino.scheme != "https" or destino.netloc != "jobs.bosch.com"
+            or not re.fullmatch(r"/en/job/REF\d+[A-Za-z]?-([^/]+)/?", destino.path)):
+        return None
+    vaga = make_vaga(
+        titulo=titulo.get_text(" ", strip=True), empresa="Bosch", cidade=cidade,
+        link=link, fonte="bosch", categoria=categoria, data_publicacao=_data_publicacao(data),
+    )
+    if modo:
+        vaga["modalidade"] = {"hybrid": "hibrido", "on-site": "presencial", "remote": "remoto"}.get(modo.casefold(), "desconhecido")
+        vaga["evidencia_modalidade"] = modo
+    return vaga
 
 
 def fetch() -> ResultadoColeta:
@@ -58,10 +69,12 @@ def fetch() -> ResultadoColeta:
         problemas = []
         vagas = {}
         paginas = 0
+        vistos = set()
         botao = page.locator('button:has-text("See all jobs")').first
         for cliques in range(MAX_CLIQUES_CARREGAR_MAIS + 1):
             try:
                 links = links_dos_cartoes(page, SELETOR_CARD)
+                vistos.update(filter(None, links))
                 extraidas = _extrair_pagina(page)
                 paginas += 1
                 for vaga in extraidas:
@@ -78,34 +91,21 @@ def fetch() -> ResultadoColeta:
             except Exception as erro:
                 problemas.append(f"Carregar mais: {resumir_erro(erro)}")
                 break
-        return ResultadoColeta.avaliar(list(vagas.values()), problemas, paginas)
+        resumo = page.get_by_text(re.compile(r"Your results:\s*\d+ results?", re.I)).first
+        contador = next(iter(resumo.all_text_contents()), "")
+        total = re.search(r"(\d+)\s+results?", contador, re.I)
+        consulta = {"url": page.url, "escopo": "Busca Portugal; expansão pelo botão See all jobs",
+                    "cartoes_distintos": len(vistos), "total_anunciado": int(total[1]) if total else None}
+        return ResultadoColeta.avaliar(list(vagas.values()), problemas, paginas, consulta=consulta)
 
 
 def _extrair_pagina(page) -> list[dict]:
-    vagas = []
-    for card in page.locator(SELETOR_CARD).all():
-        link_el = card.locator("a").first
-        parsed = _parse_card(card.inner_text())
-        if not parsed or not link_el.count():
-            continue
-        vagas.append(
-            make_vaga(
-                titulo=parsed["titulo"],
-                empresa="Bosch",
-                cidade=parsed["cidade"],
-                link=url_absoluta(link_el.get_attribute("href"), page.url),
-                fonte="bosch",
-                categoria=parsed["categoria"],
-                tipo_contrato=parsed.get("modo"),
-                data_publicacao=parsed.get("data"),
-            )
-        )
-    return vagas
+    return [vaga for card in page.locator(SELETOR_CARD).all()
+            if (vaga := extrair_cartao(card.inner_html(), page.url)) is not None]
 
 
 if __name__ == "__main__":
     import json
     from dataclasses import asdict
 
-    logging.basicConfig(level=logging.INFO)
     print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

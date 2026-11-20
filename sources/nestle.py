@@ -22,12 +22,13 @@ A lista é paginada (10 por página) com um pager estilo Drupal
 
 from __future__ import annotations
 
-from .base import ResultadoColeta, make_vaga, url_absoluta
+from .base import EstadoColeta, ResultadoColeta, make_vaga, url_absoluta
 from .playwright_utils import (
-    abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
+    ErroNavegacao, abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
 )
 
 URL = "https://www.nestle.com/jobs"
+URL_PORTUGAL = "https://empresa.nestle.pt/jobs/search-jobs"
 MAX_PAGINAS = 10
 SELETOR_CARD = ".jobs-card"
 
@@ -75,7 +76,15 @@ def _extrair_pagina(page) -> list[dict]:
 
 def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        abrir_busca(page, URL)
+        try:
+            abrir_busca(page, URL)
+        except ErroNavegacao as erro:
+            if erro.status != 403:
+                raise
+            return ResultadoColeta(
+                EstadoColeta.FALHA, motivo="Portal Nestlé respondeu HTTP 403; sem alternativa automatizável confirmada",
+                consulta={"url": page.url, "consulta_manual": URL_PORTUGAL},
+            )
 
         clicar_se_existir(page, 'button:has-text("Accept All Cookies")', timeout=4000)
         clicar_se_existir(page, 'button:has-text("Accept")', timeout=2000)
@@ -91,11 +100,14 @@ def fetch() -> ResultadoColeta:
         anteriores = links_dos_cartoes(page, SELETOR_CARD)
         botoes_busca.last.click()
         esperar_resultados(page, SELETOR_CARD, anteriores)
+        if select_pais.input_value() != "PT":
+            raise ValueError("Filtro Portugal não confirmado após a pesquisa Nestlé")
 
         return coletar_paginas(
             page, SELETOR_CARD, _extrair_pagina,
             lambda numero: page.locator(".pager__item--next a").first,
             MAX_PAGINAS,
+            consulta={"url": page.url, "escopo": "Portugal selecionado no formulário"},
         )
 
 

@@ -17,11 +17,11 @@ import datetime as dt
 import importlib
 import logging
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import replace
 from pathlib import Path
 
-from config import FONTES, eh_regiao_porto
+from config import FONTES, eh_regiao_porto, local_em_portugal, remoto_elegivel
 from publicacao import carregar_base, publicar, validar_vaga
 from sources.base import EstadoColeta, ResultadoColeta, resumir_erro
 from sources.fedex_links import identidade_fedex, url_vaga_fedex
@@ -49,8 +49,12 @@ FALHA_TOTAL = 2
 
 
 def rodar_fonte(nome: str) -> ResultadoColeta:
+    consulta = {}
     try:
         modulo = importlib.import_module(f"sources.{nome}")
+        url = getattr(modulo, "URL", None) or getattr(modulo, "API_URL", None)
+        if url:
+            consulta = {"url_planejada": url}
         resultado = modulo.fetch()
         if (
             not isinstance(resultado, ResultadoColeta)
@@ -64,10 +68,10 @@ def rodar_fonte(nome: str) -> ResultadoColeta:
             raise ValueError("Cobertura da fonte sem evidência explícita")
         if resultado.estado in (EstadoColeta.ZERO, EstadoColeta.FALHA) and resultado.vagas:
             raise ValueError("Estado incompatível com a presença de registos")
-        return resultado
+        return replace(resultado, consulta={**consulta, **resultado.consulta})
     except Exception as erro:
         logger.exception("Falha na fonte %s", nome)
-        return ResultadoColeta(EstadoColeta.FALHA, motivo=resumir_erro(erro))
+        return ResultadoColeta(EstadoColeta.FALHA, motivo=resumir_erro(erro), consulta=consulta)
 
 
 def validar_resultado(nome: str, resultado: ResultadoColeta) -> tuple[ResultadoColeta, int]:
@@ -89,7 +93,7 @@ def validar_resultado(nome: str, resultado: ResultadoColeta) -> tuple[ResultadoC
     if rejeitadas:
         problemas = [resultado.motivo] if resultado.motivo else []
         problemas.append(f"{rejeitadas} registo(s) inválido(s): {', '.join(sorted(erros))}")
-        return ResultadoColeta.avaliar(validas, problemas, resultado.paginas), rejeitadas
+        return ResultadoColeta.avaliar(validas, problemas, resultado.paginas, consulta=resultado.consulta), rejeitadas
     return replace(resultado, vagas=validas), 0
 
 
@@ -132,6 +136,10 @@ def atualizar_fonte(
         if anterior["fonte"] == "fedex":
             atualizada["link"] = observada["link"]
             atualizada.pop("link_original", None)
+        if observada.get("evidencia_modalidade") or observada.get("evidencia_elegibilidade"):
+            for campo in ("modalidade", "evidencia_modalidade", "elegibilidade_portugal", "evidencia_elegibilidade"):
+                if campo in observada:
+                    atualizada[campo] = observada[campo]
         atualizada.pop("verificacao_pendente", None)
         atualizadas.append(atualizada)
     return atualizadas + list(observadas.values())
@@ -147,28 +155,44 @@ def main() -> int:
     for nome in FONTES:
         bruto = rodar_fonte(nome)
         resultado, rejeitadas = validar_resultado(nome, bruto)
-        locais = [
-            vaga for vaga in resultado.vagas
-            if nome in FONTES_SEM_FILTRO_REGIAO or eh_regiao_porto(vaga.get("cidade"))
-        ]
+        locais, remotas = [], []
+        for vaga in resultado.vagas:
+            if vaga.get("elegibilidade_portugal") == "inelegivel":
+                continue
+            if nome == "microsoft" and not local_em_portugal(vaga.get("cidade")):
+                continue
+            if nome in FONTES_SEM_FILTRO_REGIAO or eh_regiao_porto(vaga.get("cidade")):
+                locais.append(vaga)
+            elif remoto_elegivel(vaga):
+                remotas.append(vaga)
+        elegiveis = locais + remotas
         anteriores = por_fonte[nome]
         manual = nome in FONTES_MANUAIS
-        publicadas = atualizar_fonte(anteriores, locais, resultado.estado, manual=manual)
+        publicadas = atualizar_fonte(anteriores, elegiveis, resultado.estado, manual=manual)
         por_fonte[nome] = publicadas
-        vistas = {_identidade(vaga) for vaga in locais}
+        vistas = {_identidade(vaga) for vaga in elegiveis}
         diagnosticos[nome] = {
             "estado": resultado.estado,
             "motivo": resultado.motivo,
             "paginas": resultado.paginas,
+            "cartoes_encontrados": bruto.consulta.get("cartoes_lidos", bruto.consulta.get("cartoes_distintos")),
             "extraidas": len(bruto.vagas),
-            "rejeitadas": rejeitadas,
+            "validas_extraidas": len(resultado.vagas),
+            "rejeitadas": rejeitadas + bruto.consulta.get("cartoes_invalidos", 0),
             "observadas_na_regiao": len(locais),
+            "remotas_elegiveis": len(remotas),
+            "fora_do_recorte": len(resultado.vagas) - len(elegiveis),
             "preservadas": sum(_identidade(vaga) not in vistas for vaga in anteriores),
             "por_confirmar": sum(bool(vaga.get("verificacao_pendente")) for vaga in publicadas),
             "links_por_confirmar": sum(not vaga["link"] for vaga in publicadas),
             "publicadas": len(publicadas),
             "manual": manual,
+            "consulta": resultado.consulta,
         }
+        if nome == "microsoft":
+            diagnosticos[nome]["elegibilidade_portugal"] = dict(Counter(
+                vaga.get("elegibilidade_portugal", "nao_verificada") for vaga in resultado.vagas
+            ))
         logar = logger.warning if resultado.estado in (EstadoColeta.PARCIAL, EstadoColeta.FALHA) else logger.info
         logar("%s: %s, %s", nome, resultado.estado, diagnosticos[nome])
 
@@ -202,7 +226,9 @@ def main() -> int:
             item["publicadas"] = item["preservadas"] = len(preservadas)
             item["por_confirmar"] = sum(bool(vaga.get("verificacao_pendente")) for vaga in preservadas)
             if nome == "fedex":
-                item["links_por_confirmar"] = sum(not url_vaga_fedex(vaga["link"]) for vaga in preservadas)
+                item["links_por_confirmar"] = sum(
+                    not url_vaga_fedex(vaga["link"], referencia=vaga.get("categoria")) for vaga in preservadas
+                )
 
     estado = "sucesso"
     if falha_total:
