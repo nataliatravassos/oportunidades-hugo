@@ -17,13 +17,16 @@ from __future__ import annotations
 import logging
 import re
 
-from .base import make_vaga
-from .playwright_utils import clicar_se_existir, nova_pagina
+from .base import ResultadoColeta, make_vaga, resumir_erro, url_absoluta
+from .playwright_utils import (
+    abrir_busca, clicar_se_existir, esperar_resultados, links_dos_cartoes, nova_pagina,
+)
 
 logger = logging.getLogger(__name__)
 
 URL = "https://jobs.bosch.com/en/?pages=1&country=pt"
 MAX_CLIQUES_CARREGAR_MAIS = 30
+SELETOR_CARD = ".M-JobSearchResultsGroup__item"
 
 PADRAO_CARD = re.compile(
     r"^(?P<titulo>.+?)"
@@ -42,71 +45,67 @@ def _parse_card(texto: str) -> dict | None:
     return m.groupdict()
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        page.goto(URL, wait_until="domcontentloaded")
+        abrir_busca(page, URL)
 
         # O banner de cookies nem sempre aparece (depende de cache), então
         # isso é "melhor esforço": se não aparecer em 4s, segue em frente.
         clicar_se_existir(page, 'button:has-text("Decline all")', timeout=4000)
 
-        # Espera a contagem de resultados aparecer e ser > 0 (a página
-        # mostra "0 Result" por um instante enquanto carrega).
-        page.wait_for_function(
-            "document.body.innerText.includes('results') || "
-            "document.body.innerText.includes('Result')",
-            timeout=15000,
-        )
-        page.wait_for_timeout(1500)
+        esperar_resultados(page, SELETOR_CARD, [])
 
-        botao = page.locator('button:has-text("See all jobs")')
-        cliques = 0
-        while cliques < MAX_CLIQUES_CARREGAR_MAIS:
-            if botao.count() == 0 or not botao.first.is_visible():
-                break
-            antes = page.locator(".M-JobSearchResultsGroup__item").count()
+        problemas = []
+        vagas = {}
+        paginas = 0
+        botao = page.locator('button:has-text("See all jobs")').first
+        for cliques in range(MAX_CLIQUES_CARREGAR_MAIS + 1):
             try:
-                botao.first.click()
-            except Exception:  # noqa: BLE001
+                links = links_dos_cartoes(page, SELETOR_CARD)
+                extraidas = _extrair_pagina(page)
+                paginas += 1
+                for vaga in extraidas:
+                    vagas.setdefault(vaga["link"] or vaga["titulo"], vaga)
+                if len(extraidas) != len(links):
+                    problemas.append(f"{len(extraidas)}/{len(links)} cartões extraídos")
+                if botao.count() == 0 or not botao.is_visible() or botao.is_disabled():
+                    break
+                if cliques == MAX_CLIQUES_CARREGAR_MAIS:
+                    problemas.append("Limite de carregamentos atingido com navegação restante")
+                    break
+                botao.click()
+                esperar_resultados(page, SELETOR_CARD, links, crescer=True)
+            except Exception as erro:
+                problemas.append(f"Carregar mais: {resumir_erro(erro)}")
                 break
-            page.wait_for_timeout(900)
-            depois = page.locator(".M-JobSearchResultsGroup__item").count()
-            cliques += 1
-            if depois <= antes:
-                break
+        return ResultadoColeta.avaliar(list(vagas.values()), problemas, paginas)
 
-        cards = page.locator(".M-JobSearchResultsGroup__item")
-        total = cards.count()
-        vagas = []
-        for i in range(total):
-            card = cards.nth(i)
-            link_el = card.locator("a").first
-            href = None
-            try:
-                href = link_el.get_attribute("href")
-            except Exception:  # noqa: BLE001
-                pass
-            texto = card.inner_text()
-            parsed = _parse_card(texto)
-            if not parsed or not href:
-                continue
-            vagas.append(
-                make_vaga(
-                    titulo=parsed["titulo"],
-                    empresa="Bosch",
-                    cidade=parsed["cidade"],
-                    link=href if href.startswith("http") else f"https://jobs.bosch.com{href}",
-                    fonte="bosch",
-                    categoria=parsed["categoria"],
-                    tipo_contrato=parsed.get("modo"),
-                    data_publicacao=parsed.get("data"),
-                )
+
+def _extrair_pagina(page) -> list[dict]:
+    vagas = []
+    for card in page.locator(SELETOR_CARD).all():
+        link_el = card.locator("a").first
+        parsed = _parse_card(card.inner_text())
+        if not parsed or not link_el.count():
+            continue
+        vagas.append(
+            make_vaga(
+                titulo=parsed["titulo"],
+                empresa="Bosch",
+                cidade=parsed["cidade"],
+                link=url_absoluta(link_el.get_attribute("href"), page.url),
+                fonte="bosch",
+                categoria=parsed["categoria"],
+                tipo_contrato=parsed.get("modo"),
+                data_publicacao=parsed.get("data"),
             )
-        return vagas
+        )
+    return vagas
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
     logging.basicConfig(level=logging.INFO)
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))

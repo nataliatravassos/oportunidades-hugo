@@ -17,8 +17,10 @@ botões numerados (aria-label="Page N").
 
 from __future__ import annotations
 
-from .base import make_vaga
-from .playwright_utils import clicar_se_existir, nova_pagina
+from .base import ResultadoColeta, make_vaga, url_absoluta
+from .playwright_utils import (
+    abrir_busca, clicar_se_existir, coletar_paginas, esperar_resultados, links_dos_cartoes, nova_pagina,
+)
 
 URL = "https://www.sonae.pt/pt/talento/oportunidades"
 MAX_PAGINAS = 40
@@ -58,7 +60,7 @@ def _extrair_pagina(page) -> list[dict]:
                 titulo=titulo,
                 empresa="Sonae",
                 cidade=cidade,
-                link=href if href.startswith("http") else f"https://www.sonae.pt{href}",
+                link=url_absoluta(href, page.url),
                 fonte="sonae",
                 categoria=categoria,
                 tipo_contrato=tipo,
@@ -67,9 +69,9 @@ def _extrair_pagina(page) -> list[dict]:
     return vagas
 
 
-def fetch() -> list[dict]:
+def fetch() -> ResultadoColeta:
     with nova_pagina() as page:
-        page.goto(URL, wait_until="domcontentloaded")
+        abrir_busca(page, URL)
 
         clicar_se_existir(page, 'button:has-text("Aceitar todos")', timeout=4000)
         clicar_se_existir(page, 'button:has-text("Aceitar")', timeout=2000)
@@ -81,48 +83,19 @@ def fetch() -> list[dict]:
         clicar_se_existir(page, 'text="Mostrar mais"', timeout=3000)
         rotulo_porto = page.locator('label:text-is("Porto")').first
         rotulo_porto.wait_for(state="visible", timeout=10000)
+        anteriores = links_dos_cartoes(page, SELETOR_CARD)
         rotulo_porto.click()
+        esperar_resultados(page, SELETOR_CARD, anteriores)
 
-        # Espera a lista recarregar (o texto do contador "Todas N" muda).
-        page.wait_for_timeout(1500)
-        page.wait_for_selector(SELETOR_CARD, timeout=20000)
-
-        todas = list(_extrair_pagina(page))
-
-        pagina_atual = 1
-        while pagina_atual < MAX_PAGINAS:
-            proximo = page.locator('button[aria-label="Next page"]').first
-            if proximo.count() == 0:
-                break
-            try:
-                desabilitado = proximo.get_attribute("disabled") is not None or proximo.is_disabled()
-            except Exception:  # noqa: BLE001
-                desabilitado = False
-            if desabilitado:
-                break
-            try:
-                proximo.click()
-            except Exception:  # noqa: BLE001
-                break
-            page.wait_for_timeout(1200)
-            page.wait_for_selector(SELETOR_CARD, timeout=15000)
-            pagina_atual += 1
-            novas = _extrair_pagina(page)
-            if not novas:
-                break
-            todas.extend(novas)
-
-        vistos = set()
-        unicas = []
-        for v in todas:
-            if v["link"] in vistos:
-                continue
-            vistos.add(v["link"])
-            unicas.append(v)
-        return unicas
+        return coletar_paginas(
+            page, SELETOR_CARD, _extrair_pagina,
+            lambda numero: page.locator('button[aria-label="Next page"]').first,
+            MAX_PAGINAS,
+        )
 
 
 if __name__ == "__main__":
     import json
+    from dataclasses import asdict
 
-    print(json.dumps(fetch(), indent=2, ensure_ascii=False))
+    print(json.dumps(asdict(fetch()), indent=2, ensure_ascii=False))
