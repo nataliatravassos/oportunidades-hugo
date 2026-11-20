@@ -76,11 +76,22 @@ só pedir depois que o repositório estiver no ar.
 - **A classificação "escritório/operacional" é só uma estimativa** baseada em
   palavras do título do cargo — não é perfeita, serve só pra ordenar a lista
   e facilitar a leitura.
-- Uma falha preserva a última lista válida daquela fonte. Uma coleta parcial
-  pode acrescentar vagas e mantém as que já estavam publicadas. O zero só
-  limpa a lista da fonte quando confirmado por uma resposta reconhecida.
-  Se todas as fontes automáticas falharem, só o diagnóstico é publicado e
-  o workflow fica com estado de falha.
+- Uma falha preserva as vagas da fonte. Uma coleta parcial pode acrescentar
+  vagas. As vagas ausentes numa coleta aproveitável, inclusive quando a
+  fonte confirma zero, continuam visíveis como «por confirmar», com a data
+  em que foram vistas pela última vez. O reaparecimento retira essa marca.
+  Se todas as fontes automáticas falharem, só o diagnóstico é publicado e o
+  workflow fica com estado de falha.
+- A API do INESC TEC permite validar uma lista integral ou um zero. Para
+  Bosch, DHL, FedEx, FCT, IKEA, Microsoft, Nestlé, Siemens e Sonae, a
+  extração aproveitável é parcial enquanto o layout, os filtros ou a
+  paginação não demonstrarem a cobertura total. A lista dos outros
+  institutos é estática e não conta como coleta automática.
+- Caminhos legados da FedEx que correspondam às rotas observadas no portal
+  oficial são normalizados. Destinos fora desse padrão ficam sem link
+  clicável até uma nova observação com um destino reconhecido. A data de
+  observação refere-se à listagem e pode avançar sem alterar o carimbo do
+  conteúdo. Isso não comprova que a candidatura continua aberta.
 
 ## Estrutura dos arquivos
 

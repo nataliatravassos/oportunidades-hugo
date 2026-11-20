@@ -25,12 +25,12 @@ DETALHE_URL = "https://www.inesctec.pt/editais/pt/{ref}"
 def fetch() -> ResultadoColeta:
     resp = requests.get(API_URL, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
     resp.raise_for_status()
+    if resp.url.rstrip("/") != API_URL:
+        return ResultadoColeta(EstadoColeta.FALHA, motivo="Redirecionamento inesperado da API de editais")
     editais = resp.json()
     if not isinstance(editais, list):
         return ResultadoColeta(EstadoColeta.FALHA, motivo="A API não devolveu uma lista de editais")
     if not editais:
-        if resp.url.rstrip("/") != API_URL:
-            return ResultadoColeta(EstadoColeta.FALHA, motivo="Lista vazia após redirecionamento inesperado")
         return ResultadoColeta(
             EstadoColeta.ZERO, motivo="A API de editais ativos devolveu uma lista vazia", paginas=1,
         )
@@ -60,7 +60,7 @@ def fetch() -> ResultadoColeta:
             )
         )
     problemas = [f"{invalidos} edital(is) com formato inválido"] if invalidos else []
-    return ResultadoColeta.avaliar(vagas, problemas)
+    return ResultadoColeta.avaliar(vagas, problemas, cobertura="Lista da API de editais ativos integralmente processada")
 
 
 if __name__ == "__main__":

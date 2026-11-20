@@ -104,6 +104,14 @@ function escapeHtml(s) {
   return (s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 }
 
+function ultimaObservacao(vaga) {
+  if (vaga.fonte === "outros_institutos") return "Consulta manual";
+  const data = new Date(vaga.coletado_em || "");
+  const ultima = Number.isNaN(data.getTime()) ? "Sem data registada" :
+    data.toLocaleString("pt-PT", { dateStyle: "short", timeStyle: "short", timeZone: "Europe/Lisbon" });
+  return `Última vez vista: ${ultima}${vaga.verificacao_pendente ? " · por confirmar" : ""}`;
+}
+
 function render() {
   const lista = document.getElementById("lista");
   const vagas = filtroAtivo === "todas" ? TODAS : TODAS.filter(v => v.classificacao === filtroAtivo);
@@ -113,17 +121,24 @@ function render() {
     return;
   }
 
-  lista.innerHTML = vagas.map(v => `
-    <a class="vaga" href="${escapeHtml(v.link)}" target="_blank" rel="noopener">
+  lista.innerHTML = vagas.map(v => {
+    const temLink = /^https?:\/\//i.test(v.link || "");
+    const abertura = temLink
+      ? `<a class="vaga" href="${escapeHtml(v.link)}" target="_blank" rel="noopener">`
+      : '<article class="vaga">';
+    return `
+    ${abertura}
       <div class="vaga-titulo">${escapeHtml(v.titulo)}</div>
       <div class="vaga-meta">
         <span>${escapeHtml(v.empresa)}</span>
         ${v.cidade ? `<span>· ${escapeHtml(v.cidade)}</span>` : ""}
         ${v.tipo_contrato ? `<span>· ${escapeHtml(v.tipo_contrato)}</span>` : ""}
       </div>
+      <div class="vaga-meta">${escapeHtml(ultimaObservacao(v))}${temLink ? "" : " · Link por confirmar"}</div>
       <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>
-    </a>
-  `).join("");
+    ${temLink ? "</a>" : "</article>"}
+  `;
+  }).join("");
 }
 
 function montarFiltros() {

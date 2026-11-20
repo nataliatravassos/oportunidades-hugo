@@ -74,7 +74,7 @@ def fetch() -> ResultadoColeta:
                 categoria=inst["motivo"],
             )
         )
-    return ResultadoColeta.avaliar(vagas, [], paginas=0)
+    return ResultadoColeta.avaliar(vagas, [], paginas=0, cobertura="Lista estática de referências manuais")
 
 
 if __name__ == "__main__":

@@ -24,6 +24,7 @@ from pathlib import Path
 from config import FONTES, eh_regiao_porto
 from publicacao import carregar_base, publicar, validar_vaga
 from sources.base import EstadoColeta, ResultadoColeta, resumir_erro
+from sources.fedex_links import identidade_fedex, url_vaga_fedex
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", stream=sys.stdout
@@ -59,8 +60,10 @@ def rodar_fonte(nome: str) -> ResultadoColeta:
             raise ValueError("O coletor não retornou um ResultadoColeta válido")
         if resultado.estado in (EstadoColeta.COMPLETA, EstadoColeta.PARCIAL) and not resultado.vagas:
             raise ValueError("Lista vazia sem confirmação")
-        if resultado.estado == EstadoColeta.ZERO and (resultado.vagas or not resultado.motivo):
-            raise ValueError("Zero sem evidência explícita ou com registos")
+        if resultado.estado in (EstadoColeta.COMPLETA, EstadoColeta.ZERO) and not resultado.motivo:
+            raise ValueError("Cobertura da fonte sem evidência explícita")
+        if resultado.estado in (EstadoColeta.ZERO, EstadoColeta.FALHA) and resultado.vagas:
+            raise ValueError("Estado incompatível com a presença de registos")
         return resultado
     except Exception as erro:
         logger.exception("Falha na fonte %s", nome)
@@ -97,30 +100,41 @@ def _dados_da_vaga(vaga: dict) -> dict:
 def _ordem(vaga: dict) -> tuple:
     return (
         ORDEM_CLASSIFICACAO[vaga["classificacao"]],
-        vaga["empresa"].lower(), vaga["titulo"].lower(), vaga["fonte"], vaga["link"],
+        vaga["empresa"].lower(), vaga["titulo"].lower(), vaga["fonte"], vaga["link"] or "",
     )
 
 
-def atualizar_fonte(anteriores: list[dict], locais: list[dict], estado: EstadoColeta) -> list[dict]:
-    if estado == EstadoColeta.ZERO:
-        return []
+def _identidade(vaga: dict) -> str:
+    return identidade_fedex(vaga) if vaga["fonte"] == "fedex" else vaga["link"]
+
+
+def atualizar_fonte(
+    anteriores: list[dict], locais: list[dict], estado: EstadoColeta, *, manual: bool = False,
+) -> list[dict]:
     if estado == EstadoColeta.FALHA:
         return anteriores
-    por_link = {v["link"]: v for v in anteriores}
-    if estado == EstadoColeta.COMPLETA:
-        atualizadas = []
-        for vaga in locais:
-            anterior = por_link.get(vaga["link"])
-            if anterior is not None and _dados_da_vaga(anterior) == _dados_da_vaga(vaga):
-                vaga = anterior
-            atualizadas.append(vaga)
-        return atualizadas
-    novas = []
-    for vaga in locais:
-        if vaga["link"] not in por_link:
-            por_link[vaga["link"]] = vaga
-            novas.append(vaga)
-    return anteriores + novas
+
+    observadas = {_identidade(vaga): vaga for vaga in locais}
+    atualizadas = []
+    for anterior in anteriores:
+        observada = observadas.pop(_identidade(anterior), None)
+        if observada is None:
+            # Nem um zero confirmado do catálogo demonstra o encerramento individual.
+            atualizadas.append(anterior if manual else {**anterior, "verificacao_pendente": True})
+            continue
+        if manual and _dados_da_vaga(anterior) == _dados_da_vaga(observada):
+            atualizadas.append(anterior)
+            continue
+        atualizada = dict(anterior if estado == EstadoColeta.PARCIAL else observada)
+        datas = [v["coletado_em"] for v in (anterior, observada) if v.get("coletado_em")]
+        if datas:
+            atualizada["coletado_em"] = max(datas, key=dt.datetime.fromisoformat)
+        if anterior["fonte"] == "fedex":
+            atualizada["link"] = observada["link"]
+            atualizada.pop("link_original", None)
+        atualizada.pop("verificacao_pendente", None)
+        atualizadas.append(atualizada)
+    return atualizadas + list(observadas.values())
 
 
 def main() -> int:
@@ -138,8 +152,10 @@ def main() -> int:
             if nome in FONTES_SEM_FILTRO_REGIAO or eh_regiao_porto(vaga.get("cidade"))
         ]
         anteriores = por_fonte[nome]
-        publicadas = atualizar_fonte(anteriores, locais, resultado.estado)
+        manual = nome in FONTES_MANUAIS
+        publicadas = atualizar_fonte(anteriores, locais, resultado.estado, manual=manual)
         por_fonte[nome] = publicadas
+        vistas = {_identidade(vaga) for vaga in locais}
         diagnosticos[nome] = {
             "estado": resultado.estado,
             "motivo": resultado.motivo,
@@ -147,9 +163,11 @@ def main() -> int:
             "extraidas": len(bruto.vagas),
             "rejeitadas": rejeitadas,
             "observadas_na_regiao": len(locais),
-            "preservadas": len(anteriores) if resultado.estado in (EstadoColeta.PARCIAL, EstadoColeta.FALHA) else 0,
+            "preservadas": sum(_identidade(vaga) not in vistas for vaga in anteriores),
+            "por_confirmar": sum(bool(vaga.get("verificacao_pendente")) for vaga in publicadas),
+            "links_por_confirmar": sum(not vaga["link"] for vaga in publicadas),
             "publicadas": len(publicadas),
-            "manual": nome in FONTES_MANUAIS,
+            "manual": manual,
         }
         logar = logger.warning if resultado.estado in (EstadoColeta.PARCIAL, EstadoColeta.FALHA) else logger.info
         logar("%s: %s, %s", nome, resultado.estado, diagnosticos[nome])
@@ -159,22 +177,32 @@ def main() -> int:
     agora = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
     atualizado_em = anterior["atualizado_em"] if anterior else None
     dados = None
+    dados_atualizados = False
     if not falha_total:
         vagas = sorted(
             (vaga for grupo in por_fonte.values() for vaga in grupo),
             key=_ordem,
         )
-        if anterior is None or vagas != sorted(anterior["vagas"], key=_ordem):
-            atualizado_em = agora
+        anteriores = sorted(anterior["vagas"], key=_ordem) if anterior else []
+        if anterior is None or vagas != anteriores:
+            dados_atualizados = (
+                anterior is None or list(map(_dados_da_vaga, vagas)) != list(map(_dados_da_vaga, anteriores))
+            )
+            if dados_atualizados:
+                atualizado_em = agora
             dados = {"atualizado_em": atualizado_em, "total": len(vagas), "vagas": vagas}
         elif not (PASTA_DADOS / "vagas.md").is_file():
             dados = anterior
     else:
+        publicadas_anteriores = defaultdict(list)
+        for vaga in anterior["vagas"] if anterior else []:
+            publicadas_anteriores[vaga["fonte"]].append(vaga)
         for nome, item in diagnosticos.items():
-            if item["manual"]:
-                item["publicadas"] = item["preservadas"] = sum(
-                    vaga["fonte"] == nome for vaga in vagas_anteriores
-                )
+            preservadas = publicadas_anteriores[nome]
+            item["publicadas"] = item["preservadas"] = len(preservadas)
+            item["por_confirmar"] = sum(bool(vaga.get("verificacao_pendente")) for vaga in preservadas)
+            if nome == "fedex":
+                item["links_por_confirmar"] = sum(not url_vaga_fedex(vaga["link"]) for vaga in preservadas)
 
     estado = "sucesso"
     if falha_total:
@@ -185,7 +213,7 @@ def main() -> int:
     publicar(PASTA_DADOS, dados, {
         "coleta_finalizada_em": agora,
         "estado": estado,
-        "dados_atualizados": dados is not None and (anterior is None or dados != anterior),
+        "dados_atualizados": dados_atualizados,
         "dados_atualizados_em": atualizado_em,
         "fontes": diagnosticos,
     })

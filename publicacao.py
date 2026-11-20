@@ -10,16 +10,14 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from sources.base import url_absoluta
+from sources.fedex_links import url_vaga_fedex
 
 SECOES = {
     "escritorio": "## Escritório / técnico (provável)",
     "indefinido": "## Não dá pra saber só pelo título",
     "operacional": "## Operacional (provável ficar muito em pé)",
 }
-BASES_LEGADAS = {"fedex": "https://careers.fedex.com/jobs"}
-
-
-def validar_vaga(vaga: dict, *, base: str | None = None) -> dict:
+def validar_vaga(vaga: dict, *, legado: bool = False, preservada: bool = False) -> dict:
     if not isinstance(vaga, dict):
         raise ValueError("Registo não é um objeto")
     for campo in ("fonte", "titulo", "empresa"):
@@ -33,10 +31,31 @@ def validar_vaga(vaga: dict, *, base: str | None = None) -> dict:
     classificacao = vaga.get("classificacao")
     if not isinstance(classificacao, str) or classificacao not in SECOES:
         raise ValueError("Classificação inválida")
-    link = url_absoluta(vaga.get("link"), base)
+    if "verificacao_pendente" in vaga and type(vaga["verificacao_pendente"]) is not bool:
+        raise ValueError("Estado da verificação inválido")
+    if vaga.get("coletado_em"):
+        _data_com_fuso(vaga["coletado_em"])
+    href = vaga.get("link")
+    if vaga["fonte"] == "fedex":
+        link = url_vaga_fedex(href, legado=legado)
+        if not link and legado and isinstance(href, str) and href:
+            return {**vaga, "link": None, "link_original": href}
+        if not link and (legado or preservada) and href is None and isinstance(vaga.get("link_original"), str):
+            return vaga
+    else:
+        link = url_absoluta(href)
     if not link:
         raise ValueError("Link de candidatura inválido")
     return {**vaga, "link": link}
+
+
+def _data_com_fuso(valor: str) -> dt.datetime:
+    if not isinstance(valor, str):
+        raise ValueError("Carimbo de data inválido")
+    data = dt.datetime.fromisoformat(valor)
+    if data.utcoffset() is None:
+        raise ValueError("Carimbo de data sem fuso")
+    return data
 
 
 def validar_payload(dados: dict, *, legado: bool = False) -> list[dict]:
@@ -44,14 +63,8 @@ def validar_payload(dados: dict, *, legado: bool = False) -> list[dict]:
         raise ValueError("Formato inválido para vagas.json")
     if type(dados.get("total")) is not int or dados["total"] != len(dados["vagas"]):
         raise ValueError("Total incompatível com a lista de vagas")
-    atualizado = dados.get("atualizado_em")
-    if not isinstance(atualizado, str) or dt.datetime.fromisoformat(atualizado).utcoffset() is None:
-        raise ValueError("Carimbo de atualização inválido")
-    vagas = []
-    for vaga in dados["vagas"]:
-        base = BASES_LEGADAS.get(vaga.get("fonte")) if legado and isinstance(vaga, dict) else None
-        vagas.append(validar_vaga(vaga, base=base))
-    return vagas
+    _data_com_fuso(dados.get("atualizado_em"))
+    return [validar_vaga(vaga, legado=legado, preservada=True) for vaga in dados["vagas"]]
 
 
 def carregar_base(pasta: Path) -> tuple[dict | None, list[dict]]:
@@ -83,11 +96,19 @@ def renderizar_markdown(dados: dict) -> str:
         vagas = [v for v in dados["vagas"] if v["classificacao"] == classe]
         if not vagas:
             continue
-        linhas.extend([secao, "", "| Cargo | Empresa | Cidade | Tipo | Link |", "|---|---|---|---|---|"])
+        linhas.extend([
+            secao, "", "| Cargo | Empresa | Cidade | Tipo | Última vez vista | Link |",
+            "|---|---|---|---|---|---|",
+        ])
         for vaga in vagas:
-            campos = (vaga["titulo"], vaga["empresa"], vaga.get("cidade") or "—", vaga.get("tipo_contrato") or "—")
-            link = vaga["link"].replace("<", "%3C").replace(">", "%3E").replace("|", "%7C")
-            linhas.append("| " + " | ".join(map(_celula, campos)) + f" | [abrir](<{link}>) |")
+            observacao = vaga.get("coletado_em")
+            ultima = _data_com_fuso(observacao).astimezone(dt.timezone.utc).strftime("%d/%m/%Y %H:%M UTC") if observacao else "Sem data registada"
+            if vaga.get("verificacao_pendente"):
+                ultima += " · por confirmar"
+            campos = (vaga["titulo"], vaga["empresa"], vaga.get("cidade") or "—", vaga.get("tipo_contrato") or "—", ultima)
+            link = vaga["link"]
+            destino = f"[abrir](<{link}>)" if link else "Link por confirmar"
+            linhas.append("| " + " | ".join(map(_celula, campos)) + f" | {destino} |")
         linhas.append("")
     return "\n".join(linhas)
 
@@ -103,8 +124,9 @@ def publicar(pasta: Path, dados: dict | None, diagnostico: dict) -> None:
         if validar_payload(json.loads(json_vagas)) != dados["vagas"]:
             raise ValueError("A lista a publicar contém links sem normalização")
         markdown = renderizar_markdown(dados)
-        if sum(linha.endswith(">) |") for linha in markdown.splitlines()) != dados["total"]:
-            raise ValueError("O Markdown não contém uma linha de candidatura por vaga")
+        vagas_renderizadas = sum(linha.endswith((">) |", "Link por confirmar |")) for linha in markdown.splitlines())
+        if vagas_renderizadas != dados["total"]:
+            raise ValueError("O Markdown não contém uma linha por vaga")
         conteudos.update({"vagas.md": markdown, "vagas.json": json_vagas})
     conteudos["coleta.json"] = _json(diagnostico)
 

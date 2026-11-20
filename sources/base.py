@@ -30,13 +30,15 @@ class ResultadoColeta:
     paginas: int = 0
 
     @classmethod
-    def avaliar(cls, vagas: list[dict], problemas: list[str], paginas: int = 1):
+    def avaliar(cls, vagas: list[dict], problemas: list[str], paginas: int = 1, *, cobertura: str | None = None):
         if not vagas:
             motivo = "; ".join(problemas) or "Nenhuma vaga extraída e zero sem confirmação"
             return cls(EstadoColeta.FALHA, motivo=motivo, paginas=paginas)
+        if not cobertura and not problemas:
+            problemas = ["Cobertura integral não demonstrada"]
         if problemas:
             return cls(EstadoColeta.PARCIAL, vagas, "; ".join(problemas), paginas)
-        return cls(EstadoColeta.COMPLETA, vagas, paginas=paginas)
+        return cls(EstadoColeta.COMPLETA, vagas, motivo=cobertura, paginas=paginas)
 
 
 def resumir_erro(erro: Exception) -> str:
