@@ -102,6 +102,9 @@ class InterfaceTest(unittest.TestCase):
     def test_verificador_esta_desativado_por_padrao(self):
         self.assertFalse(VERIFICADOR_ATIVO)
 
+    def test_app_publico_nao_le_enriquecimento_experimental(self):
+        self.assertNotIn("enriquecimento.json", self.html)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "fonte": "inesctec",
+  "atualizado_em": "2026-11-21T01:58:46+00:00",
+  "vagas": {
+    "https://www.inesctec.pt/editais/pt/AE2026-0365": {
+      "estado": "falha_acesso",
+      "qualidade": "insuficiente",
+      "motivo": "DNS, timeout ou erro de rede",
+      "erro": "<urlopen error [Errno -5] No address associated with hostname>",
+      "ultima_tentativa": "2026-11-21T01:58:46+00:00",
+      "fonte_oficial": "https://www.inesctec.pt/editais/pt/AE2026-0365",
+      "id_vaga": "AE2026-0365",
+      "titulo": "Bioengenharia, Processamento de sinal e imagem biomédicao, gestão de projetos. (AE2026-0365)",
+      "situacao_vaga": "observada",
+      "ultima_verificacao": null
+    },
+    "https://www.inesctec.pt/editais/pt/AE2026-0355": {
+      "estado": "falha_acesso",
+      "qualidade": "insuficiente",
+      "motivo": "DNS, timeout ou erro de rede",
+      "erro": "<urlopen error [Errno -5] No address associated with hostname>",
+      "ultima_tentativa": "2026-11-21T01:58:46+00:00",
+      "fonte_oficial": "https://www.inesctec.pt/editais/pt/AE2026-0355",
+      "id_vaga": "AE2026-0355",
+      "titulo": "Bioengenharia, Tecnologias para a saúde, Gestão e conservação de dados clínicos. (AE2026-0355)",
+      "situacao_vaga": "observada",
+      "ultima_verificacao": null
+    },
+    "https://www.inesctec.pt/editais/pt/AE2026-0348": {
+      "estado": "falha_acesso",
+      "qualidade": "insuficiente",
+      "motivo": "DNS, timeout ou erro de rede",
+      "erro": "<urlopen error [Errno -5] No address associated with hostname>",
+      "ultima_tentativa": "2026-11-21T01:58:46+00:00",
+      "fonte_oficial": "https://www.inesctec.pt/editais/pt/AE2026-0348",
+      "id_vaga": "AE2026-0348",
+      "titulo": "Ciências da Computação (AE2026-0348)",
+      "situacao_vaga": "observada",
+      "ultima_verificacao": null
+    },
+    "https://www.inesctec.pt/editais/pt/AE2026-0349": {
+      "estado": "falha_acesso",
+      "qualidade": "insuficiente",
+      "motivo": "DNS, timeout ou erro de rede",
+      "erro": "<urlopen error [Errno -5] No address associated with hostname>",
+      "ultima_tentativa": "2026-11-21T01:58:46+00:00",
+      "fonte_oficial": "https://www.inesctec.pt/editais/pt/AE2026-0349",
+      "id_vaga": "AE2026-0349",
+      "titulo": "Ciências da Computação (AE2026-0349)",
+      "situacao_vaga": "observada",
+      "ultima_verificacao": null
+    },
+    "https://www.inesctec.pt/editais/pt/AE2026-0347": {
+      "estado": "falha_acesso",
+      "qualidade": "insuficiente",
+      "motivo": "DNS, timeout ou erro de rede",
+      "erro": "<urlopen error [Errno -5] No address associated with hostname>",
+      "ultima_tentativa": "2026-11-21T01:58:46+00:00",
+      "fonte_oficial": "https://www.inesctec.pt/editais/pt/AE2026-0347",
+      "id_vaga": "AE2026-0347",
+      "titulo": "Computação de Elevado Desempenho (AE2026-0347)",
+      "situacao_vaga": "observada",
+      "ultima_verificacao": null
+    }
+  },
+  "total_processadas": 5,
+  "total_enriquecidas": 0,
+  "total_registros_preservados": 139
+}

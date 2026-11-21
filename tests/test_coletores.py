@@ -99,6 +99,19 @@ class LinksTest(unittest.TestCase):
 
 
 class ColetoresTest(unittest.TestCase):
+    def test_inesctec_separa_prazo_de_publicacao(self):
+        resposta = Mock(url=inesctec.API_URL)
+        resposta.json.return_value = [{
+            "idEdital": "AE2026-0357",
+            "areaTrabalhoPT": "Power systems",
+            "candidaturaFim": "2026-12-04",
+        }]
+        with patch.object(inesctec.requests, "get", return_value=resposta):
+            resultado = inesctec.fetch()
+        vaga = resultado.vagas[0]
+        self.assertIsNone(vaga["data_publicacao"])
+        self.assertEqual(vaga["prazo_candidatura"], "2026-12-04")
+
     def test_inesctec_distingue_zero_explicito_de_resposta_incompativel(self):
         for payload, estado in (([], EstadoColeta.ZERO), ({}, EstadoColeta.FALHA)):
             with self.subTest(payload=payload):
