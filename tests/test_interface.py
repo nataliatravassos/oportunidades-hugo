@@ -102,6 +102,29 @@ class InterfaceTest(unittest.TestCase):
     def test_verificador_esta_desativado_por_padrao(self):
         self.assertFalse(VERIFICADOR_ATIVO)
 
+    def test_painel_tem_filtro_melhores_oportunidades_hugo(self):
+        self.assertIn("Melhores oportunidades para Hugo", self.html)
+        self.assertIn("filtroMelhoresHugo", self.html)
+        self.assertIn("aria-label=\"Filtrar melhores oportunidades para Hugo\"", self.html)
+
+    def test_avaliacao_hugo_tem_classificacao_acessivel(self):
+        self.assertIn("aria-label=\"Avaliação para Hugo:", self.html)
+        self.assertIn("Impeditivo:", self.html)
+        self.assertIn("A verificar:", self.html)
+
+    def test_estado_vazio_hugo_oferece_retorno_acessivel(self):
+        self.assertIn("Nenhuma oportunidade possui informações suficientes para receber prioridade", self.html)
+        self.assertIn("Outras vagas continuam disponíveis para análise", self.html)
+        self.assertIn("Ver todas as oportunidades", self.html)
+        self.assertIn('id="ver-todas-hugo"', self.html)
+        self.assertIn('aria-label="Ver todas as oportunidades', self.html)
+
+    def test_service_worker_usa_cache_novo_e_limpa_apenas_app(self):
+        sw = (self.raiz / "sw.js").read_text(encoding="utf-8")
+        self.assertIn('const CACHE = "vagas-porto-v2"', sw)
+        self.assertIn('nome.startsWith("vagas-porto-v")', sw)
+        self.assertIn("nome !== CACHE", sw)
+
     def test_app_publico_nao_le_enriquecimento_experimental(self):
         self.assertNotIn("enriquecimento.json", self.html)
 
