@@ -129,6 +129,7 @@ def make_vaga(
     categoria: str | None = None,
     tipo_contrato: str | None = None,
     data_publicacao: str | None = None,
+    prazo_candidatura: str | None = None,
 ) -> dict:
     """Monta um registro de vaga no formato padrão usado em todo o projeto."""
     titulo = " ".join(titulo.split())
@@ -141,6 +142,7 @@ def make_vaga(
         "categoria": categoria,
         "tipo_contrato": tipo_contrato,
         "data_publicacao": data_publicacao,
+        "prazo_candidatura": prazo_candidatura,
         "classificacao": classificar(titulo),
         "coletado_em": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
     }
