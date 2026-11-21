@@ -12,6 +12,7 @@ import json
 import re
 import socket
 import sys
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -85,7 +86,11 @@ def ref_da_vaga(vaga: dict) -> str | None:
     return match.group(2) if match else None
 
 
-def migrar_datas_historicas_inesctec(vagas: list[dict]) -> list[dict]:
+def migrar_datas_historicas_inesctec(
+    vagas: list[dict],
+    *,
+    origem_comprovada: bool = False,
+) -> list[dict]:
     """Move o valor legado de candidaturaFim para prazo_candidatura.
 
     Esta correção é conservadora: não atribui uma data de publicação histórica
@@ -93,6 +98,8 @@ def migrar_datas_historicas_inesctec(vagas: list[dict]) -> list[dict]:
     só são reinterpretadas no campo correto para registos INESC TEC sem evidência
     independente de publicação.
     """
+    if not origem_comprovada:
+        return [dict(vaga) for vaga in vagas]
     migradas = []
     for vaga in vagas:
         resultado = dict(vaga)
@@ -144,6 +151,21 @@ def validar_correspondencia_pdf(vaga: dict, texto: str, url: str) -> tuple[bool,
             return False, "conflito_referencia", "O PDF contém referências de editais conflitantes"
         if not ref or ref.upper() not in refs_normalizadas:
             return False, "conflito_referencia", "O PDF contém outra referência de edital"
+        titulo_registo = normalizar_texto(vaga.get("titulo", "")).lower()
+        titulo_sem_ref = re.sub(r"\s*\(" + re.escape(ref.lower()) + r"\)\s*$", "", titulo_registo).strip()
+        titulo_explicito = re.search(r"(?:título|titulo)\s*[:\-]\s*([^\n.]{3,180})", texto, re.I)
+        if titulo_explicito:
+            titulo_documento = titulo_explicito.group(1).lower()
+            if titulo_sem_ref and titulo_sem_ref not in titulo_documento and titulo_documento not in titulo_sem_ref:
+                return False, "conflito_titulo", "Título explícito do PDF contradiz o título da vaga"
+        instituicoes_conflitantes = (
+            "bosch", "fedex", "ikea", "siemens", "dhl", "microsoft",
+            "universidade do porto", "universidade de aveiro",
+        )
+        tem_inesc = "inesc tec" in normalizado or "instituto de engenharia de sistemas" in normalizado
+        conflito_instituicao = any(nome in normalizado for nome in instituicoes_conflitantes)
+        if tem_inesc is False and conflito_instituicao:
+            return False, "conflito_instituicao", "Instituição explícita do PDF contradiz o INESC TEC"
         return True, "referencia_explicita", "A referência explícita corresponde ao caminho da vaga"
 
     parsed = urllib.parse.urlsplit(url)
@@ -703,7 +725,7 @@ def extrair_payload(vaga: dict, url: str, conteudo: str, tipo: str = "html") -> 
     return resultado
 
 
-def buscar_html(url: str, timeout: int = 30) -> tuple[str, str]:
+def buscar_html(url: str, timeout: int = 30) -> tuple[str, str | tuple[str, bytes, str]]:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(req, timeout=timeout) as resposta:
         status = resposta.status
@@ -713,8 +735,21 @@ def buscar_html(url: str, timeout: int = 30) -> tuple[str, str]:
     if status >= 400:
         raise urllib.error.HTTPError(final_url, status, "HTTP error", {}, None)
     if content_type == "application/pdf" or bruto.startswith(b"%PDF"):
-        return final_url, "__PDF_INCOMPLETO_SEM_EXTRATOR_VERIFICADO__"
+        return final_url, ("pdf", bruto, content_type)
     return final_url, bruto.decode("utf-8", errors="replace")
+
+
+def extrair_pdf_bytes(vaga: dict, url: str, bruto: bytes, *, extraido_em: str | None = None) -> dict:
+    """Processa bytes PDF obtidos pela internet sem manter ficheiro permanente."""
+    with tempfile.NamedTemporaryFile(suffix=".pdf") as temporario:
+        temporario.write(bruto)
+        temporario.flush()
+        return extrair_pdf_local(
+            vaga,
+            url,
+            Path(temporario.name),
+            extraido_em=extraido_em,
+        )
 
 
 def resultado_falha(url: str, motivo: str, erro: str, agora: str) -> dict:
@@ -796,6 +831,7 @@ def executar(
         anterior = estrutura_inicial()
     anterior_vagas = anterior.get("vagas", {})
     resultado = estrutura_inicial()
+    resultado["vagas"] = dict(anterior_vagas)
     resultado["atualizado_em"] = timestamp
     processadas = 0
     enriquecidas = 0
@@ -812,7 +848,15 @@ def executar(
         anterior_item = anterior_vagas.get(url)
         try:
             final_url, conteudo = buscar(url)
-            payload = extrair_payload(vaga, final_url, conteudo)
+            if isinstance(conteudo, tuple) and len(conteudo) == 3 and conteudo[0] == "pdf":
+                payload = extrair_pdf_bytes(
+                    vaga,
+                    final_url,
+                    conteudo[1],
+                    extraido_em=timestamp,
+                )
+            else:
+                payload = extrair_payload(vaga, final_url, conteudo)
         except Exception as erro:
             payload = preparar_falha(url, erro, timestamp)
         item = mesclar_resultado(anterior_item, payload, timestamp)

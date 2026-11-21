@@ -4,6 +4,7 @@ import urllib.error
 import unittest
 import io
 import hashlib
+from unittest.mock import Mock, patch
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from pypdf import PdfWriter
@@ -159,7 +160,9 @@ class EnriquecimentoTest(unittest.TestCase):
     def test_migracao_legada_move_prazo_e_preserva_identidade(self):
         original = vaga()
         original["data_publicacao"] = "2026-12-04"
-        migrada = ei.migrar_datas_historicas_inesctec([original])[0]
+        migrada = ei.migrar_datas_historicas_inesctec(
+            [original], origem_comprovada=True
+        )[0]
         self.assertIsNone(migrada["data_publicacao"])
         self.assertEqual(migrada["prazo_candidatura"], "2026-12-04")
         self.assertEqual(migrada["link"], original["link"])
@@ -169,7 +172,9 @@ class EnriquecimentoTest(unittest.TestCase):
     def test_migracao_nao_adiciona_publicacao_historica(self):
         original = vaga()
         original["data_publicacao"] = "2026-11-25"
-        migrada = ei.migrar_datas_historicas_inesctec([original])[0]
+        migrada = ei.migrar_datas_historicas_inesctec(
+            [original], origem_comprovada=True
+        )[0]
         self.assertIsNone(migrada["data_publicacao"])
         self.assertIn("prazo_candidatura", migrada)
 
@@ -360,6 +365,73 @@ class EnriquecimentoTest(unittest.TestCase):
             item["validacao_semantica_por_campo"].get(campo)
             for campo in ("descricao", "requisitos_obrigatorios", "requisitos_preferenciais")
         ))
+
+    def test_executar_preserva_enriquecimentos_de_execucoes_anteriores(self):
+        vaga1 = vaga("AE2026-0357", "Power systems")
+        vaga2 = vaga("AE2026-0341", "Sistemas de Energia")
+        dados = {"atualizado_em": "2026-11-21T15:00:00+00:00", "total": 2, "vagas": [vaga1, vaga2]}
+        self.base.write_text(json.dumps(dados), encoding="utf-8")
+
+        primeiro = ei.executar(
+            base=self.base,
+            saida=self.saida,
+            limite=1,
+            agora="2026-11-21T15:10:00+00:00",
+            buscar=lambda url: (url, HTML_COMPLETO),
+        )
+        ei.gravar(primeiro, self.saida)
+        dados2 = {"atualizado_em": "2026-11-21T15:15:00+00:00", "total": 1, "vagas": [vaga2]}
+        self.base.write_text(json.dumps(dados2), encoding="utf-8")
+        html2 = HTML_COMPLETO.replace("AE2026-0357", "AE2026-0341").replace("Power systems", "Sistemas de Energia")
+        segundo = ei.executar(
+            base=self.base,
+            saida=self.saida,
+            limite=1,
+            agora="2026-11-21T15:20:00+00:00",
+            buscar=lambda url: (url, HTML_COMPLETO if "0357" in url else html2),
+        )
+        ei.gravar(segundo, self.saida)
+
+        regravado = json.loads(self.saida.read_text(encoding="utf-8"))
+        urls = regravado["vagas"]
+        self.assertEqual(len(urls), 2)
+        self.assertTrue(any("AE2026-0357" in url for url in urls))
+        self.assertTrue(any("AE2026-0341" in url for url in urls))
+
+    def test_buscar_html_encaminha_pdf_para_extrator(self):
+        pdf = criar_pdf_texto(
+            "Power systems (AE2026-0357) Área de trabalho: sistemas elétricos "
+            "Requisitos mínimos: Python"
+        )
+        resposta = Mock()
+        resposta.status = 200
+        resposta.geturl.return_value = "https://www.inesctec.pt/editais/pt/AE2026-0357.pdf"
+        resposta.headers.get_content_type.return_value = "application/pdf"
+        resposta.read.return_value = pdf
+        resposta.__enter__ = Mock(return_value=resposta)
+        resposta.__exit__ = Mock(return_value=False)
+
+        with patch("urllib.request.urlopen", return_value=resposta):
+            final_url, conteudo = ei.buscar_html(
+                "https://www.inesctec.pt/editais/pt/AE2026-0357"
+            )
+        self.assertEqual(final_url, resposta.geturl.return_value)
+        self.assertEqual(conteudo[0], "pdf")
+        item = ei.extrair_pdf_bytes(
+            vaga(),
+            ei.url_oficial_valida(vaga()),
+            conteudo[1],
+            extraido_em="2026-11-21T15:30:00+00:00",
+        )
+        self.assertIn(item["estado"], ("extraido", "conteudo_nao_corresponde", "incompleto"))
+        self.assertTrue(item["sha256_documento"])
+
+    def test_migracao_desativada_por_padrao(self):
+        original = vaga()
+        original["data_publicacao"] = "2026-12-04"
+        migrada = ei.migrar_datas_historicas_inesctec([original])[0]
+        self.assertEqual(migrada["data_publicacao"], "2026-12-04")
+        self.assertNotIn("prazo_candidatura", migrada)
 
 
 if __name__ == "__main__":
