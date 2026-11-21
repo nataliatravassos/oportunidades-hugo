@@ -157,9 +157,12 @@ def atualizar_fonte(
     observadas = {_identidade(vaga): vaga for vaga in locais}
     atualizadas = []
     for anterior in anteriores:
-        # Vagas encerradas ficam no histórico, não participam da atualização
         if anterior.get("situacao") == str(SituacaoVaga.ENCERRADA):
-            atualizadas.append(anterior)
+            observada = observadas.pop(_identidade(anterior), None)
+            if observada is not None and not manual:
+                atualizadas.append(_aplicar_ciclo_novo(anterior, observada, estado))
+            else:
+                atualizadas.append(anterior)
             continue
         observada = observadas.pop(_identidade(anterior), None)
         if observada is None:

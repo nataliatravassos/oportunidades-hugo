@@ -102,6 +102,14 @@ class MigracaoTest(unittest.TestCase):
             self.assertIn("ultima_observacao", m)
             self.assertIn("evidencia_encerramento", m)
 
+    def test_simulacao_138_registros_sem_coleta_real_preserva_total(self):
+        caminho = Path(__file__).resolve().parents[1] / "data" / "vagas.json"
+        dados = json.loads(caminho.read_text(encoding="utf-8"))
+        migradas = [migrar_vaga(v) for v in dados["vagas"]]
+        atualizadas = main.atualizar_fonte(migradas, migradas, EstadoColeta.COMPLETA)
+        self.assertEqual(len(atualizadas), 138)
+        self.assertEqual(len({main._identidade(v) for v in atualizadas}), 138)
+
     def test_migrar_138_registros_passam_validacao(self):
         """Registros migrados continuam válidos segundo validar_vaga."""
         caminho = Path(__file__).resolve().parents[1] / "data" / "vagas.json"
@@ -231,6 +239,51 @@ class EncerramentoTest(unittest.TestCase):
         publicadas = main.atualizar_fonte([enc], [], EstadoColeta.COMPLETA)
         enc_resultado = next(r for r in publicadas if r.get("situacao") == "encerrada")
         self.assertEqual(enc_resultado["evidencia_encerramento"], "HTTP 410 Gone")
+
+    def test_encerrada_reaparece_quando_observada_e_preserva_historico(self):
+        anterior = migrar_vaga(_vaga("ikea", "retorno"))
+        anterior["situacao"] = "encerrada"
+        anterior["primeira_observacao"] = "2026-11-10T07:00:00+00:00"
+        anterior["ultima_observacao"] = "2026-11-18T07:00:00+00:00"
+        anterior["evidencia_encerramento"] = "HTTP 410 Gone"
+        anterior["classificacao"] = "operacional"
+        nova = {**_vaga("ikea", "retorno"), "coletado_em": CARIMBO_NOVO,
+                "classificacao": "escritorio"}
+
+        publicadas = main.atualizar_fonte([anterior], [nova], EstadoColeta.COMPLETA)
+
+        self.assertEqual(len(publicadas), 1)
+        self.assertEqual(publicadas[0]["situacao"], "observada")
+        self.assertEqual(publicadas[0]["primeira_observacao"], "2026-11-10T07:00:00+00:00")
+        self.assertEqual(publicadas[0]["classificacao"], "operacional")
+        self.assertIsNone(publicadas[0]["evidencia_encerramento"])
+
+    def test_encerrada_nao_reaparece_por_falha_ou_coleta_inconclusiva(self):
+        anterior = migrar_vaga(_vaga("ikea", "retorno"))
+        anterior["situacao"] = "encerrada"
+        anterior["evidencia_encerramento"] = "HTTP 410 Gone"
+
+        falha = main.atualizar_fonte([anterior], [], EstadoColeta.FALHA)
+        parcial = main.atualizar_fonte([anterior], [], EstadoColeta.PARCIAL)
+        inconclusiva = registrar_verificacao(
+            anterior, estado="inconclusiva", evidencia="HTTP 403", agora=CARIMBO_NOVO
+        )
+
+        self.assertEqual(falha[0]["situacao"], "encerrada")
+        self.assertEqual(parcial[0]["situacao"], "encerrada")
+        self.assertEqual(inconclusiva["situacao"], "encerrada")
+
+    def test_encerrada_manual_nao_e_reativada_por_referencia_estatica(self):
+        anterior = migrar_vaga(_vaga("outros_institutos", "manual"))
+        anterior["situacao"] = "encerrada"
+        anterior["evidencia_encerramento"] = "HTTP 410 Gone"
+        observada = inicializar_vaga(_vaga("outros_institutos", "manual"))
+
+        publicadas = main.atualizar_fonte(
+            [anterior], [observada], EstadoColeta.COMPLETA, manual=True
+        )
+
+        self.assertEqual(publicadas[0]["situacao"], "encerrada")
 
 
 # ---------------------------------------------------------------------------

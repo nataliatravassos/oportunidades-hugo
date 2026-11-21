@@ -91,6 +91,7 @@ def reapareceu(anterior: dict, nova: dict) -> dict:
         "ultima_observacao": agora,
         "ultima_verificacao": anterior.get("ultima_verificacao"),
         "evidencia_encerramento": None,
+        "classificacao": anterior.get("classificacao", nova.get("classificacao")),
     }
     resultado.pop("verificacao_pendente", None)
     return resultado
