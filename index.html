@@ -164,6 +164,16 @@ function ultimaObservacao(vaga) {
 }
 
 function avaliacaoHugo(vaga) {
+  if (!PERFIL_HUGO) {
+    return {
+      classificacao: "precisa_verificar",
+      afinidade: "insuficiente",
+      justificativa: "Perfil personalizado indisponível. Esta avaliação não deve ser usada para recomendar ou excluir vagas.",
+      impedimentos_obrigatorios: [],
+      informacoes_desconhecidas: ["Avaliação personalizada", "Perfil profissional"],
+      perfil_indisponivel: true,
+    };
+  }
   if (window.CompatibilidadeHugo) {
     return window.CompatibilidadeHugo.avaliar(vaga, PERFIL_HUGO);
   }

@@ -112,6 +112,10 @@ class InterfaceTest(unittest.TestCase):
         self.assertIn("Impeditivo:", self.html)
         self.assertIn("A verificar:", self.html)
 
+    def test_perfil_indisponivel_nao_gera_recomendacao(self):
+        self.assertIn("Perfil personalizado indisponível", self.html)
+        self.assertIn("perfil_indisponivel", self.html)
+
     def test_estado_vazio_hugo_oferece_retorno_acessivel(self):
         self.assertIn("Nenhuma oportunidade possui informações suficientes para receber prioridade", self.html)
         self.assertIn("Outras vagas continuam disponíveis para análise", self.html)
