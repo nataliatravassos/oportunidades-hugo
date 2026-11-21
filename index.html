@@ -149,7 +149,10 @@ function filtrarVagas(vagas, classificacao, situacao) {
   const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
   return vagas.filter(v => {
     const classificacaoCorresponde = classificacao === "todas" || v.classificacao === classificacao;
-    const situacaoCorresponde = situacao === "todas" || situacaoDe(v) === situacao;
+    const situacaoAtual = situacaoDe(v);
+    const situacaoCorresponde = situacao === "todas"
+      ? situacaoAtual !== "encerrada"
+      : situacaoAtual === situacao;
     return classificacaoCorresponde && situacaoCorresponde;
   });
 }

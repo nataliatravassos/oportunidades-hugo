@@ -46,6 +46,8 @@ class InterfaceTest(unittest.TestCase):
             ("operacional", "observada", 1),
             ("escritorio", "encerrada", 1),
             ("todas", "por_confirmar", 1),
+            ("todas", "todas", 3),
+            ("escritorio", "todas", 2),
         ]
         for classificacao, situacao, esperado in casos:
             resultado = subprocess.run(
@@ -57,7 +59,34 @@ class InterfaceTest(unittest.TestCase):
     def test_encerradas_tem_secao_separada_de_historico(self):
         self.assertIn("Histórico de vagas encerradas", self.html)
         self.assertIn("filtroSituacao === \"encerrada\"", self.html)
-        self.assertIn("situacao === \"todas\" || situacaoDe(v) === situacao", self.html)
+        self.assertIn("situacaoAtual !== \"encerrada\"", self.html)
+
+    def test_visualizacao_inicial_exclui_encerradas(self):
+        vagas = [
+            {"classificacao": "escritorio", "situacao": "observada"},
+            {"classificacao": "operacional", "situacao": "por_confirmar"},
+            {"classificacao": "escritorio", "situacao": "encerrada"},
+        ]
+        inicio = self.html.index("function filtrarVagas")
+        resto = self.html[inicio:]
+        profundidade = 0
+        fim = None
+        for i, caractere in enumerate(resto):
+            if caractere == "{":
+                profundidade += 1
+            elif caractere == "}":
+                profundidade -= 1
+                if profundidade == 0:
+                    fim = i + 1
+                    break
+        funcao = resto[:fim]
+        script = funcao + "\nprocess.stdout.write(JSON.stringify(filtrarVagas(" + json.dumps(vagas) + ", 'todas', 'todas')));"
+        resultado = subprocess.run(
+            ["node", "-e", script], check=True, capture_output=True, text=True,
+        )
+        exibidas = json.loads(resultado.stdout)
+        self.assertEqual(len(exibidas), 2)
+        self.assertFalse(any(v["situacao"] == "encerrada" for v in exibidas))
 
     def test_app_mantem_service_worker_e_manifest(self):
         self.assertIn('href="manifest.json"', self.html)
