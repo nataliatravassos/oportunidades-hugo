@@ -24,6 +24,9 @@ from pathlib import Path
 from config import FONTES, eh_regiao_porto, local_em_portugal, remoto_elegivel
 from publicacao import carregar_base, publicar, validar_vaga
 from sources.base import EstadoColeta, ResultadoColeta, resumir_erro
+from sources.ciclo import (
+    SituacaoVaga, inicializar_vaga, marcar_por_confirmar, migrar_vaga, reapareceu,
+)
 from sources.fedex_links import identidade_fedex, url_vaga_fedex
 
 logging.basicConfig(
@@ -97,8 +100,19 @@ def validar_resultado(nome: str, resultado: ResultadoColeta) -> tuple[ResultadoC
     return replace(resultado, vagas=validas), 0
 
 
+# Campos excluídos da comparação de idempotência: coletado_em é timestamp de coleta;
+# os campos de ciclo são adicionados/migrados on-the-fly e não representam mudança
+# de dados da vaga em si.
+_CAMPOS_METADADOS = frozenset({
+    "coletado_em",
+    "situacao", "primeira_observacao", "ultima_observacao",
+    "ultima_verificacao", "evidencia_encerramento",
+    "verificacao_pendente",
+})
+
+
 def _dados_da_vaga(vaga: dict) -> dict:
-    return {campo: valor for campo, valor in vaga.items() if campo != "coletado_em"}
+    return {campo: valor for campo, valor in vaga.items() if campo not in _CAMPOS_METADADOS}
 
 
 def _ordem(vaga: dict) -> tuple:
@@ -112,37 +126,60 @@ def _identidade(vaga: dict) -> str:
     return identidade_fedex(vaga) if vaga["fonte"] == "fedex" else vaga["link"]
 
 
+def _aplicar_ciclo_novo(anterior: dict, observada: dict, estado: EstadoColeta) -> dict:
+    """Junta os dados da coleta com o histórico do ciclo de vida."""
+    base = dict(anterior if estado == EstadoColeta.PARCIAL else observada)
+    datas = [v["coletado_em"] for v in (anterior, observada) if v.get("coletado_em")]
+    if datas:
+        base["coletado_em"] = max(datas, key=dt.datetime.fromisoformat)
+    if anterior["fonte"] == "fedex":
+        base["link"] = observada["link"]
+        base.pop("link_original", None)
+    if observada.get("evidencia_modalidade") or observada.get("evidencia_elegibilidade"):
+        for campo in ("modalidade", "evidencia_modalidade", "elegibilidade_portugal", "evidencia_elegibilidade"):
+            if campo in observada:
+                base[campo] = observada[campo]
+    return reapareceu(anterior, base)
+
+
 def atualizar_fonte(
     anteriores: list[dict], locais: list[dict], estado: EstadoColeta, *, manual: bool = False,
 ) -> list[dict]:
     if estado == EstadoColeta.FALHA:
-        return anteriores
+        # Falha total: preserva tudo sem alterar ciclo de vida
+        return [migrar_vaga(v) for v in anteriores]
+
+    # Migra registros históricos para o novo formato de ciclo de vida
+    anteriores = [migrar_vaga(v) for v in anteriores]
+    # Novas vagas recebem campos de ciclo inicializados
+    locais = [inicializar_vaga(v) if "situacao" not in v else v for v in locais]
 
     observadas = {_identidade(vaga): vaga for vaga in locais}
     atualizadas = []
     for anterior in anteriores:
+        if anterior.get("situacao") == str(SituacaoVaga.ENCERRADA):
+            observada = observadas.pop(_identidade(anterior), None)
+            if observada is not None and not manual:
+                atualizadas.append(_aplicar_ciclo_novo(anterior, observada, estado))
+            else:
+                atualizadas.append(anterior)
+            continue
         observada = observadas.pop(_identidade(anterior), None)
         if observada is None:
-            # Nem um zero confirmado do catálogo demonstra o encerramento individual.
-            atualizadas.append(anterior if manual else {**anterior, "verificacao_pendente": True})
+            # Ausência em coleta não comprova encerramento individual.
+            if manual:
+                atualizadas.append(anterior)
+            else:
+                atualizadas.append(marcar_por_confirmar(anterior))
             continue
         if manual and _dados_da_vaga(anterior) == _dados_da_vaga(observada):
             atualizadas.append(anterior)
             continue
-        atualizada = dict(anterior if estado == EstadoColeta.PARCIAL else observada)
-        datas = [v["coletado_em"] for v in (anterior, observada) if v.get("coletado_em")]
-        if datas:
-            atualizada["coletado_em"] = max(datas, key=dt.datetime.fromisoformat)
-        if anterior["fonte"] == "fedex":
-            atualizada["link"] = observada["link"]
-            atualizada.pop("link_original", None)
-        if observada.get("evidencia_modalidade") or observada.get("evidencia_elegibilidade"):
-            for campo in ("modalidade", "evidencia_modalidade", "elegibilidade_portugal", "evidencia_elegibilidade"):
-                if campo in observada:
-                    atualizada[campo] = observada[campo]
-        atualizada.pop("verificacao_pendente", None)
-        atualizadas.append(atualizada)
-    return atualizadas + list(observadas.values())
+        atualizadas.append(_aplicar_ciclo_novo(anterior, observada, estado))
+    # Vagas completamente novas
+    for nova in observadas.values():
+        atualizadas.append(nova)
+    return atualizadas
 
 
 def main() -> int:
@@ -171,19 +208,32 @@ def main() -> int:
         publicadas = atualizar_fonte(anteriores, elegiveis, resultado.estado, manual=manual)
         por_fonte[nome] = publicadas
         vistas = {_identidade(vaga) for vaga in elegiveis}
+        cartoes_invalidos_extracao = bruto.consulta.get("cartoes_invalidos", 0)
         diagnosticos[nome] = {
             "estado": resultado.estado,
             "motivo": resultado.motivo,
             "paginas": resultado.paginas,
             "cartoes_encontrados": bruto.consulta.get("cartoes_lidos", bruto.consulta.get("cartoes_distintos")),
+            # extraidas = vagas que passaram pela extração (antes da validação)
             "extraidas": len(bruto.vagas),
+            # validas_extraidas = extraidas que passaram pela validação
             "validas_extraidas": len(resultado.vagas),
-            "rejeitadas": rejeitadas + bruto.consulta.get("cartoes_invalidos", 0),
+            # rejeitadas_extracao e rejeitadas_validacao são populações distintas
+            "rejeitadas_extracao": cartoes_invalidos_extracao,
+            "rejeitadas_validacao": rejeitadas,
+            "rejeitadas": rejeitadas,  # mantido por compatibilidade (só validação)
             "observadas_na_regiao": len(locais),
             "remotas_elegiveis": len(remotas),
             "fora_do_recorte": len(resultado.vagas) - len(elegiveis),
             "preservadas": sum(_identidade(vaga) not in vistas for vaga in anteriores),
-            "por_confirmar": sum(bool(vaga.get("verificacao_pendente")) for vaga in publicadas),
+            "por_confirmar": sum(
+                vaga.get("situacao") == str(SituacaoVaga.POR_CONFIRMAR)
+                or bool(vaga.get("verificacao_pendente"))
+                for vaga in publicadas
+            ),
+            "encerradas": sum(
+                vaga.get("situacao") == str(SituacaoVaga.ENCERRADA) for vaga in publicadas
+            ),
             "links_por_confirmar": sum(not vaga["link"] for vaga in publicadas),
             "publicadas": len(publicadas),
             "manual": manual,
@@ -224,7 +274,14 @@ def main() -> int:
         for nome, item in diagnosticos.items():
             preservadas = publicadas_anteriores[nome]
             item["publicadas"] = item["preservadas"] = len(preservadas)
-            item["por_confirmar"] = sum(bool(vaga.get("verificacao_pendente")) for vaga in preservadas)
+            item["por_confirmar"] = sum(
+                vaga.get("situacao") == str(SituacaoVaga.POR_CONFIRMAR)
+                or bool(vaga.get("verificacao_pendente"))
+                for vaga in preservadas
+            )
+            item["encerradas"] = sum(
+                vaga.get("situacao") == str(SituacaoVaga.ENCERRADA) for vaga in preservadas
+            )
             if nome == "fedex":
                 item["links_por_confirmar"] = sum(
                     not url_vaga_fedex(vaga["link"], referencia=vaga.get("categoria")) for vaga in preservadas

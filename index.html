@@ -48,6 +48,8 @@
   h1 { font-size: 1.3rem; margin: 0 0 4px; }
   .sub { color: var(--muted); font-size: 0.85rem; margin: 0; }
   .filtros { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; padding-bottom: 2px; }
+  .filtros-situacao { margin-top: 6px; }
+  .historico-titulo { font-size: 1rem; margin: 4px 0 12px; }
   .filtro-btn {
     border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
     border-radius: 999px; padding: 6px 14px; font-size: 0.82rem; white-space: nowrap;
@@ -67,6 +69,11 @@
   .chip.escritorio { background: var(--chip-escritorio); color: var(--chip-escritorio-text); }
   .chip.indefinido { background: var(--chip-indefinido); color: var(--chip-indefinido-text); }
   .chip.operacional { background: var(--chip-operacional); color: var(--chip-operacional-text); }
+  .chip.situacao-observada { background: #dcfce7; color: #166534; }
+  .chip.situacao-por_confirmar { background: #fef3c7; color: #92400e; }
+  .chip.situacao-encerrada { background: #e5e7eb; color: #374151; }
+  .chip.manual { background: #fde2e2; color: #9b1c1c; }
+  .historico-titulo { font-size: 1rem; margin: 4px 0 12px; }
   .estado {
     text-align: center; color: var(--muted); padding: 60px 20px; font-size: 0.92rem; line-height: 1.5;
   }
@@ -83,7 +90,8 @@
 <header>
   <h1>Oportunidades — Porto e região</h1>
   <p class="sub" id="status">A carregar…</p>
-  <div class="filtros" id="filtros"></div>
+  <div class="filtros" id="filtros-classificacao"></div>
+  <div class="filtros filtros-situacao" id="filtros-situacao"></div>
 </header>
 
 <div class="install-hint" id="install-hint">
@@ -98,7 +106,13 @@
 <script>
 const NOMES_CLASSE = { escritorio: "Escritório", indefinido: "A conferir", operacional: "Operacional" };
 let TODAS = [];
-let filtroAtivo = "todas";
+let filtroClassificacao = "todas";
+let filtroSituacao = "todas";
+const NOMES_SITUACAO = {
+  observada: "Observada",
+  por_confirmar: "Por confirmar",
+  encerrada: "Encerrada",
+};
 
 function escapeHtml(s) {
   return (s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
@@ -120,21 +134,46 @@ function dataLisboa(valor) {
 }
 
 function ultimaObservacao(vaga) {
-  if (vaga.fonte === "outros_institutos") return "Consulta manual";
-  return `Última vez vista: ${dataLisboa(vaga.coletado_em)}${vaga.verificacao_pendente ? " · por confirmar" : ""}`;
+  if (vaga.fonte === "outros_institutos") {
+    return "Referência de consulta manual — não coletada automaticamente";
+  }
+  const situacao = vaga.situacao || (vaga.verificacao_pendente ? "por_confirmar" : "observada");
+  const ultima = vaga.ultima_observacao || vaga.coletado_em;
+  if (situacao === "encerrada") {
+    return `Histórico · última vez vista: ${dataLisboa(ultima)}${vaga.evidencia_encerramento ? ` · ${escapeHtml(vaga.evidencia_encerramento)}` : ""}`;
+  }
+  return `Última vez vista: ${dataLisboa(ultima)}${situacao === "por_confirmar" ? " · por confirmar" : ""}`;
+}
+
+function filtrarVagas(vagas, classificacao, situacao) {
+  const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
+  return vagas.filter(v => {
+    const classificacaoCorresponde = classificacao === "todas" || v.classificacao === classificacao;
+    const situacaoAtual = situacaoDe(v);
+    const situacaoCorresponde = situacao === "todas"
+      ? situacaoAtual !== "encerrada"
+      : situacaoAtual === situacao;
+    return classificacaoCorresponde && situacaoCorresponde;
+  });
 }
 
 function render() {
   const lista = document.getElementById("lista");
-  const vagas = filtroAtivo === "todas" ? TODAS : TODAS.filter(v => v.classificacao === filtroAtivo);
+  const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
+  const vagas = filtrarVagas(TODAS, filtroClassificacao, filtroSituacao);
 
   if (vagas.length === 0) {
-    lista.innerHTML = '<p class="estado">Nenhuma vaga nessa categoria no momento.</p>';
+    lista.innerHTML = '<p class="estado">Nenhuma oportunidade acompanha esses filtros no momento.</p>';
     return;
   }
 
-  lista.innerHTML = vagas.map(v => {
+  const tituloSecao = filtroSituacao === "encerrada"
+    ? '<h2 class="historico-titulo">Histórico de vagas encerradas</h2>'
+    : "";
+
+  lista.innerHTML = tituloSecao + vagas.map(v => {
     const temLink = /^https?:\/\//i.test(v.link || "");
+    const situacao = situacaoDe(v);
     const abertura = temLink
       ? `<a class="vaga" href="${escapeHtml(v.link)}" target="_blank" rel="noopener">`
       : '<article class="vaga">';
@@ -151,26 +190,59 @@ function render() {
       </div>
       <div class="vaga-meta">${escapeHtml(ultimaObservacao(v))}${temLink ? "" : " · Link por confirmar"}</div>
       <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>
+      <span class="chip situacao-${situacao}">${NOMES_SITUACAO[situacao] || situacao}</span>
+      ${v.fonte === "outros_institutos" ? '<span class="chip manual">Consulta manual</span>' : ""}
     ${temLink ? "</a>" : "</article>"}
   `;
   }).join("");
 }
 
 function montarFiltros() {
-  const contagens = { todas: TODAS.length, escritorio: 0, indefinido: 0, operacional: 0 };
-  TODAS.forEach(v => { contagens[v.classificacao] = (contagens[v.classificacao] || 0) + 1; });
+  const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
+  const contagemClassificacao = chave => filtrarVagas(
+    TODAS, chave, filtroSituacao
+  ).length;
+  const contagemSituacao = chave => filtrarVagas(
+    TODAS, filtroClassificacao, chave
+  ).length;
 
-  const el = document.getElementById("filtros");
-  const grupos = [["todas", "Todas"], ["escritorio", "Escritório"], ["indefinido", "A conferir"], ["operacional", "Operacional"]];
-  el.innerHTML = grupos.map(([chave, rotulo]) => `
-    <button class="filtro-btn ${chave === filtroAtivo ? "ativo" : ""}" data-f="${chave}">
-      ${rotulo} (${contagens[chave] || 0})
+  const elClassificacao = document.getElementById("filtros-classificacao");
+  const gruposClassificacao = [
+    ["todas", "Todas"],
+    ["escritorio", "Escritório"],
+    ["indefinido", "A conferir"],
+    ["operacional", "Operacional"],
+  ];
+  elClassificacao.innerHTML = gruposClassificacao.map(([chave, rotulo]) => `
+    <button class="filtro-btn ${chave === filtroClassificacao ? "ativo" : ""}" data-classificacao="${chave}">
+      ${rotulo} (${contagemClassificacao(chave)})
     </button>
   `).join("");
 
-  el.querySelectorAll(".filtro-btn").forEach(btn => {
+  elClassificacao.querySelectorAll(".filtro-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      filtroAtivo = btn.dataset.f;
+      filtroClassificacao = btn.dataset.classificacao;
+      montarFiltros();
+      render();
+    });
+  });
+
+  const elSituacao = document.getElementById("filtros-situacao");
+  const gruposSituacao = [
+    ["todas", "Todas situações"],
+    ["observada", "Observada"],
+    ["por_confirmar", "Por confirmar"],
+    ["encerrada", "Encerrada · histórico"],
+  ];
+  elSituacao.innerHTML = gruposSituacao.map(([chave, rotulo]) => `
+    <button class="filtro-btn ${chave === filtroSituacao ? "ativo" : ""}" data-situacao="${chave}">
+      ${rotulo} (${contagemSituacao(chave)})
+    </button>
+  `).join("");
+
+  elSituacao.querySelectorAll(".filtro-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      filtroSituacao = btn.dataset.situacao;
       montarFiltros();
       render();
     });
@@ -185,7 +257,7 @@ async function carregar() {
     TODAS = dados.vagas || [];
 
     document.getElementById("status").textContent =
-      `${dados.total} vaga(s) · atualizado em ${dataLisboa(dados.atualizado_em)}`;
+      `${dados.total} oportunidades acompanhadas · atualizado em ${dataLisboa(dados.atualizado_em)}`;
 
     montarFiltros();
     render();

@@ -10,6 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from sources.base import url_absoluta
+from sources.ciclo import SITUACOES_VALIDAS
 from sources.fedex_links import url_vaga_fedex
 
 SECOES = {
@@ -17,6 +18,11 @@ SECOES = {
     "indefinido": "## Não dá pra saber só pelo título",
     "operacional": "## Operacional (provável ficar muito em pé)",
 }
+
+CAMPOS_CICLO_OPCIONAIS = (
+    "situacao", "primeira_observacao", "ultima_observacao",
+    "ultima_verificacao", "evidencia_encerramento",
+)
 def validar_vaga(vaga: dict, *, legado: bool = False, preservada: bool = False) -> dict:
     if not isinstance(vaga, dict):
         raise ValueError("Registo não é um objeto")
@@ -25,7 +31,9 @@ def validar_vaga(vaga: dict, *, legado: bool = False, preservada: bool = False) 
         if not isinstance(valor, str) or not valor.strip():
             raise ValueError(f"Campo obrigatório inválido: {campo}")
     for campo in ("cidade", "categoria", "tipo_contrato", "data_publicacao", "coletado_em",
-                  "evidencia_modalidade", "evidencia_elegibilidade"):
+                  "evidencia_modalidade", "evidencia_elegibilidade",
+                  "primeira_observacao", "ultima_observacao", "ultima_verificacao",
+                  "evidencia_encerramento"):
         valor = vaga.get(campo)
         if valor is not None and not isinstance(valor, str):
             raise ValueError(f"Campo inválido: {campo}")
@@ -34,14 +42,17 @@ def validar_vaga(vaga: dict, *, legado: bool = False, preservada: bool = False) 
         raise ValueError("Classificação inválida")
     if "verificacao_pendente" in vaga and type(vaga["verificacao_pendente"]) is not bool:
         raise ValueError("Estado da verificação inválido")
+    if "situacao" in vaga and vaga["situacao"] not in SITUACOES_VALIDAS:
+        raise ValueError("Situação de ciclo de vida inválida")
     if "modalidade" in vaga and vaga["modalidade"] not in ("remoto", "hibrido", "presencial", "desconhecido"):
         raise ValueError("Modalidade inválida")
     if "elegibilidade_portugal" in vaga and vaga["elegibilidade_portugal"] not in (
         "confirmada", "provavel", "nao_verificada", "inelegivel",
     ):
         raise ValueError("Elegibilidade em Portugal inválida")
-    if vaga.get("coletado_em"):
-        _data_com_fuso(vaga["coletado_em"])
+    for campo_data in ("coletado_em", "primeira_observacao", "ultima_observacao", "ultima_verificacao"):
+        if vaga.get(campo_data):
+            _data_com_fuso(vaga[campo_data])
     href = vaga.get("link")
     if vaga["fonte"] == "fedex":
         link = url_vaga_fedex(href, legado=legado, referencia=vaga.get("categoria"))
@@ -88,19 +99,55 @@ def _celula(valor: str) -> str:
     return " ".join(valor.split()).replace("\\", "\\\\").replace("|", "\\|")
 
 
+def _ultima_data_vaga(vaga: dict) -> str:
+    """Devolve a data mais recente disponível para exibir na tabela."""
+    for campo in ("ultima_observacao", "coletado_em"):
+        valor = vaga.get(campo)
+        if valor:
+            try:
+                return _data_com_fuso(valor).astimezone(dt.timezone.utc).strftime("%d/%m/%Y %H:%M UTC")
+            except (ValueError, TypeError):
+                continue
+    return "Sem data registada"
+
+
+def _linha_tabela(vaga: dict, *, mostrar_situacao: bool = False) -> str:
+    situacao = vaga.get("situacao", "observada")
+    ultima = _ultima_data_vaga(vaga)
+    if situacao == "por_confirmar" or vaga.get("verificacao_pendente"):
+        ultima += " · por confirmar"
+    elif situacao == "encerrada":
+        evidencia = vaga.get("evidencia_encerramento") or "encerrada"
+        ultima += f" · encerrada ({_celula(evidencia)})"
+    campos = (
+        vaga["titulo"], vaga["empresa"],
+        vaga.get("cidade") or "—",
+        vaga.get("tipo_contrato") or "—",
+        ultima,
+    )
+    link = vaga["link"]
+    destino = f"[abrir](<{link}>)" if link else "Link por confirmar"
+    return "| " + " | ".join(map(_celula, campos)) + f" | {destino} |"
+
+
 def renderizar_markdown(dados: dict) -> str:
     agora = dt.datetime.fromisoformat(dados["atualizado_em"]).astimezone(dt.timezone.utc)
+    todas = dados["vagas"]
+    ativas = [v for v in todas if v.get("situacao", "observada") != "encerrada"]
+    encerradas = [v for v in todas if v.get("situacao") == "encerrada"]
     linhas = [
         "# Oportunidades — Porto e região",
         "",
-        f"Atualizado em {agora:%Y-%m-%d %H:%M} UTC · {dados['total']} vaga(s)",
+        f"Atualizado em {agora:%Y-%m-%d %H:%M} UTC · {len(ativas)} vaga(s) ativa(s)",
         "",
         "Gerado automaticamente. Classificação é só uma estimativa por "
         "palavra-chave no título — confira a vaga antes de descartar.",
         "",
+        "**Filtros de situação:** observada · por confirmar · encerrada",
+        "",
     ]
     for classe, secao in SECOES.items():
-        vagas = [v for v in dados["vagas"] if v["classificacao"] == classe]
+        vagas = [v for v in ativas if v["classificacao"] == classe]
         if not vagas:
             continue
         linhas.extend([
@@ -108,14 +155,17 @@ def renderizar_markdown(dados: dict) -> str:
             "|---|---|---|---|---|---|",
         ])
         for vaga in vagas:
-            observacao = vaga.get("coletado_em")
-            ultima = _data_com_fuso(observacao).astimezone(dt.timezone.utc).strftime("%d/%m/%Y %H:%M UTC") if observacao else "Sem data registada"
-            if vaga.get("verificacao_pendente"):
-                ultima += " · por confirmar"
-            campos = (vaga["titulo"], vaga["empresa"], vaga.get("cidade") or "—", vaga.get("tipo_contrato") or "—", ultima)
-            link = vaga["link"]
-            destino = f"[abrir](<{link}>)" if link else "Link por confirmar"
-            linhas.append("| " + " | ".join(map(_celula, campos)) + f" | {destino} |")
+            linhas.append(_linha_tabela(vaga))
+        linhas.append("")
+    if encerradas:
+        linhas.extend([
+            "## Encerradas (histórico)",
+            "",
+            "| Cargo | Empresa | Cidade | Tipo | Última vez vista | Link |",
+            "|---|---|---|---|---|---|",
+        ])
+        for vaga in encerradas:
+            linhas.append(_linha_tabela(vaga))
         linhas.append("")
     return "\n".join(linhas)
 
@@ -133,7 +183,7 @@ def publicar(pasta: Path, dados: dict | None, diagnostico: dict) -> None:
         markdown = renderizar_markdown(dados)
         vagas_renderizadas = sum(linha.endswith((">) |", "Link por confirmar |")) for linha in markdown.splitlines())
         if vagas_renderizadas != dados["total"]:
-            raise ValueError("O Markdown não contém uma linha por vaga")
+            raise ValueError(f"O Markdown não contém uma linha por vaga ({vagas_renderizadas} vs {dados['total']})")
         conteudos.update({"vagas.md": markdown, "vagas.json": json_vagas})
     conteudos["coleta.json"] = _json(diagnostico)
 

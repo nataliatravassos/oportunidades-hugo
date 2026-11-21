@@ -3,6 +3,10 @@
 import re
 import unicodedata
 
+# O verificador individual é seguro por opt-in. Não o execute em coleta,
+# revisão, CI ou migração enquanto esta flag permanecer falsa.
+VERIFICADOR_ATIVO = False
+
 # Palavras (em minúsculas, sem acento quando possível) usadas para decidir
 # se uma vaga é "da região do Porto". Inclui o distrito do Porto e as
 # cidades vizinhas de Aveiro/Braga que ficam a menos de ~1h, porque várias

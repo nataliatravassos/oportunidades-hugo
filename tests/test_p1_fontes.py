@@ -182,7 +182,12 @@ class MicrosoftTest(unittest.TestCase):
                 self.assertEqual(main.main(), 0)
             dados, registos = carregar_base(pasta)
             self.assertEqual(dados["total"], anterior["total"] + 1)
-            self.assertTrue(all(v in registos for v in anteriores))
+            # Registos podem ter campos de ciclo de vida adicionais (P1 Etapa 2);
+            # verificamos apenas os campos existentes antes da migração.
+            _CICLO = frozenset({"situacao", "primeira_observacao", "ultima_observacao",
+                                "ultima_verificacao", "evidencia_encerramento"})
+            def _sem_ciclo(v): return {k: w for k, w in v.items() if k not in _CICLO}
+            self.assertTrue(all(_sem_ciclo(v) in [_sem_ciclo(r) for r in registos] for v in anteriores))
             saude = json.loads((pasta / "coleta.json").read_text(encoding="utf-8"))["fontes"]["microsoft"]
             self.assertEqual((saude["extraidas"], saude["remotas_elegiveis"], saude["fora_do_recorte"]), (3, 1, 2))
             self.assertEqual(saude["elegibilidade_portugal"]["inelegivel"], 1)
@@ -275,14 +280,19 @@ class FiltrosTest(unittest.TestCase):
                 self.assertEqual(main.main(), 0)
             dados, vagas = carregar_base(pasta)
             self.assertEqual(dados["total"], 61)
-            self.assertEqual([v for v in vagas if v["fonte"] == "siemens"], [porto])
-            self.assertTrue(all(v in vagas for v in anteriores))
+            _CICLO = frozenset({"situacao", "primeira_observacao", "ultima_observacao",
+                                "ultima_verificacao", "evidencia_encerramento"})
+            def _sem_ciclo2(v): return {k: w for k, w in v.items() if k not in _CICLO}
+            self.assertEqual([_sem_ciclo2(v) for v in vagas if v["fonte"] == "siemens"], [porto])
+            self.assertTrue(all(_sem_ciclo2(v) in [_sem_ciclo2(r) for r in vagas] for v in anteriores))
             saude = json.loads((pasta / "coleta.json").read_text(encoding="utf-8"))["fontes"]["siemens"]
             self.assertEqual(
                 [saude[campo] for campo in ("cartoes_encontrados", "extraidas", "validas_extraidas",
-                                           "rejeitadas", "fora_do_recorte")],
-                [4, 3, 2, 2, 1],
+                                           "fora_do_recorte")],
+                [4, 3, 2, 1],
             )
+            # P1 Etapa 2: separação correta — extração vs validação (antes somadas)
+            self.assertEqual(saude["rejeitadas_extracao"] + saude["rejeitadas_validacao"], 2)
 
     def test_siemens_ignorar_filtro_na_segunda_pagina_preserva_a_primeira(self):
         page = Mock(url="https://jobs.siemens.com/pt_PT/externaljobs/SearchJobs/?42414=%5B812097%5D")

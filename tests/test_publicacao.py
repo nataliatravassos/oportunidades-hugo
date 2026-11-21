@@ -10,9 +10,26 @@ import main
 import publicacao
 from sources.base import EstadoColeta, ResultadoColeta, make_vaga
 
-
 CARIMBO_ANTERIOR = "2026-11-19T07:00:00+00:00"
 ROTA_FEDEX = "/industrial-engineer/job/0114F948BA2B5F95B676A19B406F93E8"
+
+# Campos adicionados pelo ciclo de vida (P1 Etapa 2). Os testes legados comparam
+# comportamento de campos existentes; estes são ignorados para manter compatibilidade.
+_CAMPOS_CICLO = frozenset({
+    "situacao", "primeira_observacao", "ultima_observacao",
+    "ultima_verificacao", "evidencia_encerramento",
+})
+
+
+def _sem_ciclo(v):
+    """Remove campos de ciclo de vida de um dicionário de vaga para comparação."""
+    if isinstance(v, dict):
+        return {k: val for k, val in v.items() if k not in _CAMPOS_CICLO}
+    return v
+
+
+def _normalizar_lista(vagas):
+    return [_sem_ciclo(v) for v in vagas]
 
 
 def vaga(fonte, identificador, **campos):
@@ -90,7 +107,8 @@ class PublicacaoTest(unittest.TestCase):
 
         dados = self.ler("vagas.json")
         link = "https://careers.fedex.com" + ROTA_FEDEX + "?job=123"
-        self.assertEqual(dados["vagas"], [{**antiga, "link": link}, {**ikea, "verificacao_pendente": True}, nova])
+        self.assertEqual(_normalizar_lista(dados["vagas"]),
+                         [{**antiga, "link": link}, {**ikea, "verificacao_pendente": True}, nova])
         self.assertIn(link, (self.pasta / "vagas.md").read_text(encoding="utf-8"))
         self.assertEqual(self.ler("coleta.json")["estado"], "parcial")
 
@@ -104,7 +122,7 @@ class PublicacaoTest(unittest.TestCase):
         self.assertEqual(self.executar(fedex=resultado), 0)
         dados = self.ler("vagas.json")
         self.assertEqual(dados["total"], 3)
-        self.assertIn(antiga, dados["vagas"])
+        self.assertIn(_sem_ciclo(antiga), _normalizar_lista(dados["vagas"]))
         self.assertTrue(next(v for v in dados["vagas"] if v["titulo"] == "Vaga ausente")["verificacao_pendente"])
         antes = self.arquivo_publicado()
         reexecucao = ResultadoColeta(EstadoColeta.PARCIAL, [incompleta, nova], "timeout novamente")
@@ -117,7 +135,7 @@ class PublicacaoTest(unittest.TestCase):
         self.preparar_base(anterior)
         recoletada = {**anterior, "coletado_em": "2099-01-01T00:00:00+00:00"}
         self.assertEqual(self.executar(ikea=completa(recoletada)), 0)
-        self.assertEqual(self.ler("vagas.json")["vagas"], [recoletada])
+        self.assertEqual(_normalizar_lista(self.ler("vagas.json")["vagas"]), [recoletada])
         coleta = self.ler("coleta.json")
         self.assertEqual(coleta["estado"], "sucesso")
         self.assertFalse(coleta["dados_atualizados"])
@@ -129,7 +147,8 @@ class PublicacaoTest(unittest.TestCase):
         self.preparar_base(antiga, ikea)
         zero = ResultadoColeta(EstadoColeta.ZERO, motivo="API de editais ativos retornou []")
         self.assertEqual(self.executar(inesctec=zero, ikea=TimeoutError("página")), 0)
-        self.assertEqual(self.ler("vagas.json")["vagas"], [ikea, {**antiga, "verificacao_pendente": True}])
+        self.assertEqual(_normalizar_lista(self.ler("vagas.json")["vagas"]),
+                         [ikea, {**antiga, "verificacao_pendente": True}])
         self.assertEqual(self.ler("coleta.json")["fontes"]["inesctec"]["estado"], "zero_confirmado")
 
     def test_coleta_completa_nao_remove_vaga_e_reaparecimento_limpa_a_marca(self):
@@ -137,13 +156,15 @@ class PublicacaoTest(unittest.TestCase):
         presente = vaga("inesctec", "presente")
         self.preparar_base(ausente, presente)
         self.assertEqual(self.executar(inesctec=completa(presente)), 0)
-        self.assertEqual(self.ler("vagas.json")["vagas"], [{**ausente, "verificacao_pendente": True}, presente])
+        self.assertEqual(_normalizar_lista(self.ler("vagas.json")["vagas"]),
+                         [{**ausente, "verificacao_pendente": True}, presente])
         self.assertIn("por confirmar", (self.pasta / "vagas.md").read_text(encoding="utf-8"))
 
         agora = {**ausente, "coletado_em": "2026-11-20T07:00:00+00:00"}
         parcial = ResultadoColeta(EstadoColeta.PARCIAL, [agora, presente], "Cobertura parcial")
         self.assertEqual(self.executar(inesctec=parcial), 0)
-        self.assertEqual(self.ler("vagas.json")["vagas"], [agora, presente])
+        self.assertEqual(_normalizar_lista(self.ler("vagas.json")["vagas"]),
+                         [_sem_ciclo(agora), _sem_ciclo(presente)])
         self.assertEqual(self.ler("coleta.json")["fontes"]["inesctec"]["por_confirmar"], 0)
 
     def test_destino_legado_duvidoso_fica_sem_link_ate_reaparecer_com_mesma_referencia(self):
@@ -152,14 +173,16 @@ class PublicacaoTest(unittest.TestCase):
         ikea = vaga("ikea", "nova")
         self.assertEqual(self.executar(fedex=TimeoutError("pagina"), ikea=completa(ikea)), 0)
         dados = self.ler("vagas.json")
-        self.assertEqual(dados["vagas"][0], {**antiga, "link": None, "link_original": antiga["link"]})
+        self.assertEqual(_sem_ciclo(dados["vagas"][0]),
+                         {**antiga, "link": None, "link_original": antiga["link"]})
         self.assertIn("Link por confirmar", (self.pasta / "vagas.md").read_text(encoding="utf-8"))
 
         reencontrada = {**antiga, "link": "https://careers.fedex.com" + ROTA_FEDEX,
                         "coletado_em": "2026-11-20T07:00:00+00:00"}
         parcial = ResultadoColeta(EstadoColeta.PARCIAL, [reencontrada], "Paginação incerta")
         self.assertEqual(self.executar(fedex=parcial), 0)
-        self.assertEqual(self.ler("vagas.json")["vagas"], [reencontrada, ikea])
+        self.assertEqual(_normalizar_lista(self.ler("vagas.json")["vagas"]),
+                         [_sem_ciclo(reencontrada), _sem_ciclo(ikea)])
 
     def test_lista_vazia_inesperada_nao_remove_dados(self):
         self.preparar_base(vaga("fedex", "antes"))
@@ -175,7 +198,8 @@ class PublicacaoTest(unittest.TestCase):
         self.preparar_base(antiga)
 
         self.assertEqual(self.executar(fedex=completa(nova, invalida)), 0)
-        self.assertEqual(self.ler("vagas.json")["vagas"], [{**antiga, "verificacao_pendente": True}, nova])
+        self.assertEqual(_normalizar_lista(self.ler("vagas.json")["vagas"]),
+                         [{**antiga, "verificacao_pendente": True}, nova])
         fonte = self.ler("coleta.json")["fontes"]["fedex"]
         self.assertEqual(fonte["estado"], "parcial")
         self.assertEqual(fonte["rejeitadas"], 1)
