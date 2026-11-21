@@ -43,7 +43,9 @@ class SituacaoVaga(StrEnum):
 def migrar_vaga(vaga: dict) -> dict:
     """Adiciona campos de ciclo de vida a um registro histórico.
 
-    Nunca inventa datas: usa coletado_em quando disponível.
+    Nunca inventa datas de observação ou verificação. As datas de primeira
+    e última observação podem ser inferidas de coletado_em; ultima_verificacao
+    fica nula porque uma coleta não é uma verificação individual.
     verificacao_pendente: True → por_confirmar; False/ausente → observada.
     """
     if "situacao" in vaga:
@@ -58,7 +60,7 @@ def migrar_vaga(vaga: dict) -> dict:
         "situacao": str(situacao),
         "primeira_observacao": coletado,
         "ultima_observacao": coletado,
-        "ultima_verificacao": coletado,
+        "ultima_verificacao": None,
         "evidencia_encerramento": None,
     }
 
@@ -71,7 +73,7 @@ def inicializar_vaga(vaga: dict) -> dict:
         "situacao": str(SituacaoVaga.OBSERVADA),
         "primeira_observacao": agora,
         "ultima_observacao": agora,
-        "ultima_verificacao": agora,
+        "ultima_verificacao": None,
         "evidencia_encerramento": None,
     }
 
@@ -87,7 +89,7 @@ def reapareceu(anterior: dict, nova: dict) -> dict:
         "situacao": str(SituacaoVaga.OBSERVADA),
         "primeira_observacao": anterior.get("primeira_observacao") or anterior.get("coletado_em"),
         "ultima_observacao": agora,
-        "ultima_verificacao": agora,
+        "ultima_verificacao": anterior.get("ultima_verificacao"),
         "evidencia_encerramento": None,
     }
     resultado.pop("verificacao_pendente", None)
@@ -96,37 +98,39 @@ def reapareceu(anterior: dict, nova: dict) -> dict:
 
 def marcar_por_confirmar(vaga: dict, agora: str | None = None) -> dict:
     """Marca que a vaga não foi vista numa coleta, mas sem evidência de encerramento."""
-    ts = agora or _agora()
     return {
         **vaga,
         "situacao": str(SituacaoVaga.POR_CONFIRMAR),
         "verificacao_pendente": True,
-        "ultima_verificacao": ts,
+        # Ausência em coleta não é uma verificação individual.
+        "ultima_verificacao": vaga.get("ultima_verificacao"),
         # ultima_observacao NÃO muda — preserva a última vez real
     }
 
 
-def registrar_verificacao(vaga: dict, *, disponivel: bool, evidencia: str, agora: str | None = None) -> dict:
+def registrar_verificacao(vaga: dict, *, estado: str, evidencia: str, agora: str | None = None) -> dict:
     """Atualiza o estado depois de uma verificação de disponibilidade individual.
 
-    Apenas evidência confiável de encerramento (ex.: HTTP 410, link removido)
-    transiciona para 'encerrada'. Falhas inconclusivas (timeout, 403, 429)
-    não alteram o estado, apenas atualizam ultima_verificacao.
+    Estados aceitos: aberta_confirmada, encerrada_confirmada, inconclusiva.
+    Só encerrada_confirmada transiciona para encerrada. Inconclusiva não
+    confirma disponibilidade nem encerra a vaga.
     """
     ts = agora or _agora()
     base = {**vaga, "ultima_verificacao": ts}
-    if disponivel:
+    if estado == "aberta_confirmada":
         return {**base, "situacao": str(SituacaoVaga.OBSERVADA), "verificacao_pendente": False,
                 "ultima_observacao": ts, "evidencia_encerramento": None}
-    if _e_inconclusivo(evidencia):
+    if estado == "inconclusiva":
         return base  # não altera estado
-    return {**base, "situacao": str(SituacaoVaga.ENCERRADA),
-            "evidencia_encerramento": evidencia, "verificacao_pendente": False}
+    if estado == "encerrada_confirmada" and _evidencia_encerramento_confiavel(evidencia):
+        return {**base, "situacao": str(SituacaoVaga.ENCERRADA),
+                "evidencia_encerramento": evidencia, "verificacao_pendente": False}
+    return base
 
 
-def _e_inconclusivo(evidencia: str) -> bool:
-    ev = evidencia.lower()
-    return any(token in ev for token in ERROS_INCONCLUSIVOS)
+def _evidencia_encerramento_confiavel(evidencia: str) -> bool:
+    texto = evidencia.lower()
+    return "410 gone" in texto or "explicitamente encerrada" in texto
 
 
 def _agora() -> str:

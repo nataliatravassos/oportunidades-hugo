@@ -5,7 +5,6 @@ Principios:
     timeout, HTTP 403/429, ou ausência em coleta parcial.
   - Encerramento só com evidência individual confiável:
     * HTTP 410 Gone (vaga explicitamente removida)
-    * HTTP 404 de URLs específicas de vagas (não de páginas de busca)
     * Resposta do site indicando "vaga não existe / encerrada"
   - Respeitoso: taxa máxima de 1 req/s por domínio, sem parallelismo.
   - Limitado: configurável, desativado por padrão em CI.
@@ -25,21 +24,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
+from enum import StrEnum
 
 logger = logging.getLogger(__name__)
-
-# Domínios cujos 404 são confiáveis (URL de vaga específica inexistente = encerrada)
-DOMINIOS_404_CONFIAVEIS = frozenset({
-    "jobs.bosch.com",
-    "careers.fedex.com",
-    "www.siemens.com",
-    "jobs.dhl.com",
-    "careers.microsoft.com",
-    "www.nestle.com",
-    "www.inesctec.pt",
-    "fct.pt",
-    "sigarra.up.pt",
-})
 
 # Domínios que requerem JS e não podem ser verificados via HTTP simples
 DOMINIOS_NAO_VERIFICAVEIS = frozenset({
@@ -52,12 +39,17 @@ TIMEOUT_SEGUNDOS = 10
 INTERVALO_ENTRE_REQUISICOES = 1.0  # segundos por domínio
 
 
+class EstadoVerificacao(StrEnum):
+    ABERTA_CONFIRMADA = "aberta_confirmada"
+    ENCERRADA_CONFIRMADA = "encerrada_confirmada"
+    INCONCLUSIVA = "inconclusiva"
+
+
 @dataclass
 class ResultadoVerificacao:
-    disponivel: bool
+    estado: EstadoVerificacao
     evidencia: str
     status_http: int | None = None
-    inconclusivo: bool = False
 
 
 @dataclass
@@ -65,6 +57,7 @@ class VerificadorDisponibilidade:
     """Verificador de disponibilidade com rate limiting por domínio."""
 
     max_verificacoes: int = 20
+    ativo: bool = False
     _ultimo_por_dominio: dict[str, float] = field(default_factory=dict, init=False)
     _contagem: int = field(default=0, init=False)
 
@@ -85,9 +78,12 @@ class VerificadorDisponibilidade:
         """Verifica se uma vaga ainda está disponível.
 
         Devolve None se:
+        - O verificador estiver desativado
         - O link está ausente ou o domínio não pode ser verificado
         - O limite de verificações foi atingido
         """
+        if not self.ativo:
+            return None
         if self._contagem >= self.max_verificacoes:
             return None
 
@@ -101,9 +97,8 @@ class VerificadorDisponibilidade:
 
         if dominio in DOMINIOS_NAO_VERIFICAVEIS:
             return ResultadoVerificacao(
-                disponivel=True,
+                estado=EstadoVerificacao.INCONCLUSIVA,
                 evidencia="Domínio não verificável via HTTP",
-                inconclusivo=True,
             )
 
         self._aguardar_rate_limit(dominio)
@@ -122,40 +117,37 @@ class VerificadorDisponibilidade:
         except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as e:
             logger.debug("Verificação inconclusiva para %s: %s", link, e)
             return ResultadoVerificacao(
-                disponivel=True,
+                estado=EstadoVerificacao.INCONCLUSIVA,
                 evidencia=f"Falha de rede: {type(e).__name__}",
-                inconclusivo=True,
             )
 
         if status == 410:
             return ResultadoVerificacao(
-                disponivel=False,
+                estado=EstadoVerificacao.ENCERRADA_CONFIRMADA,
                 evidencia=f"HTTP 410 Gone — vaga removida definitivamente",
                 status_http=status,
             )
-        if status == 404 and dominio in DOMINIOS_404_CONFIAVEIS:
+        if status == 404:
             return ResultadoVerificacao(
-                disponivel=False,
-                evidencia=f"HTTP 404 em domínio confiável ({dominio})",
+                estado=EstadoVerificacao.INCONCLUSIVA,
+                evidencia="HTTP 404 — não confirma o motivo do encerramento",
                 status_http=status,
             )
         if status in (403, 429):
             return ResultadoVerificacao(
-                disponivel=True,
+                estado=EstadoVerificacao.INCONCLUSIVA,
                 evidencia=f"HTTP {status} — acesso bloqueado, não comprova encerramento",
                 status_http=status,
-                inconclusivo=True,
             )
         if 200 <= status < 400:
             return ResultadoVerificacao(
-                disponivel=True,
-                evidencia=f"HTTP {status}",
+                estado=EstadoVerificacao.INCONCLUSIVA,
+                evidencia=f"HTTP {status} — resposta não confirma a candidatura aberta",
                 status_http=status,
             )
         # Outros erros (5xx, etc.) são inconclusivos
         return ResultadoVerificacao(
-            disponivel=True,
+            estado=EstadoVerificacao.INCONCLUSIVA,
             evidencia=f"HTTP {status} — inconclusivo",
             status_http=status,
-            inconclusivo=True,
         )

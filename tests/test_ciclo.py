@@ -31,7 +31,7 @@ from sources.ciclo import (
     registrar_verificacao,
 )
 from sources.verificador import (
-    ResultadoVerificacao, VerificadorDisponibilidade, DOMINIOS_404_CONFIAVEIS,
+    EstadoVerificacao, ResultadoVerificacao, VerificadorDisponibilidade,
 )
 
 
@@ -68,6 +68,7 @@ class MigracaoTest(unittest.TestCase):
         self.assertEqual(m["situacao"], "observada")
         self.assertEqual(m["primeira_observacao"], CARIMBO)
         self.assertEqual(m["ultima_observacao"], CARIMBO)
+        self.assertIsNone(m["ultima_verificacao"])
         self.assertIsNone(m["evidencia_encerramento"])
 
     def test_migrar_vaga_verificacao_pendente_vira_por_confirmar(self):
@@ -167,7 +168,7 @@ class PorConfirmarTest(unittest.TestCase):
         pc = marcar_por_confirmar(v, agora=CARIMBO_NOVO)
         self.assertEqual(pc["situacao"], "por_confirmar")
         self.assertEqual(pc["ultima_observacao"], CARIMBO)  # não muda!
-        self.assertEqual(pc["ultima_verificacao"], CARIMBO_NOVO)
+        self.assertIsNone(pc["ultima_verificacao"])
         self.assertTrue(pc["verificacao_pendente"])
 
     def test_falha_de_coletor_nao_altera_ciclo(self):
@@ -185,25 +186,32 @@ class PorConfirmarTest(unittest.TestCase):
 class EncerramentoTest(unittest.TestCase):
     def test_encerramento_requer_evidencia_individual(self):
         v = migrar_vaga(_vaga())
-        enc = registrar_verificacao(v, disponivel=False, evidencia="HTTP 410 Gone", agora=CARIMBO_NOVO)
+        enc = registrar_verificacao(v, estado="encerrada_confirmada", evidencia="HTTP 410 Gone", agora=CARIMBO_NOVO)
         self.assertEqual(enc["situacao"], "encerrada")
         self.assertEqual(enc["evidencia_encerramento"], "HTTP 410 Gone")
 
     def test_timeout_nao_encerra(self):
         v = migrar_vaga(_vaga())
-        pc = registrar_verificacao(v, disponivel=False, evidencia="timeout na conexão", agora=CARIMBO_NOVO)
+        pc = registrar_verificacao(v, estado="inconclusiva", evidencia="timeout na conexão", agora=CARIMBO_NOVO)
         # timeout é inconclusivo → estado não muda
         self.assertNotEqual(pc["situacao"], "encerrada")
 
     def test_http_403_nao_encerra(self):
         v = migrar_vaga(_vaga())
-        r = registrar_verificacao(v, disponivel=False, evidencia="403 Forbidden", agora=CARIMBO_NOVO)
+        r = registrar_verificacao(v, estado="inconclusiva", evidencia="403 Forbidden", agora=CARIMBO_NOVO)
         self.assertNotEqual(r["situacao"], "encerrada")
 
     def test_http_429_nao_encerra(self):
         v = migrar_vaga(_vaga())
-        r = registrar_verificacao(v, disponivel=False, evidencia="429 Too Many Requests", agora=CARIMBO_NOVO)
+        r = registrar_verificacao(v, estado="inconclusiva", evidencia="429 Too Many Requests", agora=CARIMBO_NOVO)
         self.assertNotEqual(r["situacao"], "encerrada")
+
+    def test_resultado_inconclusivo_preserva_situacao_e_observacao(self):
+        v = migrar_vaga(_vaga())
+        r = registrar_verificacao(v, estado="inconclusiva", evidencia="HTTP 403", agora=CARIMBO_NOVO)
+        self.assertEqual(r["situacao"], "observada")
+        self.assertEqual(r["ultima_observacao"], v["ultima_observacao"])
+        self.assertEqual(r["evidencia_encerramento"], None)
 
     def test_ausencia_em_coleta_parcial_nao_encerra(self):
         """Ausência em coleta parcial → por_confirmar, não encerrada."""
@@ -219,7 +227,7 @@ class EncerramentoTest(unittest.TestCase):
 
     def test_encerrada_permanece_no_historico(self):
         v = migrar_vaga(_vaga())
-        enc = registrar_verificacao(v, disponivel=False, evidencia="HTTP 410 Gone")
+        enc = registrar_verificacao(v, estado="encerrada_confirmada", evidencia="HTTP 410 Gone")
         publicadas = main.atualizar_fonte([enc], [], EstadoColeta.COMPLETA)
         enc_resultado = next(r for r in publicadas if r.get("situacao") == "encerrada")
         self.assertEqual(enc_resultado["evidencia_encerramento"], "HTTP 410 Gone")
@@ -409,59 +417,72 @@ class RenderizacaoTest(unittest.TestCase):
 # ---------------------------------------------------------------------------
 
 class VerificadorTest(unittest.TestCase):
-    def test_http_410_encerra(self):
+    def test_verificador_desativado_por_padrao(self):
         v = VerificadorDisponibilidade()
+        self.assertIsNone(v.verificar(_vaga(link="https://jobs.bosch.com/job/123")))
+
+    def test_http_410_encerra(self):
+        v = VerificadorDisponibilidade(ativo=True)
         with patch("urllib.request.urlopen") as mock_open:
             mock_open.side_effect = urllib.error.HTTPError(
                 url="https://jobs.bosch.com/job/123", code=410,
                 msg="Gone", hdrs=None, fp=None,
             )
             r = v.verificar(_vaga(link="https://jobs.bosch.com/job/123"))
-        self.assertFalse(r.disponivel)
+        self.assertEqual(r.estado, EstadoVerificacao.ENCERRADA_CONFIRMADA)
         self.assertIn("410", r.evidencia)
 
-    def test_http_404_em_dominio_confiavel_encerra(self):
-        v = VerificadorDisponibilidade()
+    def test_http_404_em_dominio_confiavel_e_inconclusivo(self):
+        """404 não é evidência suficiente de encerramento."""
+        v = VerificadorDisponibilidade(ativo=True)
         with patch("urllib.request.urlopen") as mock_open:
             mock_open.side_effect = urllib.error.HTTPError(
                 url="https://jobs.bosch.com/job/123", code=404,
                 msg="Not Found", hdrs=None, fp=None,
             )
             r = v.verificar(_vaga(link="https://jobs.bosch.com/job/123"))
-        self.assertFalse(r.disponivel)
+        self.assertEqual(r.estado, EstadoVerificacao.INCONCLUSIVA)
         self.assertIn("404", r.evidencia)
 
     def test_http_404_em_dominio_desconhecido_nao_encerra(self):
-        v = VerificadorDisponibilidade()
+        v = VerificadorDisponibilidade(ativo=True)
         with patch("urllib.request.urlopen") as mock_open:
             mock_open.side_effect = urllib.error.HTTPError(
                 url="https://desconhecido.example.com/job/123", code=404,
                 msg="Not Found", hdrs=None, fp=None,
             )
             r = v.verificar(_vaga(link="https://desconhecido.example.com/job/123"))
-        # 404 de domínio desconhecido é inconclusivo → considera disponível
-        self.assertTrue(r.disponivel or r.inconclusivo)
+        self.assertEqual(r.estado, EstadoVerificacao.INCONCLUSIVA)
 
     def test_http_403_e_inconclusivo(self):
-        v = VerificadorDisponibilidade()
+        v = VerificadorDisponibilidade(ativo=True)
         with patch("urllib.request.urlopen") as mock_open:
             mock_open.side_effect = urllib.error.HTTPError(
                 url="https://jobs.bosch.com/job/123", code=403,
                 msg="Forbidden", hdrs=None, fp=None,
             )
             r = v.verificar(_vaga(link="https://jobs.bosch.com/job/123"))
-        self.assertTrue(r.inconclusivo)
+        self.assertEqual(r.estado, EstadoVerificacao.INCONCLUSIVA)
 
     def test_timeout_e_inconclusivo(self):
-        v = VerificadorDisponibilidade()
+        v = VerificadorDisponibilidade(ativo=True)
         with patch("urllib.request.urlopen") as mock_open:
             mock_open.side_effect = TimeoutError("connection timed out")
             r = v.verificar(_vaga(link="https://jobs.bosch.com/job/123"))
-        self.assertTrue(r.inconclusivo)
-        self.assertTrue(r.disponivel)
+        self.assertEqual(r.estado, EstadoVerificacao.INCONCLUSIVA)
+
+    def test_http_200_nao_confirma_candidatura_aberta(self):
+        v = VerificadorDisponibilidade(ativo=True)
+        mock_resp = MagicMock()
+        mock_resp.__enter__ = Mock(return_value=mock_resp)
+        mock_resp.__exit__ = Mock(return_value=False)
+        mock_resp.status = 200
+        with patch("urllib.request.urlopen", return_value=mock_resp):
+            r = v.verificar(_vaga(link="https://jobs.bosch.com/job/123"))
+        self.assertEqual(r.estado, EstadoVerificacao.INCONCLUSIVA)
 
     def test_limite_de_verificacoes_respeitado(self):
-        v = VerificadorDisponibilidade(max_verificacoes=2)
+        v = VerificadorDisponibilidade(max_verificacoes=2, ativo=True)
         mock_resp = MagicMock()
         mock_resp.__enter__ = Mock(return_value=mock_resp)
         mock_resp.__exit__ = Mock(return_value=False)
@@ -480,10 +501,10 @@ class VerificadorTest(unittest.TestCase):
         self.assertIsNone(v.verificar({"link": None, "fonte": "ikea"}))
 
     def test_dominio_nao_verificavel_e_inconclusivo(self):
-        v = VerificadorDisponibilidade()
+        v = VerificadorDisponibilidade(ativo=True)
         r = v.verificar(_vaga(link="https://www.ikea.com/pt/pt/jobs/"))
         self.assertIsNotNone(r)
-        self.assertTrue(r.inconclusivo)
+        self.assertEqual(r.estado, EstadoVerificacao.INCONCLUSIVA)
 
 
 # ---------------------------------------------------------------------------

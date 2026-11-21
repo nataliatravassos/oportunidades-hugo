@@ -67,6 +67,10 @@
   .chip.escritorio { background: var(--chip-escritorio); color: var(--chip-escritorio-text); }
   .chip.indefinido { background: var(--chip-indefinido); color: var(--chip-indefinido-text); }
   .chip.operacional { background: var(--chip-operacional); color: var(--chip-operacional-text); }
+  .chip.situacao-observada { background: #dcfce7; color: #166534; }
+  .chip.situacao-por_confirmar { background: #fef3c7; color: #92400e; }
+  .chip.situacao-encerrada { background: #e5e7eb; color: #374151; }
+  .historico-titulo { font-size: 1rem; margin: 4px 0 12px; }
   .estado {
     text-align: center; color: var(--muted); padding: 60px 20px; font-size: 0.92rem; line-height: 1.5;
   }
@@ -99,6 +103,11 @@
 const NOMES_CLASSE = { escritorio: "Escritório", indefinido: "A conferir", operacional: "Operacional" };
 let TODAS = [];
 let filtroAtivo = "todas";
+const NOMES_SITUACAO = {
+  observada: "Observada",
+  por_confirmar: "Por confirmar",
+  encerrada: "Encerrada",
+};
 
 function escapeHtml(s) {
   return (s || "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
@@ -121,20 +130,42 @@ function dataLisboa(valor) {
 
 function ultimaObservacao(vaga) {
   if (vaga.fonte === "outros_institutos") return "Consulta manual";
-  return `Última vez vista: ${dataLisboa(vaga.coletado_em)}${vaga.verificacao_pendente ? " · por confirmar" : ""}`;
+  const situacao = vaga.situacao || (vaga.verificacao_pendente ? "por_confirmar" : "observada");
+  const ultima = vaga.ultima_observacao || vaga.coletado_em;
+  if (situacao === "encerrada") {
+    return `Histórico · última vez vista: ${dataLisboa(ultima)}${vaga.evidencia_encerramento ? ` · ${escapeHtml(vaga.evidencia_encerramento)}` : ""}`;
+  }
+  return `Última vez vista: ${dataLisboa(ultima)}${situacao === "por_confirmar" ? " · por confirmar" : ""}`;
 }
 
 function render() {
   const lista = document.getElementById("lista");
-  const vagas = filtroAtivo === "todas" ? TODAS : TODAS.filter(v => v.classificacao === filtroAtivo);
+  const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
+  let vagas;
+  if (filtroAtivo === "todas") {
+    vagas = TODAS.filter(v => situacaoDe(v) !== "encerrada");
+  } else if (filtroAtivo === "encerrada") {
+    vagas = TODAS.filter(v => situacaoDe(v) === "encerrada");
+  } else {
+    vagas = TODAS.filter(v => situacaoDe(v) === filtroAtivo);
+  }
+  const ativas = TODAS.filter(v => situacaoDe(v) !== "encerrada");
+  if (filtroAtivo === "todas") vagas = ativas;
 
   if (vagas.length === 0) {
-    lista.innerHTML = '<p class="estado">Nenhuma vaga nessa categoria no momento.</p>';
+    lista.innerHTML = filtroAtivo === "encerrada"
+      ? '<p class="estado">Nenhuma vaga no histórico de encerradas.</p>'
+      : '<p class="estado">Nenhuma vaga nessa situação no momento.</p>';
     return;
   }
 
-  lista.innerHTML = vagas.map(v => {
+  const tituloSecao = filtroAtivo === "encerrada"
+    ? '<h2 class="historico-titulo">Histórico de vagas encerradas</h2>'
+    : "";
+
+  lista.innerHTML = tituloSecao + vagas.map(v => {
     const temLink = /^https?:\/\//i.test(v.link || "");
+    const situacao = situacaoDe(v);
     const abertura = temLink
       ? `<a class="vaga" href="${escapeHtml(v.link)}" target="_blank" rel="noopener">`
       : '<article class="vaga">';
@@ -151,17 +182,28 @@ function render() {
       </div>
       <div class="vaga-meta">${escapeHtml(ultimaObservacao(v))}${temLink ? "" : " · Link por confirmar"}</div>
       <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>
+      <span class="chip situacao-${situacao}">${NOMES_SITUACAO[situacao] || situacao}</span>
     ${temLink ? "</a>" : "</article>"}
   `;
   }).join("");
 }
 
 function montarFiltros() {
-  const contagens = { todas: TODAS.length, escritorio: 0, indefinido: 0, operacional: 0 };
-  TODAS.forEach(v => { contagens[v.classificacao] = (contagens[v.classificacao] || 0) + 1; });
+  const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
+  const contagens = { todas: 0, observada: 0, por_confirmar: 0, encerrada: 0 };
+  TODAS.forEach(v => {
+    const situacao = situacaoDe(v);
+    contagens[situacao] = (contagens[situacao] || 0) + 1;
+    if (situacao !== "encerrada") contagens.todas++;
+  });
 
   const el = document.getElementById("filtros");
-  const grupos = [["todas", "Todas"], ["escritorio", "Escritório"], ["indefinido", "A conferir"], ["operacional", "Operacional"]];
+  const grupos = [
+    ["todas", "Todas ativas"],
+    ["observada", "Observada"],
+    ["por_confirmar", "Por confirmar"],
+    ["encerrada", "Encerrada · histórico"],
+  ];
   el.innerHTML = grupos.map(([chave, rotulo]) => `
     <button class="filtro-btn ${chave === filtroAtivo ? "ativo" : ""}" data-f="${chave}">
       ${rotulo} (${contagens[chave] || 0})
