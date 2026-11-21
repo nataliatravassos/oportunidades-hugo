@@ -1,7 +1,26 @@
 {
-  "atualizado_em": "2026-11-20T22:12:57+00:00",
-  "total": 138,
+  "atualizado_em": "2026-11-21T01:11:53+00:00",
+  "total": 139,
   "vagas": [
+    {
+      "titulo": "Academic Internship in Industrial Engineering and Management (f/m/div.)",
+      "empresa": "Bosch",
+      "cidade": "Braga",
+      "link": "https://jobs.bosch.com/en/job/REF299281M-academic-internship-in-industrial-engineering-and-management-f-m-div",
+      "fonte": "bosch",
+      "categoria": "Engineering",
+      "tipo_contrato": null,
+      "data_publicacao": "2026-10-23",
+      "classificacao": "escritorio",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
+      "modalidade": "presencial",
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
+    },
     {
       "titulo": "Academic Internship in Industrial Engineering and Management (f/m/div.)",
       "empresa": "Bosch",
@@ -12,9 +31,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-10",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Academic Internship in Industrial Engineering and Management (f/m/div.)",
@@ -26,9 +50,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-10",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Automated Driving Sensor Engineer - Radar (f/m/div)",
@@ -40,9 +69,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-30",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Backend Developer (f/m/div.)",
@@ -54,9 +88,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Data Engineer – Unified Data Layer (UDL) (f/m/div.)",
@@ -68,9 +107,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-11",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Data Scientist (f/m/div.)",
@@ -82,9 +126,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-05",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:35+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:35+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Data Scientist (f/m/div.)",
@@ -96,9 +145,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "coletado_em": "2026-11-21T01:10:21+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:26+00:00",
+      "ultima_observacao": "2026-11-21T01:10:21+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Development & Test Engineer - Heat Pumps (f/m/div.)",
@@ -110,9 +164,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-30",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Development and Test Engineer for Hydraulics in Heat Pump development (f/m/div.)",
@@ -124,9 +183,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-20",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "coletado_em": "2026-11-21T01:10:16+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:21+00:00",
+      "ultima_observacao": "2026-11-21T01:10:16+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Development Engineer - Acoustic (f/m/div.)",
@@ -138,9 +202,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-05",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:35+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:35+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Development Engineer - Machine Learning (f/m/div.)",
@@ -152,9 +221,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:35+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:35+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Development Engineer - Materials (f/m/div.)",
@@ -166,9 +240,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Development Engineer - Refrigeration Testing (f/m/div.)",
@@ -180,9 +259,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:35+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:35+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "DevOps Engineer – Unified Data Layer (UDL) (f/m/div.)",
@@ -194,9 +278,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-11",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Electrical Engineer – Heat Pumps (f/m/div.)",
@@ -208,9 +297,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "coletado_em": "2026-11-21T01:10:26+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:31+00:00",
+      "ultima_observacao": "2026-11-21T01:10:26+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Embedded Software Engineer (f/m/div.)",
@@ -222,9 +316,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "coletado_em": "2026-11-21T01:10:21+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:26+00:00",
+      "ultima_observacao": "2026-11-21T01:10:21+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Embedded Software Engineer - Radar Systems (f/m/div.)",
@@ -236,9 +335,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-02",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Extracurricular: Planeamento Supply Chain & Data Analytics para a região EMEA (f/m/div.)",
@@ -250,9 +354,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-04",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship – DevOps & GenAI Engineer for Quality (f/m/div.)",
@@ -264,9 +373,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-30",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: AI Software Engineer (f/m/div.)",
@@ -278,9 +392,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "coletado_em": "2026-11-21T01:10:24+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:29+00:00",
+      "ultima_observacao": "2026-11-21T01:10:24+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Android Developer (f/m/div.)",
@@ -292,9 +411,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "coletado_em": "2026-11-21T01:10:21+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:26+00:00",
+      "ultima_observacao": "2026-11-21T01:10:21+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Data Engineering - Cloud Platform (f/m/div.)",
@@ -306,9 +430,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-09",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Industry 4.0, IIoT and Manufacturing Digitalization (f/m/div.)",
@@ -320,9 +449,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-11",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: iOS Developer (f/m/div.)",
@@ -334,9 +468,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:26+00:00",
+      "coletado_em": "2026-11-21T01:10:21+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:26+00:00",
+      "ultima_observacao": "2026-11-21T01:10:21+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Lab Engineer within Heat Pump Development - Automation (f/m/div.)",
@@ -348,9 +487,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "coletado_em": "2026-11-21T01:10:19+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-21T01:10:19+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Mechanical Development and Testing Engineer (f/m/div.)",
@@ -362,9 +506,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:26+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:26+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Project Management for Digitalization (f/m/div.)",
@@ -376,9 +525,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "coletado_em": "2026-11-21T01:10:19+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-21T01:10:19+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: R&D & Simulation Engineer - Heat Pump Water Heaters (f/m/div.)",
@@ -390,9 +544,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-20",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "coletado_em": "2026-11-21T01:10:16+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:21+00:00",
+      "ultima_observacao": "2026-11-21T01:10:16+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Finite Element Simulation Engineer (f/m/div.)",
@@ -404,9 +563,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Full Stack Developer (f/m/div.)",
@@ -418,9 +582,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Full-Stack Developer (f/m/div.)",
@@ -432,9 +601,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "coletado_em": "2026-11-21T01:10:21+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:29+00:00",
+      "ultima_observacao": "2026-11-21T01:10:21+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Information Security & Data Protection Expert (f/m/div.)",
@@ -446,9 +620,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-23",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "IT Process Expert – Plan to Fulfill (P2F) (f/m/div.)",
@@ -460,9 +639,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-11",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Junior Software Quality Assurance Engineer (f/m/div.)",
@@ -474,9 +658,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "coletado_em": "2026-11-21T01:10:23+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:29+00:00",
+      "ultima_observacao": "2026-11-21T01:10:23+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Lab Engineer (f/m/div.)",
@@ -488,9 +677,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-04",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Module Lead Development Engineer for Hydraulics in Heat Pump application (f/m/div.)",
@@ -502,9 +696,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-02",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Preventive Quality Engineer - FMEA & Data Analytics (f/m/div.)",
@@ -516,9 +715,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "coletado_em": "2026-11-21T01:10:19+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-21T01:10:19+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Product Architect - AW Heat Pumps (f/m/div.)",
@@ -530,9 +734,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "coletado_em": "2026-11-21T01:10:19+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-21T01:10:19+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Project Manager (f/m/div.)",
@@ -544,9 +753,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "coletado_em": "2026-11-21T01:10:26+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:31+00:00",
+      "ultima_observacao": "2026-11-21T01:10:26+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "R&D Engineer - Mechanical Designer | eBike (f/m/div.)",
@@ -558,9 +772,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "coletado_em": "2026-11-21T01:10:24+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:29+00:00",
+      "ultima_observacao": "2026-11-21T01:10:24+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "R&D Engineer - Mechanical Project Manager | eBike (f/m/div.)",
@@ -572,9 +791,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-18",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "coletado_em": "2026-11-21T01:10:24+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:29+00:00",
+      "ultima_observacao": "2026-11-21T01:10:24+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Refrigeration Engineer – Heat Pumps (f/m/div.)",
@@ -586,9 +810,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "coletado_em": "2026-11-21T01:10:26+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:31+00:00",
+      "ultima_observacao": "2026-11-21T01:10:26+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Reliability Test Engineer (f/m/div.)",
@@ -600,9 +829,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-16",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:29+00:00",
+      "coletado_em": "2026-11-21T01:10:24+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:29+00:00",
+      "ultima_observacao": "2026-11-21T01:10:24+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "SAP S/4HANA Test Automation Manager (f/m/div.)",
@@ -614,9 +848,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-26",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Senior Hardware Design Engineer (f/m/div.)",
@@ -628,9 +867,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-26",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Senior Information Security & Data Protection Expert (f/m/div.)",
@@ -642,9 +886,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-27",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:44+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:44+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Subproject Manager - RADAR Plant Test (f/m/div.)",
@@ -656,9 +905,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-27",
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "E58I0: Marketing Analyst-Senior (ID)",
@@ -670,7 +924,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Human Resources Recruitment Specialist",
@@ -682,7 +941,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:05+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:05+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Industrial Engineer",
@@ -694,7 +958,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Industrial Engineer",
@@ -706,7 +975,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Industrial Engineer - Senior",
@@ -718,7 +992,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Industrial Engineer - Sort Technology Design & Modelling",
@@ -730,7 +1009,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Industrial Engineer- (Associate - Standard - Senior)",
@@ -742,7 +1026,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Operations Quality Associate / Specialist / Snr. Specialist",
@@ -754,7 +1043,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Process Advisor",
@@ -766,7 +1060,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Project Engineer",
@@ -778,7 +1077,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Senior System Engineer (f/m)",
@@ -790,7 +1094,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:05+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:05+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em IT — Instituto de Telecomunicações (polo do Porto)",
@@ -802,7 +1111,12 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "escritorio",
-      "coletado_em": "2026-11-20T15:51:20+00:00"
+      "coletado_em": "2026-11-20T15:51:20+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Academic Internship in Management systems or Computing (f/m/div.)",
@@ -814,9 +1128,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-10",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Buyer (f/m/div.)",
@@ -828,9 +1147,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-05",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Controlling Business Partner (f/m/div.)",
@@ -842,9 +1166,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-20",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "coletado_em": "2026-11-21T01:10:16+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:21+00:00",
+      "ultima_observacao": "2026-11-21T01:10:16+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Customer Order & Production Planner (f/m/div.)",
@@ -856,9 +1185,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-28",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:48+00:00",
+      "coletado_em": "2026-11-21T01:10:44+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:48+00:00",
+      "ultima_observacao": "2026-11-21T01:10:44+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Environmental, Health & Safety (EHS) Technician (f/m/div.)",
@@ -870,9 +1204,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "coletado_em": "2026-11-21T01:10:26+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:31+00:00",
+      "ultima_observacao": "2026-11-21T01:10:26+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Curricular em Engenharia e Gestão Industrial (f/m/div.)",
@@ -884,9 +1223,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-10",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:37+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:37+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Curricular em Engenharia Eletrónica/Eletrotécnica (f/m/div.)",
@@ -898,9 +1242,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-26",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Curricular em Engenharia Mecânica (f/m/div.)",
@@ -912,9 +1261,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-27",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:51+00:00",
+      "coletado_em": "2026-11-21T01:10:46+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:51+00:00",
+      "ultima_observacao": "2026-11-21T01:10:46+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Curricular em Exportação e Logística (f/m/div.)",
@@ -926,9 +1280,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "coletado_em": "2026-11-21T01:10:19+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-21T01:10:19+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Curricular em Gestão/ Engenharia Gestão Industrial (f/m/div.)",
@@ -940,9 +1299,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Extracurricular em Engenharia e Gestão Industrial (f/m/div.)",
@@ -954,9 +1318,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-10",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Extracurricular: Gestão de Energia e Gestão de Projetos (f/m/div.)",
@@ -968,9 +1337,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-03",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio extracurricular: Logística Inversa e Inbound de Distribuição Nacional (f/m/div.)",
@@ -982,9 +1356,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-03",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Extracurricular: Suporte aos Sistemas de Gestão de Segurança e Ambiente (f/m/div.)",
@@ -998,7 +1377,13 @@
       "classificacao": "indefinido",
       "coletado_em": "2026-11-20T22:11:23+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "por_confirmar",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null,
+      "verificacao_pendente": true
     },
     {
       "titulo": "Extracurricular Internship: Model-Based System Simulation (f/m/div.)",
@@ -1010,9 +1395,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-05",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:35+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:35+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Extracurricular Internship: Product Management (f/m/div)",
@@ -1024,9 +1414,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Hardware Customer Project Lead (f/m/div.)",
@@ -1038,9 +1433,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-30",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Mechanical Designer - Packaging (f/m/div.)",
@@ -1052,9 +1452,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:32+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:32+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Responsável Operacional Logístico (f/m/div.)",
@@ -1066,9 +1471,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-03",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:45+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:45+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "SAP Process Expert Source to Pay (f/m/div.)",
@@ -1080,9 +1490,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-20",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "coletado_em": "2026-11-21T01:10:16+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:21+00:00",
+      "ultima_observacao": "2026-11-21T01:10:16+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "SAP S/4HANA Authorization Expert (f/m/div.)",
@@ -1094,9 +1509,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-28",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:48+00:00",
+      "coletado_em": "2026-11-21T01:10:44+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:48+00:00",
+      "ultima_observacao": "2026-11-21T01:10:44+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Senior Expert Compressors - Heat Pumps (f/m/div.)",
@@ -1108,9 +1528,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-19",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:23+00:00",
+      "coletado_em": "2026-11-21T01:10:19+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:23+00:00",
+      "ultima_observacao": "2026-11-21T01:10:19+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Senior Plant Controller (f/m/div.)",
@@ -1122,9 +1547,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-10-29",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:48+00:00",
+      "coletado_em": "2026-11-21T01:10:41+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:48+00:00",
+      "ultima_observacao": "2026-11-21T01:10:41+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Senior SAP Consultant Order to Cash (f/m/div.)",
@@ -1136,9 +1566,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-20",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:21+00:00",
+      "coletado_em": "2026-11-21T01:10:16+00:00",
       "modalidade": "hibrido",
-      "evidencia_modalidade": "Hybrid"
+      "evidencia_modalidade": "Hybrid",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:21+00:00",
+      "ultima_observacao": "2026-11-21T01:10:16+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Técnico de Mecatrónica (f/m/div.)",
@@ -1150,9 +1585,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-12",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:31+00:00",
+      "coletado_em": "2026-11-21T01:10:26+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:31+00:00",
+      "ultima_observacao": "2026-11-21T01:10:26+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em CEiiA — Centro de Engenharia e Desenvolvimento de Produto",
@@ -1164,7 +1604,12 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T15:51:20+00:00"
+      "coletado_em": "2026-11-20T15:51:20+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "CUSTOMS OPS SUPPORT - DHL EXPRESS",
@@ -1176,7 +1621,12 @@
       "tipo_contrato": "Part-time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:18+00:00"
+      "coletado_em": "2026-11-21T01:11:14+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:18+00:00",
+      "ultima_observacao": "2026-11-21T01:11:14+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Handling Operator",
@@ -1188,7 +1638,12 @@
       "tipo_contrato": "Part-time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:18+00:00"
+      "coletado_em": "2026-11-21T01:11:14+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:18+00:00",
+      "ultima_observacao": "2026-11-21T01:11:14+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Concurso de 2027 da Parceria Europeia EP PerMed",
@@ -1200,7 +1655,12 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:12+00:00"
+      "coletado_em": "2026-11-21T01:10:10+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:12+00:00",
+      "ultima_observacao": "2026-11-21T01:10:10+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Concurso de 2027 da Parceria Europeia One Health – Antimicrobial Resistance (EUP OHAMR)",
@@ -1212,7 +1672,12 @@
       "tipo_contrato": null,
       "data_publicacao": "fev 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:12+00:00"
+      "coletado_em": "2026-11-21T01:10:10+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:12+00:00",
+      "ultima_observacao": "2026-11-21T01:10:10+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Concurso de Projetos de Computação Avançada (7ª ed) - A0 | A1 (lote B)",
@@ -1224,7 +1689,12 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:12+00:00"
+      "coletado_em": "2026-11-21T01:10:10+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:12+00:00",
+      "ultima_observacao": "2026-11-21T01:10:10+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Concurso de Projetos de Computação Avançada (7ª ed) - A2 | A3 (lote B) | Via Rápida",
@@ -1236,7 +1706,12 @@
       "tipo_contrato": null,
       "data_publicacao": "jan 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:12+00:00"
+      "coletado_em": "2026-11-21T01:10:10+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:12+00:00",
+      "ultima_observacao": "2026-11-21T01:10:10+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Programa Portugal-Berkeley",
@@ -1248,7 +1723,12 @@
       "tipo_contrato": null,
       "data_publicacao": "dez 2027",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:12+00:00"
+      "coletado_em": "2026-11-21T01:10:10+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:12+00:00",
+      "ultima_observacao": "2026-11-21T01:10:10+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Cash Application (Receive and Apply)",
@@ -1260,7 +1740,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker Associate with English",
@@ -1272,7 +1757,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker Associate with German",
@@ -1284,7 +1774,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker Associate with German",
@@ -1296,7 +1791,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker Associate with German (Austria)",
@@ -1308,7 +1808,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker Associate with Italian",
@@ -1320,7 +1825,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker with Dutch",
@@ -1332,7 +1842,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Clearance Broker with Dutch",
@@ -1344,7 +1859,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Invoice Adjustment (Billing & Dispute Management)",
@@ -1356,7 +1876,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Invoice to Cash (CFS Representative)",
@@ -1368,7 +1893,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Logistics Services Representative",
@@ -1380,7 +1910,12 @@
       "tipo_contrato": "Full Time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:08+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:08+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em Fraunhofer Portugal AICOS",
@@ -1392,43 +1927,63 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T15:51:20+00:00"
+      "coletado_em": "2026-11-20T15:51:20+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Colaborador de Logística - Outflow - 20h (14h - 20h) - Temporário",
       "empresa": "IKEA",
-      "cidade": "Matosinhos, Porto, Portugal",
+      "cidade": "Matosinhos, Porto",
       "link": "https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-20h-14h-20h-temporario/24107/102764249280",
       "fonte": "ikea",
       "categoria": "Logistics & Supply Chain",
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:37+00:00"
+      "coletado_em": "2026-11-21T01:11:34+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:37+00:00",
+      "ultima_observacao": "2026-11-21T01:11:34+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Colaborador de Logística - Outflow - 25h (Disponibilidade: 15h às 22h) - Temporário",
       "empresa": "IKEA",
-      "cidade": "Matosinhos, Porto, Portugal",
+      "cidade": "Matosinhos, Porto",
       "link": "https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-logistica-outflow-25h-disponibilidade-15h-as-22h-temporario/24107/103564257728",
       "fonte": "ikea",
       "categoria": "Logistics & Supply Chain",
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:37+00:00"
+      "coletado_em": "2026-11-21T01:11:34+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:37+00:00",
+      "ultima_observacao": "2026-11-21T01:11:34+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Colaborador de Vendas - Iluminação e Tapetes - 20h (Disponibilidade: 16h - 23h)",
       "empresa": "IKEA",
-      "cidade": "Matosinhos, Porto, Portugal",
+      "cidade": "Matosinhos, Porto",
       "link": "https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-vendas-iluminacao-e-tapetes-20h-disponibilidade-16h-23h/24107/103264448512",
       "fonte": "ikea",
       "categoria": "Sales & Commercial",
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:12:37+00:00"
+      "coletado_em": "2026-11-21T01:11:34+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:37+00:00",
+      "ultima_observacao": "2026-11-21T01:11:34+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em INEGI — Instituto de Ciência e Inovação em Engenharia Mecânica e Engenharia Industrial",
@@ -1440,7 +1995,12 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T15:51:20+00:00"
+      "coletado_em": "2026-11-20T15:51:20+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Bioengenharia, Processamento de sinal e imagem biomédicao, gestão de projetos. (AE2026-0365)",
@@ -1452,7 +2012,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Bioengenharia, Tecnologias para a saúde, Gestão e conservação de dados clínicos. (AE2026-0355)",
@@ -1464,7 +2029,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Ciências da Computação (AE2026-0348)",
@@ -1476,7 +2046,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Ciências da Computação (AE2026-0349)",
@@ -1488,7 +2063,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Computação de Elevado Desempenho (AE2026-0347)",
@@ -1500,7 +2080,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "COMPUTER SCIENCE (AE2026-0350)",
@@ -1512,7 +2097,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "COMPUTER SCIENCE (AE2026-0352)",
@@ -1524,7 +2114,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Comunicação ótica subaquática e localização relativa para veículos submarinos cooperativos. (AE2026-0353)",
@@ -1536,7 +2131,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Engenharia (AE2026-0360)",
@@ -1548,7 +2148,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Engenharia Electrotécnica (AE2026-0351)",
@@ -1560,7 +2165,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-03",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Informática, Eletrónica e Sistemas Digitais (AE2026-0305)",
@@ -1572,7 +2182,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Informática, Eletrónica e Sistemas Digitais (AE2026-0359)",
@@ -1584,7 +2199,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "LLMs executados localmente e sem ligação a serviços externos para aumentar a autonomia de veículos submarinos. (AE2026-0354)",
@@ -1596,7 +2216,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-25",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Online Outlier Detection (AE2026-0358)",
@@ -1608,7 +2233,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-26",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Power systems (AE2026-0357)",
@@ -1620,7 +2250,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Problema de entrega na última milha (AE2026-0356)",
@@ -1632,7 +2267,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-26",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Sistemas de Energia (AE2026-0320)",
@@ -1644,7 +2284,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-22",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Sistemas de Energia (AE2026-0364)",
@@ -1656,7 +2301,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Sistemas de Energia - Eletrónica de Potência e Flexibilidade da Rede para a Transição Energética (AE2026-0341)",
@@ -1668,7 +2318,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-04",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Telecomunicações (AE2026-0361)",
@@ -1680,7 +2335,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-07",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Telecomunicações (AE2026-0362)",
@@ -1692,7 +2352,12 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-12-23",
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T22:11:10+00:00"
+      "coletado_em": "2026-11-21T01:10:08+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:10+00:00",
+      "ultima_observacao": "2026-11-21T01:10:08+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "[verificar manualmente] Oportunidades em ISR-Porto — Instituto de Sistemas e Robótica, polo do Porto (FEUP)",
@@ -1704,7 +2369,12 @@
       "tipo_contrato": null,
       "data_publicacao": null,
       "classificacao": "indefinido",
-      "coletado_em": "2026-11-20T15:51:20+00:00"
+      "coletado_em": "2026-11-20T15:51:20+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_observacao": "2026-11-20T15:51:20+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Estágio Curricular em Manutenção Preditiva (f/m/div.)",
@@ -1716,9 +2386,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-11",
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:11:34+00:00",
+      "coletado_em": "2026-11-21T01:10:29+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:34+00:00",
+      "ultima_observacao": "2026-11-21T01:10:29+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Técnico de Manutenção (f/m/div.)",
@@ -1730,9 +2405,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-04",
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:11:43+00:00",
+      "coletado_em": "2026-11-21T01:10:38+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:43+00:00",
+      "ultima_observacao": "2026-11-21T01:10:38+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Técnico de Manutenção Industrial - Mecânica (f/m/div.)",
@@ -1744,9 +2424,14 @@
       "tipo_contrato": null,
       "data_publicacao": "2026-11-06",
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:11:40+00:00",
+      "coletado_em": "2026-11-21T01:10:35+00:00",
       "modalidade": "presencial",
-      "evidencia_modalidade": "On-Site"
+      "evidencia_modalidade": "On-Site",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:11:40+00:00",
+      "ultima_observacao": "2026-11-21T01:10:35+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "ESTÁGIO PROFISSIONAL | TECNICO DE MANUTENÇÃO | DHL EXPRESS PORTUGAL",
@@ -1758,7 +2443,12 @@
       "tipo_contrato": "Full-time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:12:18+00:00"
+      "coletado_em": "2026-11-21T01:11:14+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:18+00:00",
+      "ultima_observacao": "2026-11-21T01:11:14+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Operador Armazém - GOPS OPO - Exportação - Part-time",
@@ -1770,7 +2460,12 @@
       "tipo_contrato": "Part Time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Operador Armazém - Importação- Part-time",
@@ -1782,31 +2477,46 @@
       "tipo_contrato": "Part Time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:12:09+00:00"
+      "coletado_em": "2026-11-21T01:11:04+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:09+00:00",
+      "ultima_observacao": "2026-11-21T01:11:04+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Colaborador de IKEA Food - Copa - 20h (Disponibilidade: 12h às 19h)",
       "empresa": "IKEA",
-      "cidade": "Matosinhos, Porto, Portugal",
+      "cidade": "Matosinhos, Porto",
       "link": "https://jobs.ikea.com/en/job/matosinhos-municipality/colaborador-de-ikea-food-copa-20h-disponibilidade-12h-as-19h/24107/103505199152",
       "fonte": "ikea",
       "categoria": "Food & Restaurant",
       "tipo_contrato": "Part time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:12:37+00:00"
+      "coletado_em": "2026-11-21T01:11:34+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:37+00:00",
+      "ultima_observacao": "2026-11-21T01:11:34+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     },
     {
       "titulo": "Técnico(a) de Manutenção Industrial",
       "empresa": "IKEA",
-      "cidade": "Paços de Ferreira, Porto, Portugal",
+      "cidade": "Paços de Ferreira, Porto",
       "link": "https://jobs.ikea.com/en/job/pacos-de-ferreira/tecnico-a-de-manutencao-industrial/24107/69906269248",
       "fonte": "ikea",
       "categoria": "Engineering & Technology",
       "tipo_contrato": "Full time",
       "data_publicacao": null,
       "classificacao": "operacional",
-      "coletado_em": "2026-11-20T22:12:37+00:00"
+      "coletado_em": "2026-11-21T01:11:34+00:00",
+      "situacao": "observada",
+      "primeira_observacao": "2026-11-20T22:12:37+00:00",
+      "ultima_observacao": "2026-11-21T01:11:34+00:00",
+      "ultima_verificacao": null,
+      "evidencia_encerramento": null
     }
   ]
 }
