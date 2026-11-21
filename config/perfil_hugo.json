@@ -1,0 +1,33 @@
+{
+  "formacao": {
+    "doutorado": "Engenharia Elétrica",
+    "ano_conclusao": 2023,
+    "pos_doutorado": "INESC TEC"
+  },
+  "competencias_confirmadas": [
+    "otimizacao matematica",
+    "modelagem matematica e computacional",
+    "sistemas eletricos e energeticos",
+    "simulacao computacional",
+    "python cientifico",
+    "pyomo",
+    "pesquisa e desenvolvimento"
+  ],
+  "idiomas": {
+    "portugues": "nativo",
+    "ingles": {
+      "compreensao": "boa",
+      "leitura": "boa",
+      "escrita": "boa",
+      "conversacao": "dificuldade maior",
+      "certificacao": "desconhecida"
+    }
+  },
+  "preferencias": {
+    "localidades_prioritarias": ["porto", "matosinhos", "gaia", "maia", "aveiro", "braga"],
+    "regimes_aceitos": ["presencial", "hibrido", "remoto elegivel para Portugal"],
+    "vinculos_aceitos": ["academico", "empresarial", "bolsa", "temporario", "estavel"],
+    "priorizar_estabilidade": true,
+    "salario_minimo": null
+  }
+}

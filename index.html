@@ -50,6 +50,20 @@
   .filtros { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; padding-bottom: 2px; }
   .filtros-situacao { margin-top: 6px; }
   .historico-titulo { font-size: 1rem; margin: 4px 0 12px; }
+  .hugo-chip {
+    background: #ede9fe; color: #5b21b6;
+  }
+  .hugo-chip.baixa_compatibilidade { background: #fee2e2; color: #991b1b; }
+  .hugo-chip.precisa_verificar { background: #fef3c7; color: #92400e; }
+  .hugo-chip.prioritaria { background: #dcfce7; color: #166534; }
+  .hugo-detalhes {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+  .hugo-detalhes b { color: var(--text); }
   .filtro-btn {
     border: 1px solid var(--border); background: var(--card-bg); color: var(--text);
     border-radius: 999px; padding: 6px 14px; font-size: 0.82rem; white-space: nowrap;
@@ -92,6 +106,7 @@
   <p class="sub" id="status">A carregar…</p>
   <div class="filtros" id="filtros-classificacao"></div>
   <div class="filtros filtros-situacao" id="filtros-situacao"></div>
+  <div class="filtros filtros-hugo" id="filtros-hugo"></div>
 </header>
 
 <div class="install-hint" id="install-hint">
@@ -103,11 +118,14 @@
   <p class="estado">A carregar vagas…</p>
 </main>
 
+<script src="compatibilidade.js"></script>
 <script>
 const NOMES_CLASSE = { escritorio: "Escritório", indefinido: "A conferir", operacional: "Operacional" };
 let TODAS = [];
 let filtroClassificacao = "todas";
 let filtroSituacao = "todas";
+let filtroMelhoresHugo = false;
+let PERFIL_HUGO = null;
 const NOMES_SITUACAO = {
   observada: "Observada",
   por_confirmar: "Por confirmar",
@@ -145,7 +163,30 @@ function ultimaObservacao(vaga) {
   return `Última vez vista: ${dataLisboa(ultima)}${situacao === "por_confirmar" ? " · por confirmar" : ""}`;
 }
 
-function filtrarVagas(vagas, classificacao, situacao) {
+function avaliacaoHugo(vaga) {
+  if (!PERFIL_HUGO) {
+    return {
+      classificacao: "precisa_verificar",
+      afinidade: "insuficiente",
+      justificativa: "Perfil personalizado indisponível. Esta avaliação não deve ser usada para recomendar ou excluir vagas.",
+      impedimentos_obrigatorios: [],
+      informacoes_desconhecidas: ["Avaliação personalizada", "Perfil profissional"],
+      perfil_indisponivel: true,
+    };
+  }
+  if (window.CompatibilidadeHugo) {
+    return window.CompatibilidadeHugo.avaliar(vaga, PERFIL_HUGO);
+  }
+  return {
+    classificacao: "precisa_verificar",
+    afinidade: "insuficiente",
+    justificativa: "Informações insuficientes para uma recomendação fundamentada.",
+    impedimentos_obrigatorios: [],
+    informacoes_desconhecidas: ["Requisitos obrigatórios", "Requisitos preferenciais"],
+  };
+}
+
+function filtrarVagas(vagas, classificacao, situacao, melhoresHugo = false) {
   const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
   return vagas.filter(v => {
     const classificacaoCorresponde = classificacao === "todas" || v.classificacao === classificacao;
@@ -153,17 +194,35 @@ function filtrarVagas(vagas, classificacao, situacao) {
     const situacaoCorresponde = situacao === "todas"
       ? situacaoAtual !== "encerrada"
       : situacaoAtual === situacao;
-    return classificacaoCorresponde && situacaoCorresponde;
+    const hugoCorresponde = !melhoresHugo ||
+      avaliacaoHugo(v).classificacao === "prioritaria";
+    return classificacaoCorresponde && situacaoCorresponde && hugoCorresponde;
   });
 }
 
 function render() {
   const lista = document.getElementById("lista");
   const situacaoDe = v => v.situacao || (v.verificacao_pendente ? "por_confirmar" : "observada");
-  const vagas = filtrarVagas(TODAS, filtroClassificacao, filtroSituacao);
+  const vagas = filtrarVagas(TODAS, filtroClassificacao, filtroSituacao, filtroMelhoresHugo);
 
   if (vagas.length === 0) {
-    lista.innerHTML = '<p class="estado">Nenhuma oportunidade acompanha esses filtros no momento.</p>';
+    if (filtroMelhoresHugo) {
+      lista.innerHTML = `
+        <p class="estado">Nenhuma oportunidade possui informações suficientes para receber prioridade no momento.
+        Outras vagas continuam disponíveis para análise.</p>
+        <button class="filtro-btn" id="ver-todas-hugo" type="button"
+                aria-label="Ver todas as oportunidades e desativar o filtro de prioridade para Hugo">
+          Ver todas as oportunidades
+        </button>
+      `;
+      document.getElementById("ver-todas-hugo").addEventListener("click", () => {
+        filtroMelhoresHugo = false;
+        montarFiltros();
+        render();
+      });
+    } else {
+      lista.innerHTML = '<p class="estado">Nenhuma oportunidade acompanha esses filtros no momento.</p>';
+    }
     return;
   }
 
@@ -174,6 +233,18 @@ function render() {
   lista.innerHTML = tituloSecao + vagas.map(v => {
     const temLink = /^https?:\/\//i.test(v.link || "");
     const situacao = situacaoDe(v);
+    const avaliacao = avaliacaoHugo(v);
+    const rotuloHugo = {
+      prioritaria: "Prioritária para Hugo",
+      precisa_verificar: "Precisa verificar",
+      baixa_compatibilidade: "Baixa compatibilidade",
+    }[avaliacao.classificacao] || "Precisa verificar";
+    const impedimentos = avaliacao.impedimentos_obrigatorios && avaliacao.impedimentos_obrigatorios.length
+      ? `<div><b>Impeditivo:</b> ${escapeHtml(avaliacao.impedimentos_obrigatorios.join(" "))}</div>`
+      : "";
+    const desconhecidas = avaliacao.informacoes_desconhecidas && avaliacao.informacoes_desconhecidas.length
+      ? `<div><b>A verificar:</b> ${escapeHtml(avaliacao.informacoes_desconhecidas.join(", "))}</div>`
+      : "";
     const abertura = temLink
       ? `<a class="vaga" href="${escapeHtml(v.link)}" target="_blank" rel="noopener">`
       : '<article class="vaga">';
@@ -192,6 +263,13 @@ function render() {
       <span class="chip ${v.classificacao}">${NOMES_CLASSE[v.classificacao] || v.classificacao}</span>
       <span class="chip situacao-${situacao}">${NOMES_SITUACAO[situacao] || situacao}</span>
       ${v.fonte === "outros_institutos" ? '<span class="chip manual">Consulta manual</span>' : ""}
+      <span class="chip hugo-chip ${avaliacao.classificacao}" role="status"
+            aria-label="Avaliação para Hugo: ${escapeHtml(rotuloHugo)}">${rotuloHugo}</span>
+      <div class="hugo-detalhes">
+        <div><b>Justificação:</b> ${escapeHtml(avaliacao.justificativa)}</div>
+        ${impedimentos}
+        ${desconhecidas}
+      </div>
     ${temLink ? "</a>" : "</article>"}
   `;
   }).join("");
@@ -247,14 +325,39 @@ function montarFiltros() {
       render();
     });
   });
+
+  const elHugo = document.getElementById("filtros-hugo");
+  const vagasPrioritarias = filtrarVagas(
+    TODAS,
+    filtroClassificacao,
+    filtroSituacao,
+    true,
+  );
+  elHugo.innerHTML = `
+    <button class="filtro-btn ${filtroMelhoresHugo ? "ativo" : ""}"
+            data-hugo="prioritarias"
+            aria-pressed="${filtroMelhoresHugo}"
+            aria-label="Filtrar melhores oportunidades para Hugo">
+      Melhores oportunidades para Hugo (${vagasPrioritarias.length})
+    </button>
+  `;
+  elHugo.querySelector(".filtro-btn").addEventListener("click", () => {
+    filtroMelhoresHugo = !filtroMelhoresHugo;
+    montarFiltros();
+    render();
+  });
 }
 
 async function carregar() {
   try {
-    const resp = await fetch("data/vagas.json", { cache: "no-store" });
+    const [resp, perfilResp] = await Promise.all([
+      fetch("data/vagas.json", { cache: "no-store" }),
+      fetch("config/perfil_hugo.json", { cache: "no-store" }),
+    ]);
     if (!resp.ok) throw new Error("sem dados ainda");
     const dados = await resp.json();
     TODAS = dados.vagas || [];
+    PERFIL_HUGO = perfilResp.ok ? await perfilResp.json() : null;
 
     document.getElementById("status").textContent =
       `${dados.total} oportunidades acompanhadas · atualizado em ${dataLisboa(dados.atualizado_em)}`;
