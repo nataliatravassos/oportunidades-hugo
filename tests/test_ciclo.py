@@ -88,8 +88,8 @@ class MigracaoTest(unittest.TestCase):
         self.assertIsNone(m["primeira_observacao"])
         self.assertIsNone(m["ultima_observacao"])
 
-    def test_migrar_138_registros_reais(self):
-        """Verifica que todos os 138 registros de produção migram sem erro."""
+    def test_migrar_registros_reais(self):
+        """Verifica que todos os registros de produção migram sem erro."""
         caminho = Path(__file__).resolve().parents[1] / "data" / "vagas.json"
         if not caminho.exists():
             self.skipTest("vagas.json ausente")
@@ -102,15 +102,15 @@ class MigracaoTest(unittest.TestCase):
             self.assertIn("ultima_observacao", m)
             self.assertIn("evidencia_encerramento", m)
 
-    def test_simulacao_138_registros_sem_coleta_real_preserva_total(self):
+    def test_simulacao_registros_sem_coleta_real_preserva_total(self):
         caminho = Path(__file__).resolve().parents[1] / "data" / "vagas.json"
         dados = json.loads(caminho.read_text(encoding="utf-8"))
         migradas = [migrar_vaga(v) for v in dados["vagas"]]
         atualizadas = main.atualizar_fonte(migradas, migradas, EstadoColeta.COMPLETA)
-        self.assertEqual(len(atualizadas), 138)
-        self.assertEqual(len({main._identidade(v) for v in atualizadas}), 138)
+        self.assertEqual(len(atualizadas), 139)
+        self.assertEqual(len({main._identidade(v) for v in atualizadas}), 139)
 
-    def test_migrar_138_registros_passam_validacao(self):
+    def test_migrar_registros_passam_validacao(self):
         """Registros migrados continuam válidos segundo validar_vaga."""
         caminho = Path(__file__).resolve().parents[1] / "data" / "vagas.json"
         if not caminho.exists():

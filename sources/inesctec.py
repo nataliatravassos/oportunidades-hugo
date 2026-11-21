@@ -56,7 +56,8 @@ def fetch() -> ResultadoColeta:
                 link=DETALHE_URL.format(ref=ref),
                 fonte="inesctec",
                 categoria=centro,
-                data_publicacao=e.get("candidaturaFim"),
+                data_publicacao=None,
+                prazo_candidatura=e.get("candidaturaFim"),
             )
         )
     problemas = [f"{invalidos} edital(is) com formato inválido"] if invalidos else []
