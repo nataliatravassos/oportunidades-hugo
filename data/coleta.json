@@ -1,8 +1,8 @@
 {
-  "coleta_finalizada_em": "2026-11-22T14:58:51+00:00",
+  "coleta_finalizada_em": "2026-11-23T18:52:44+00:00",
   "estado": "parcial",
   "dados_atualizados": true,
-  "dados_atualizados_em": "2026-11-22T14:58:51+00:00",
+  "dados_atualizados_em": "2026-11-23T18:52:44+00:00",
   "fontes": {
     "inesctec": {
       "estado": "sucesso_completo",
@@ -92,11 +92,11 @@
       "observadas_na_regiao": 75,
       "remotas_elegiveis": 0,
       "fora_do_recorte": 21,
-      "preservadas": 1,
-      "por_confirmar": 1,
+      "preservadas": 6,
+      "por_confirmar": 6,
       "encerradas": 0,
       "links_por_confirmar": 0,
-      "publicadas": 76,
+      "publicadas": 81,
       "manual": false,
       "consulta": {
         "url_planejada": "https://jobs.bosch.com/en/?pages=1&country=pt",
@@ -111,16 +111,16 @@
       "motivo": "Página 2: 15/25 cartões extraídos",
       "paginas": 2,
       "cartoes_encontrados": 50,
-      "extraidas": 29,
-      "validas_extraidas": 29,
+      "extraidas": 27,
+      "validas_extraidas": 27,
       "rejeitadas_extracao": 10,
       "rejeitadas_validacao": 0,
       "rejeitadas": 0,
-      "observadas_na_regiao": 26,
+      "observadas_na_regiao": 25,
       "remotas_elegiveis": 0,
-      "fora_do_recorte": 3,
-      "preservadas": 0,
-      "por_confirmar": 0,
+      "fora_do_recorte": 2,
+      "preservadas": 1,
+      "por_confirmar": 1,
       "encerradas": 0,
       "links_por_confirmar": 0,
       "publicadas": 24,
@@ -244,7 +244,7 @@
       "manual": false,
       "consulta": {
         "url_planejada": "https://www.nestle.com/jobs",
-        "url": "https://www.nestle.com/jobs?__cf_chl_rt_tk=XQ_Mtj6s8igx5DgdmghrxvOcawZ9DwS7SfLbNcGibBU-1795359523-1.0.1.1-uorsLa3mlX_Nx2nWo.THeB.LEn745r75lJQ.t0XZrDw",
+        "url": "https://www.nestle.com/jobs?__cf_chl_rt_tk=GsE8xv.XiOvh.ew2fJIWe4p2jmdo9ylNZs4T0AQZeCo-1795459957-1.0.1.1-2uuOxgv8WN6h11pewrFb0YYhhepOqKI0YnoRLOyYk9k",
         "consulta_manual": "https://empresa.nestle.pt/jobs/search-jobs"
       }
     },
@@ -252,15 +252,15 @@
       "estado": "parcial",
       "motivo": "Cobertura integral não demonstrada",
       "paginas": 1,
-      "cartoes_encontrados": 4,
-      "extraidas": 4,
-      "validas_extraidas": 4,
+      "cartoes_encontrados": 3,
+      "extraidas": 3,
+      "validas_extraidas": 3,
       "rejeitadas_extracao": 0,
       "rejeitadas_validacao": 0,
       "rejeitadas": 0,
       "observadas_na_regiao": 0,
       "remotas_elegiveis": 0,
-      "fora_do_recorte": 4,
+      "fora_do_recorte": 3,
       "preservadas": 0,
       "por_confirmar": 0,
       "encerradas": 0,
@@ -269,10 +269,10 @@
       "manual": false,
       "consulta": {
         "url_planejada": "https://jobs.careers.microsoft.com/global/en/search",
-        "url": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393557046190&sort_by=timestamp",
+        "url": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393557074420&sort_by=timestamp",
         "escopo": "Portugal selecionado; elegibilidade verificada por anúncio",
         "limite_paginas": 10,
-        "cartoes_lidos": 4,
+        "cartoes_lidos": 3,
         "cartoes_invalidos": 0,
         "cartoes_sem_processar": 0,
         "anuncios_com_portugal_visivel": 2,
@@ -283,7 +283,7 @@
       },
       "elegibilidade_portugal": {
         "provavel": 1,
-        "nao_verificada": 3
+        "nao_verificada": 2
       }
     },
     "outros_institutos": {
